@@ -1,0 +1,25 @@
+{
+  "name": "@softstroke/svg",
+  "version": "0.1.0",
+  "description": "Softstroke icons as optimized SVG files, a sprite and JSON",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "./sprite.svg": "./dist/sprite.svg",
+    "./icons.json": "./dist/icons.json",
+    "./icons/*": "./dist/icons/*",
+    "./keywords.json": "./dist/keywords.json",
+    "./solid-sprite.svg": "./dist/solid-sprite.svg",
+    "./icons-solid.json": "./dist/icons-solid.json",
+    "./solid/icons/*": "./dist/solid/icons/*"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "icons",
+    "svg",
+    "softstroke"
+  ]
+}

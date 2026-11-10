@@ -1,0 +1,2046 @@
+{
+  "alarm": [
+    "clock",
+    "wake",
+    "reminder",
+    "time",
+    "morning"
+  ],
+  "alarm-off": [
+    "disable alarm",
+    "silent",
+    "clock",
+    "snooze",
+    "mute"
+  ],
+  "alarm-plus": [
+    "add alarm",
+    "clock",
+    "reminder",
+    "new",
+    "wake"
+  ],
+  "alert-circle": [
+    "warning",
+    "error",
+    "exclamation",
+    "attention",
+    "danger"
+  ],
+  "alert-triangle": [
+    "warning",
+    "caution",
+    "exclamation",
+    "danger",
+    "hazard"
+  ],
+  "align-center": [
+    "text",
+    "alignment",
+    "center",
+    "paragraph"
+  ],
+  "align-left": [
+    "text",
+    "alignment",
+    "left",
+    "paragraph"
+  ],
+  "align-right": [
+    "text",
+    "alignment",
+    "right",
+    "paragraph"
+  ],
+  "anchor": [
+    "marine",
+    "harbor",
+    "sea",
+    "boat",
+    "nautical"
+  ],
+  "archive": [
+    "box",
+    "storage",
+    "backup",
+    "old",
+    "store"
+  ],
+  "arrow-down": [
+    "direction",
+    "south",
+    "down",
+    "descend"
+  ],
+  "arrow-down-left": [
+    "diagonal",
+    "southwest",
+    "incoming",
+    "received"
+  ],
+  "arrow-down-right": [
+    "diagonal",
+    "southeast",
+    "trend down"
+  ],
+  "arrow-left": [
+    "direction",
+    "west",
+    "back",
+    "previous"
+  ],
+  "arrow-left-right": [
+    "swap",
+    "exchange",
+    "transfer",
+    "horizontal",
+    "convert"
+  ],
+  "arrow-right": [
+    "direction",
+    "east",
+    "forward",
+    "next"
+  ],
+  "arrow-up": [
+    "direction",
+    "north",
+    "up",
+    "ascend"
+  ],
+  "arrow-up-down": [
+    "swap",
+    "exchange",
+    "reorder",
+    "toggle",
+    "vertical"
+  ],
+  "arrow-up-left": [
+    "diagonal",
+    "northwest",
+    "back"
+  ],
+  "arrow-up-right": [
+    "diagonal",
+    "northeast",
+    "trend up",
+    "open",
+    "external"
+  ],
+  "at-sign": [
+    "email",
+    "mention",
+    "address",
+    "handle",
+    "username"
+  ],
+  "audio-lines": [
+    "waveform",
+    "sound",
+    "voice",
+    "equalizer",
+    "audio"
+  ],
+  "award": [
+    "badge",
+    "achievement",
+    "medal",
+    "prize",
+    "certificate"
+  ],
+  "badge-check": [
+    "verified",
+    "certified",
+    "approved",
+    "quality",
+    "official"
+  ],
+  "bag": [
+    "shopping",
+    "purchase",
+    "store",
+    "buy",
+    "tote"
+  ],
+  "banknote": [
+    "money",
+    "cash",
+    "bill",
+    "payment",
+    "currency"
+  ],
+  "bar-chart": [
+    "graph",
+    "statistics",
+    "analytics",
+    "data",
+    "report"
+  ],
+  "barcode": [
+    "scan",
+    "product",
+    "sku",
+    "inventory",
+    "checkout"
+  ],
+  "battery": [
+    "power",
+    "charge",
+    "energy",
+    "level"
+  ],
+  "battery-charging": [
+    "charging",
+    "power",
+    "energy",
+    "plugged in"
+  ],
+  "bell": [
+    "notification",
+    "alert",
+    "alarm",
+    "reminder",
+    "ring"
+  ],
+  "bell-off": [
+    "notification",
+    "mute",
+    "silent",
+    "disabled",
+    "do not disturb"
+  ],
+  "bell-ring": [
+    "notification",
+    "ringing",
+    "alarm",
+    "alert",
+    "active"
+  ],
+  "bike": [
+    "bicycle",
+    "cycling",
+    "ride",
+    "sport",
+    "transport"
+  ],
+  "bluetooth": [
+    "wireless",
+    "connect",
+    "pair",
+    "device"
+  ],
+  "bold": [
+    "text",
+    "format",
+    "strong",
+    "weight",
+    "typography"
+  ],
+  "book": [
+    "read",
+    "library",
+    "guide",
+    "manual",
+    "documentation"
+  ],
+  "book-open": [
+    "read",
+    "reading",
+    "docs",
+    "learn",
+    "pages"
+  ],
+  "bookmark": [
+    "save",
+    "favorite",
+    "ribbon",
+    "read later"
+  ],
+  "briefcase": [
+    "work",
+    "job",
+    "business",
+    "portfolio",
+    "career"
+  ],
+  "bug": [
+    "debug",
+    "issue",
+    "error",
+    "insect",
+    "report"
+  ],
+  "building": [
+    "office",
+    "company",
+    "city",
+    "apartment",
+    "business"
+  ],
+  "bus": [
+    "transport",
+    "public transit",
+    "vehicle",
+    "travel",
+    "commute"
+  ],
+  "cake": [
+    "birthday",
+    "celebration",
+    "party",
+    "dessert",
+    "anniversary"
+  ],
+  "calculator": [
+    "math",
+    "calculate",
+    "numbers",
+    "accounting",
+    "sum"
+  ],
+  "calendar": [
+    "date",
+    "schedule",
+    "event",
+    "month",
+    "planner"
+  ],
+  "calendar-check": [
+    "date",
+    "booked",
+    "confirmed",
+    "event",
+    "scheduled"
+  ],
+  "calendar-days": [
+    "month",
+    "schedule",
+    "dates",
+    "planner",
+    "agenda"
+  ],
+  "calendar-minus": [
+    "remove event",
+    "schedule",
+    "date",
+    "delete"
+  ],
+  "calendar-plus": [
+    "add event",
+    "schedule",
+    "new",
+    "date",
+    "appointment"
+  ],
+  "calendar-x": [
+    "cancel",
+    "event",
+    "date",
+    "remove",
+    "unavailable"
+  ],
+  "camera": [
+    "photo",
+    "picture",
+    "capture",
+    "snapshot",
+    "lens"
+  ],
+  "camera-off": [
+    "no camera",
+    "disabled",
+    "privacy",
+    "photo",
+    "video off"
+  ],
+  "captions": [
+    "subtitles",
+    "cc",
+    "closed captions",
+    "video",
+    "accessibility"
+  ],
+  "car": [
+    "vehicle",
+    "drive",
+    "auto",
+    "transport",
+    "ride"
+  ],
+  "cart": [
+    "shopping",
+    "basket",
+    "checkout",
+    "buy",
+    "ecommerce"
+  ],
+  "cast": [
+    "chromecast",
+    "screen",
+    "stream",
+    "tv",
+    "mirror"
+  ],
+  "chat": [
+    "message",
+    "conversation",
+    "comment",
+    "talk",
+    "speech"
+  ],
+  "chat-bubble": [
+    "message",
+    "comment",
+    "speech",
+    "reply"
+  ],
+  "check": [
+    "done",
+    "confirm",
+    "tick",
+    "success",
+    "ok"
+  ],
+  "check-circle": [
+    "done",
+    "success",
+    "verified",
+    "complete",
+    "approved"
+  ],
+  "check-square": [
+    "checkbox",
+    "checked",
+    "task",
+    "done",
+    "select"
+  ],
+  "chevron-down": [
+    "expand",
+    "dropdown",
+    "open",
+    "caret",
+    "down"
+  ],
+  "chevron-left": [
+    "back",
+    "previous",
+    "caret",
+    "left"
+  ],
+  "chevron-right": [
+    "forward",
+    "next",
+    "caret",
+    "right",
+    "more"
+  ],
+  "chevron-up": [
+    "collapse",
+    "close",
+    "caret",
+    "up"
+  ],
+  "chevrons-left": [
+    "first",
+    "rewind",
+    "back",
+    "double"
+  ],
+  "chevrons-right": [
+    "last",
+    "skip",
+    "forward",
+    "double"
+  ],
+  "chevrons-up-down": [
+    "select",
+    "dropdown",
+    "sort",
+    "expand",
+    "unfold"
+  ],
+  "circle": [
+    "shape",
+    "radio",
+    "dot",
+    "round",
+    "empty"
+  ],
+  "clapperboard": [
+    "movie",
+    "film",
+    "production",
+    "video",
+    "scene"
+  ],
+  "clipboard": [
+    "paste",
+    "copy",
+    "notes",
+    "tasks",
+    "board"
+  ],
+  "clock": [
+    "time",
+    "hour",
+    "watch",
+    "schedule",
+    "pending"
+  ],
+  "cloud": [
+    "weather",
+    "storage",
+    "sync",
+    "online",
+    "sky"
+  ],
+  "cloud-download": [
+    "download",
+    "restore",
+    "sync",
+    "get from cloud"
+  ],
+  "cloud-drizzle": [
+    "weather",
+    "drizzle",
+    "light rain",
+    "shower",
+    "forecast"
+  ],
+  "cloud-fog": [
+    "weather",
+    "fog",
+    "mist",
+    "haze",
+    "forecast"
+  ],
+  "cloud-lightning": [
+    "weather",
+    "storm",
+    "thunder",
+    "lightning",
+    "forecast"
+  ],
+  "cloud-rain": [
+    "weather",
+    "rain",
+    "rainy",
+    "forecast",
+    "storm"
+  ],
+  "cloud-snow": [
+    "weather",
+    "snow",
+    "winter",
+    "cold",
+    "forecast"
+  ],
+  "cloud-sun": [
+    "weather",
+    "partly cloudy",
+    "sunny",
+    "day",
+    "forecast"
+  ],
+  "cloud-upload": [
+    "upload",
+    "backup",
+    "sync",
+    "send to cloud"
+  ],
+  "code": [
+    "developer",
+    "programming",
+    "html",
+    "xml",
+    "tag",
+    "embed",
+    "brackets"
+  ],
+  "coffee": [
+    "cup",
+    "drink",
+    "break",
+    "cafe",
+    "mug"
+  ],
+  "coins": [
+    "money",
+    "cash",
+    "currency",
+    "savings",
+    "change"
+  ],
+  "compass": [
+    "direction",
+    "explore",
+    "north",
+    "orientation",
+    "travel"
+  ],
+  "copy": [
+    "duplicate",
+    "clone",
+    "clipboard",
+    "paste"
+  ],
+  "cpu": [
+    "chip",
+    "processor",
+    "hardware",
+    "computer",
+    "ai"
+  ],
+  "credit-card": [
+    "payment",
+    "card",
+    "debit",
+    "checkout",
+    "billing"
+  ],
+  "crop": [
+    "image",
+    "edit",
+    "trim",
+    "resize",
+    "photo"
+  ],
+  "crown": [
+    "premium",
+    "king",
+    "vip",
+    "pro",
+    "royal"
+  ],
+  "database": [
+    "storage",
+    "data",
+    "sql",
+    "db",
+    "server"
+  ],
+  "dice": [
+    "game",
+    "random",
+    "chance",
+    "luck",
+    "roll"
+  ],
+  "disc": [
+    "cd",
+    "dvd",
+    "vinyl",
+    "record",
+    "album"
+  ],
+  "dollar": [
+    "money",
+    "currency",
+    "price",
+    "usd",
+    "cost"
+  ],
+  "download": [
+    "save",
+    "export",
+    "get",
+    "arrow down",
+    "tray"
+  ],
+  "droplet": [
+    "water",
+    "liquid",
+    "drop",
+    "humidity",
+    "rain"
+  ],
+  "edit": [
+    "pencil",
+    "write",
+    "change",
+    "modify",
+    "compose"
+  ],
+  "external-link": [
+    "open",
+    "new tab",
+    "outside",
+    "launch",
+    "redirect"
+  ],
+  "eye": [
+    "view",
+    "show",
+    "visible",
+    "watch",
+    "preview"
+  ],
+  "eye-off": [
+    "hide",
+    "hidden",
+    "invisible",
+    "password",
+    "private"
+  ],
+  "fast-forward": [
+    "forward",
+    "speed",
+    "media",
+    "player",
+    "seek"
+  ],
+  "file": [
+    "document",
+    "page",
+    "paper",
+    "sheet"
+  ],
+  "file-check": [
+    "approved",
+    "verified",
+    "done",
+    "document"
+  ],
+  "file-plus": [
+    "new file",
+    "add",
+    "create",
+    "document"
+  ],
+  "file-text": [
+    "document",
+    "text",
+    "page",
+    "notes",
+    "article"
+  ],
+  "film": [
+    "movie",
+    "cinema",
+    "video",
+    "reel",
+    "media"
+  ],
+  "filter": [
+    "funnel",
+    "sort",
+    "refine",
+    "narrow"
+  ],
+  "fingerprint": [
+    "biometric",
+    "identity",
+    "touch id",
+    "security",
+    "authentication"
+  ],
+  "flag": [
+    "report",
+    "mark",
+    "country",
+    "milestone",
+    "goal"
+  ],
+  "flame": [
+    "fire",
+    "hot",
+    "burn",
+    "trending",
+    "heat"
+  ],
+  "flask": [
+    "lab",
+    "science",
+    "experiment",
+    "chemistry",
+    "beta"
+  ],
+  "flower": [
+    "nature",
+    "plant",
+    "spring",
+    "garden",
+    "bloom"
+  ],
+  "folder": [
+    "directory",
+    "files",
+    "collection",
+    "category"
+  ],
+  "folder-open": [
+    "open",
+    "directory",
+    "browse",
+    "files"
+  ],
+  "folder-plus": [
+    "new folder",
+    "add",
+    "create",
+    "directory"
+  ],
+  "forward": [
+    "send on",
+    "pass",
+    "share",
+    "message",
+    "mail"
+  ],
+  "fuel": [
+    "gas",
+    "petrol",
+    "station",
+    "pump",
+    "energy"
+  ],
+  "gamepad": [
+    "game",
+    "controller",
+    "play",
+    "console",
+    "gaming"
+  ],
+  "gem": [
+    "diamond",
+    "premium",
+    "jewel",
+    "value",
+    "luxury"
+  ],
+  "gift": [
+    "present",
+    "reward",
+    "birthday",
+    "surprise",
+    "offer"
+  ],
+  "glasses": [
+    "reading",
+    "vision",
+    "eyewear",
+    "view",
+    "nerd"
+  ],
+  "globe": [
+    "world",
+    "language",
+    "internet",
+    "web",
+    "earth",
+    "international"
+  ],
+  "graduation-cap": [
+    "education",
+    "school",
+    "degree",
+    "learn",
+    "student"
+  ],
+  "grid": [
+    "layout",
+    "apps",
+    "tiles",
+    "dashboard",
+    "gallery"
+  ],
+  "hammer": [
+    "tool",
+    "build",
+    "construction",
+    "fix",
+    "auction"
+  ],
+  "headphones": [
+    "audio",
+    "music",
+    "listen",
+    "headset",
+    "support"
+  ],
+  "heart": [
+    "like",
+    "love",
+    "favorite",
+    "wishlist"
+  ],
+  "help-circle": [
+    "question",
+    "faq",
+    "support",
+    "info",
+    "unknown"
+  ],
+  "history": [
+    "recent",
+    "past",
+    "time",
+    "undo",
+    "log"
+  ],
+  "home": [
+    "house",
+    "main",
+    "start",
+    "dashboard"
+  ],
+  "hourglass": [
+    "time",
+    "waiting",
+    "loading",
+    "sand",
+    "timer"
+  ],
+  "id-card": [
+    "identity",
+    "badge",
+    "license",
+    "profile",
+    "card"
+  ],
+  "image": [
+    "photo",
+    "picture",
+    "gallery",
+    "media",
+    "landscape"
+  ],
+  "image-plus": [
+    "add image",
+    "upload",
+    "photo",
+    "picture",
+    "new"
+  ],
+  "images": [
+    "gallery",
+    "photos",
+    "album",
+    "pictures",
+    "collection"
+  ],
+  "inbox": [
+    "mail",
+    "tray",
+    "messages",
+    "received"
+  ],
+  "infinity": [
+    "unlimited",
+    "forever",
+    "loop",
+    "endless",
+    "math"
+  ],
+  "info": [
+    "information",
+    "about",
+    "details",
+    "help",
+    "tooltip"
+  ],
+  "italic": [
+    "text",
+    "format",
+    "slanted",
+    "emphasis",
+    "typography"
+  ],
+  "key": [
+    "password",
+    "access",
+    "unlock",
+    "security",
+    "credentials"
+  ],
+  "laptop": [
+    "computer",
+    "notebook",
+    "macbook",
+    "device",
+    "work"
+  ],
+  "layers": [
+    "stack",
+    "levels",
+    "arrange",
+    "design",
+    "overlay"
+  ],
+  "layout": [
+    "template",
+    "dashboard",
+    "panels",
+    "grid",
+    "wireframe"
+  ],
+  "leaf": [
+    "nature",
+    "eco",
+    "plant",
+    "green",
+    "environment"
+  ],
+  "lightbulb": [
+    "idea",
+    "tip",
+    "light",
+    "innovation",
+    "hint"
+  ],
+  "line-chart": [
+    "graph",
+    "analytics",
+    "statistics",
+    "growth",
+    "data"
+  ],
+  "link": [
+    "chain",
+    "url",
+    "hyperlink",
+    "connect",
+    "attach"
+  ],
+  "list": [
+    "bullets",
+    "items",
+    "menu",
+    "rows",
+    "todo"
+  ],
+  "list-music": [
+    "playlist",
+    "queue",
+    "songs",
+    "audio",
+    "library"
+  ],
+  "loader": [
+    "loading",
+    "spinner",
+    "progress",
+    "wait",
+    "busy"
+  ],
+  "lock": [
+    "secure",
+    "password",
+    "private",
+    "locked",
+    "security"
+  ],
+  "lock-keyhole": [
+    "password",
+    "secure",
+    "private",
+    "locked",
+    "security"
+  ],
+  "log-in": [
+    "sign in",
+    "enter",
+    "login",
+    "access"
+  ],
+  "log-out": [
+    "sign out",
+    "exit",
+    "logout",
+    "leave"
+  ],
+  "magnet": [
+    "attract",
+    "magnetic",
+    "pull",
+    "physics",
+    "lead"
+  ],
+  "mail": [
+    "email",
+    "envelope",
+    "message",
+    "letter",
+    "inbox"
+  ],
+  "mail-open": [
+    "email",
+    "read",
+    "opened",
+    "envelope",
+    "letter"
+  ],
+  "map": [
+    "location",
+    "navigation",
+    "directions",
+    "travel",
+    "folded"
+  ],
+  "map-pin": [
+    "location",
+    "marker",
+    "place",
+    "address",
+    "gps"
+  ],
+  "maximize": [
+    "fullscreen",
+    "expand",
+    "enlarge",
+    "corners"
+  ],
+  "megaphone": [
+    "announcement",
+    "marketing",
+    "broadcast",
+    "promote",
+    "loud"
+  ],
+  "menu": [
+    "hamburger",
+    "navigation",
+    "lines",
+    "sidebar",
+    "drawer"
+  ],
+  "mic": [
+    "microphone",
+    "record",
+    "voice",
+    "audio",
+    "speak"
+  ],
+  "mic-off": [
+    "mute",
+    "microphone",
+    "silent",
+    "no audio",
+    "disabled"
+  ],
+  "minimize": [
+    "exit fullscreen",
+    "shrink",
+    "collapse",
+    "corners"
+  ],
+  "minus": [
+    "subtract",
+    "remove",
+    "decrease",
+    "less",
+    "dash"
+  ],
+  "minus-circle": [
+    "subtract",
+    "remove",
+    "decrease",
+    "delete"
+  ],
+  "monitor": [
+    "desktop",
+    "screen",
+    "display",
+    "computer",
+    "pc"
+  ],
+  "moon": [
+    "night",
+    "dark mode",
+    "sleep",
+    "theme"
+  ],
+  "moon-star": [
+    "night",
+    "dark mode",
+    "sleep",
+    "evening",
+    "sky"
+  ],
+  "more-horizontal": [
+    "ellipsis",
+    "options",
+    "dots",
+    "overflow",
+    "menu"
+  ],
+  "more-vertical": [
+    "ellipsis",
+    "options",
+    "dots",
+    "overflow",
+    "kebab"
+  ],
+  "mountain": [
+    "hill",
+    "nature",
+    "landscape",
+    "hike",
+    "outdoors"
+  ],
+  "move": [
+    "drag",
+    "pan",
+    "position",
+    "arrows",
+    "reorder"
+  ],
+  "music": [
+    "song",
+    "audio",
+    "notes",
+    "melody",
+    "sound"
+  ],
+  "navigation": [
+    "direction",
+    "gps",
+    "location",
+    "pointer",
+    "arrow"
+  ],
+  "newspaper": [
+    "news",
+    "article",
+    "press",
+    "blog",
+    "feed"
+  ],
+  "package": [
+    "box",
+    "parcel",
+    "delivery",
+    "shipping",
+    "order"
+  ],
+  "palette": [
+    "color",
+    "paint",
+    "theme",
+    "design",
+    "art"
+  ],
+  "paperclip": [
+    "attachment",
+    "attach",
+    "file",
+    "clip"
+  ],
+  "parking": [
+    "car park",
+    "park",
+    "vehicle",
+    "lot",
+    "garage"
+  ],
+  "pause": [
+    "stop",
+    "hold",
+    "media",
+    "player",
+    "break"
+  ],
+  "pause-circle": [
+    "hold",
+    "media",
+    "player",
+    "break",
+    "wait"
+  ],
+  "percent": [
+    "discount",
+    "sale",
+    "rate",
+    "percentage",
+    "offer"
+  ],
+  "phone": [
+    "call",
+    "telephone",
+    "contact",
+    "dial",
+    "mobile"
+  ],
+  "phone-call": [
+    "calling",
+    "ringing",
+    "incoming",
+    "contact",
+    "dial"
+  ],
+  "phone-off": [
+    "hang up",
+    "end call",
+    "decline",
+    "missed",
+    "disabled"
+  ],
+  "pie-chart": [
+    "graph",
+    "analytics",
+    "share",
+    "statistics",
+    "report"
+  ],
+  "pin": [
+    "pushpin",
+    "attach",
+    "pinned",
+    "stick",
+    "save"
+  ],
+  "plane": [
+    "flight",
+    "airport",
+    "travel",
+    "airplane",
+    "trip"
+  ],
+  "play": [
+    "start",
+    "media",
+    "video",
+    "player",
+    "run"
+  ],
+  "play-circle": [
+    "start",
+    "video",
+    "media",
+    "player",
+    "run"
+  ],
+  "plug": [
+    "power",
+    "electric",
+    "connect",
+    "socket",
+    "charger"
+  ],
+  "plus": [
+    "add",
+    "new",
+    "create",
+    "increase",
+    "more"
+  ],
+  "plus-circle": [
+    "add",
+    "new",
+    "create",
+    "insert"
+  ],
+  "podcast": [
+    "broadcast",
+    "audio",
+    "show",
+    "listen",
+    "episode"
+  ],
+  "printer": [
+    "print",
+    "document",
+    "paper",
+    "output"
+  ],
+  "puzzle": [
+    "plugin",
+    "extension",
+    "piece",
+    "integration",
+    "solve"
+  ],
+  "qr-code": [
+    "scan",
+    "code",
+    "barcode",
+    "link",
+    "payment"
+  ],
+  "radio": [
+    "fm",
+    "broadcast",
+    "audio",
+    "station",
+    "music"
+  ],
+  "rainbow": [
+    "weather",
+    "colors",
+    "pride",
+    "arc",
+    "sky"
+  ],
+  "receipt": [
+    "bill",
+    "invoice",
+    "purchase",
+    "order",
+    "payment"
+  ],
+  "redo": [
+    "forward",
+    "repeat",
+    "history",
+    "again"
+  ],
+  "refresh": [
+    "reload",
+    "sync",
+    "update",
+    "retry",
+    "rotate"
+  ],
+  "repeat": [
+    "loop",
+    "replay",
+    "recurring",
+    "cycle"
+  ],
+  "repeat-one": [
+    "loop",
+    "repeat track",
+    "media",
+    "player",
+    "once"
+  ],
+  "reply": [
+    "respond",
+    "answer",
+    "back",
+    "message",
+    "mail"
+  ],
+  "rewind": [
+    "back",
+    "seek",
+    "media",
+    "player",
+    "reverse"
+  ],
+  "rocket": [
+    "launch",
+    "startup",
+    "fast",
+    "space",
+    "boost"
+  ],
+  "rotate-ccw": [
+    "undo",
+    "reset",
+    "counterclockwise",
+    "rotate left",
+    "history"
+  ],
+  "route": [
+    "path",
+    "journey",
+    "directions",
+    "trip",
+    "way"
+  ],
+  "rss": [
+    "feed",
+    "subscribe",
+    "news",
+    "blog",
+    "podcast"
+  ],
+  "save": [
+    "floppy",
+    "disk",
+    "store",
+    "keep"
+  ],
+  "scale": [
+    "balance",
+    "justice",
+    "law",
+    "compare",
+    "legal"
+  ],
+  "scan-face": [
+    "face id",
+    "biometric",
+    "recognition",
+    "authentication",
+    "scan"
+  ],
+  "scissors": [
+    "cut",
+    "trim",
+    "clip",
+    "barber",
+    "salon"
+  ],
+  "search": [
+    "find",
+    "magnifier",
+    "lookup",
+    "zoom",
+    "query"
+  ],
+  "send": [
+    "submit",
+    "message",
+    "paper plane",
+    "deliver"
+  ],
+  "server": [
+    "hosting",
+    "rack",
+    "backend",
+    "infrastructure",
+    "data center"
+  ],
+  "settings": [
+    "gear",
+    "cog",
+    "preferences",
+    "options",
+    "configuration"
+  ],
+  "share": [
+    "send",
+    "forward",
+    "paper plane",
+    "social"
+  ],
+  "share-nodes": [
+    "share",
+    "network",
+    "connect",
+    "social",
+    "android"
+  ],
+  "shield": [
+    "security",
+    "protection",
+    "safe",
+    "guard",
+    "defense"
+  ],
+  "shield-alert": [
+    "security",
+    "warning",
+    "threat",
+    "risk",
+    "vulnerable"
+  ],
+  "shield-check": [
+    "secure",
+    "verified",
+    "protected",
+    "safe",
+    "trust"
+  ],
+  "shield-off": [
+    "unprotected",
+    "insecure",
+    "disabled",
+    "security",
+    "unsafe"
+  ],
+  "ship": [
+    "boat",
+    "cruise",
+    "sea",
+    "ferry",
+    "travel"
+  ],
+  "shuffle": [
+    "random",
+    "mix",
+    "crossing",
+    "music"
+  ],
+  "sidebar": [
+    "panel",
+    "collapse",
+    "close sidebar",
+    "drawer",
+    "navigation"
+  ],
+  "sidebar-expand": [
+    "panel",
+    "expand",
+    "open sidebar",
+    "drawer",
+    "navigation"
+  ],
+  "signpost": [
+    "directions",
+    "sign",
+    "road",
+    "wayfinding",
+    "crossroads"
+  ],
+  "skip-back": [
+    "previous",
+    "track",
+    "media",
+    "player",
+    "back"
+  ],
+  "skip-forward": [
+    "next",
+    "track",
+    "media",
+    "player",
+    "forward"
+  ],
+  "sliders": [
+    "settings",
+    "adjust",
+    "controls",
+    "filters",
+    "preferences"
+  ],
+  "smartphone": [
+    "phone",
+    "mobile",
+    "device",
+    "iphone",
+    "android"
+  ],
+  "smile": [
+    "emoji",
+    "happy",
+    "face",
+    "feedback",
+    "reaction"
+  ],
+  "snowflake": [
+    "snow",
+    "winter",
+    "cold",
+    "freeze",
+    "frost"
+  ],
+  "sort": [
+    "order",
+    "arrange",
+    "list",
+    "descending",
+    "ranking"
+  ],
+  "sparkle": [
+    "ai",
+    "magic",
+    "shine",
+    "new",
+    "star"
+  ],
+  "sparkles": [
+    "ai",
+    "magic",
+    "effects",
+    "shine",
+    "new"
+  ],
+  "speaker": [
+    "audio",
+    "sound",
+    "music",
+    "hifi",
+    "device"
+  ],
+  "sprout": [
+    "plant",
+    "grow",
+    "seedling",
+    "eco",
+    "garden"
+  ],
+  "square": [
+    "checkbox",
+    "unchecked",
+    "shape",
+    "box",
+    "empty"
+  ],
+  "star": [
+    "favorite",
+    "rating",
+    "review",
+    "bookmark",
+    "featured"
+  ],
+  "stop": [
+    "media",
+    "player",
+    "end",
+    "halt",
+    "square"
+  ],
+  "stop-circle": [
+    "end",
+    "media",
+    "player",
+    "record",
+    "halt"
+  ],
+  "store": [
+    "shop",
+    "market",
+    "retail",
+    "storefront",
+    "business"
+  ],
+  "sun": [
+    "light mode",
+    "day",
+    "brightness",
+    "weather",
+    "theme"
+  ],
+  "sunrise": [
+    "morning",
+    "dawn",
+    "sun",
+    "day",
+    "weather"
+  ],
+  "sunset": [
+    "evening",
+    "dusk",
+    "sun",
+    "night",
+    "weather"
+  ],
+  "tablet": [
+    "ipad",
+    "device",
+    "screen",
+    "reader"
+  ],
+  "tag": [
+    "price",
+    "label",
+    "discount",
+    "category",
+    "sale"
+  ],
+  "target": [
+    "goal",
+    "aim",
+    "focus",
+    "objective",
+    "bullseye"
+  ],
+  "tent": [
+    "camping",
+    "outdoors",
+    "camp",
+    "shelter",
+    "trip"
+  ],
+  "terminal": [
+    "console",
+    "command line",
+    "shell",
+    "cli",
+    "developer"
+  ],
+  "thermometer": [
+    "temperature",
+    "weather",
+    "heat",
+    "cold",
+    "degrees"
+  ],
+  "thumbs-down": [
+    "dislike",
+    "disapprove",
+    "downvote",
+    "bad"
+  ],
+  "thumbs-up": [
+    "like",
+    "approve",
+    "agree",
+    "upvote",
+    "good"
+  ],
+  "ticket": [
+    "event",
+    "pass",
+    "admission",
+    "coupon",
+    "booking"
+  ],
+  "timer": [
+    "stopwatch",
+    "countdown",
+    "time",
+    "duration",
+    "speed"
+  ],
+  "timer-off": [
+    "stopwatch",
+    "stop",
+    "disabled",
+    "time",
+    "countdown"
+  ],
+  "toggle": [
+    "switch",
+    "on",
+    "enable",
+    "setting",
+    "boolean"
+  ],
+  "train": [
+    "railway",
+    "transit",
+    "metro",
+    "transport",
+    "travel"
+  ],
+  "trash": [
+    "delete",
+    "remove",
+    "bin",
+    "garbage",
+    "discard"
+  ],
+  "tree": [
+    "nature",
+    "park",
+    "forest",
+    "plant",
+    "outdoors"
+  ],
+  "trending-down": [
+    "decrease",
+    "loss",
+    "decline",
+    "fall",
+    "stocks"
+  ],
+  "trending-up": [
+    "growth",
+    "increase",
+    "profit",
+    "rise",
+    "stocks"
+  ],
+  "trophy": [
+    "winner",
+    "award",
+    "achievement",
+    "prize",
+    "champion"
+  ],
+  "truck": [
+    "delivery",
+    "shipping",
+    "transport",
+    "vehicle",
+    "logistics"
+  ],
+  "tv": [
+    "television",
+    "screen",
+    "watch",
+    "display",
+    "channel"
+  ],
+  "type": [
+    "text",
+    "font",
+    "typography",
+    "letter"
+  ],
+  "umbrella": [
+    "rain",
+    "weather",
+    "protection",
+    "insurance",
+    "cover"
+  ],
+  "underline": [
+    "text",
+    "format",
+    "typography",
+    "line"
+  ],
+  "undo": [
+    "back",
+    "revert",
+    "history",
+    "previous"
+  ],
+  "unlock": [
+    "open",
+    "unlocked",
+    "access",
+    "security"
+  ],
+  "upload": [
+    "import",
+    "send",
+    "arrow up",
+    "tray",
+    "publish"
+  ],
+  "user": [
+    "person",
+    "profile",
+    "account",
+    "avatar",
+    "member"
+  ],
+  "user-check": [
+    "verified",
+    "person",
+    "account",
+    "approved",
+    "confirmed"
+  ],
+  "user-circle": [
+    "avatar",
+    "profile",
+    "account",
+    "person",
+    "me"
+  ],
+  "user-minus": [
+    "remove",
+    "person",
+    "account",
+    "delete",
+    "unfollow"
+  ],
+  "user-plus": [
+    "add user",
+    "invite",
+    "new member",
+    "follow",
+    "signup"
+  ],
+  "user-x": [
+    "remove",
+    "person",
+    "block",
+    "reject",
+    "delete"
+  ],
+  "users": [
+    "people",
+    "team",
+    "group",
+    "members",
+    "community"
+  ],
+  "video": [
+    "camera",
+    "movie",
+    "record",
+    "film",
+    "meeting"
+  ],
+  "video-off": [
+    "camera off",
+    "no video",
+    "disabled",
+    "meeting"
+  ],
+  "volume": [
+    "sound",
+    "audio",
+    "speaker",
+    "loud",
+    "music"
+  ],
+  "volume-low": [
+    "quiet",
+    "sound",
+    "speaker",
+    "audio",
+    "lower"
+  ],
+  "volume-off": [
+    "mute",
+    "silent",
+    "no sound",
+    "speaker"
+  ],
+  "wallet": [
+    "money",
+    "payment",
+    "finance",
+    "cash",
+    "purse"
+  ],
+  "wallet-card": [
+    "money",
+    "payment",
+    "card",
+    "finance",
+    "purse"
+  ],
+  "watch": [
+    "smartwatch",
+    "time",
+    "wearable",
+    "wrist",
+    "clock"
+  ],
+  "waves": [
+    "water",
+    "sea",
+    "ocean",
+    "beach",
+    "swim"
+  ],
+  "wifi": [
+    "internet",
+    "wireless",
+    "network",
+    "signal",
+    "connection"
+  ],
+  "wifi-off": [
+    "offline",
+    "no internet",
+    "disconnected",
+    "no signal"
+  ],
+  "wind": [
+    "weather",
+    "air",
+    "breeze",
+    "windy",
+    "blow"
+  ],
+  "wrench": [
+    "tool",
+    "settings",
+    "fix",
+    "repair",
+    "maintenance"
+  ],
+  "x": [
+    "close",
+    "cancel",
+    "remove",
+    "dismiss",
+    "delete"
+  ],
+  "x-circle": [
+    "cancel",
+    "error",
+    "close",
+    "failed",
+    "remove"
+  ],
+  "zap": [
+    "lightning",
+    "flash",
+    "power",
+    "energy",
+    "fast"
+  ]
+}

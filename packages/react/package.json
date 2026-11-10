@@ -1,0 +1,39 @@
+{
+  "name": "@softstroke/react",
+  "version": "0.1.0",
+  "description": "Softstroke icons as React components",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./icons/*": {
+      "types": "./dist/icons/*.d.ts",
+      "default": "./dist/icons/*.js"
+    },
+    "./solid": {
+      "types": "./dist/solid/index.d.ts",
+      "default": "./dist/solid/index.js"
+    },
+    "./solid/icons/*": {
+      "types": "./dist/solid/icons/*.d.ts",
+      "default": "./dist/solid/icons/*.js"
+    }
+  },
+  "peerDependencies": {
+    "react": ">=17"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "icons",
+    "svg",
+    "softstroke"
+  ]
+}

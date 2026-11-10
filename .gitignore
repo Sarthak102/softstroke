@@ -1,0 +1,8 @@
+node_modules
+dist
+preview.html
+packages/*/README.md
+packages/*/LICENSE
+.venv
+.DS_Store
+site
