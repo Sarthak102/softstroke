@@ -1,6 +1,6 @@
 {
   "name": "@softstroke/react-native",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Softstroke icons as React Native components (react-native-svg)",
   "license": "MIT",
   "type": "module",
@@ -36,5 +36,14 @@
     "icons",
     "svg",
     "softstroke"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sarthak102/softstroke.git",
+    "directory": "packages/react-native"
+  },
+  "homepage": "https://sarthak102.github.io/softstroke/",
+  "bugs": {
+    "url": "https://github.com/Sarthak102/softstroke/issues"
+  }
 }
