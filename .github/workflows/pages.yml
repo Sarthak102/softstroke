@@ -1,5 +1,6 @@
-# Builds the docs site (npm run site) and publishes it to GitHub Pages on every push to main.
-name: Docs site
+# Builds the packages (npm test), then the Next.js site in web/ (static export to web/out),
+# and publishes it to GitHub Pages on every push to main.
+name: Website
 on:
   push:
     branches: [main]
@@ -23,12 +24,18 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            web/package-lock.json
       - run: npm ci
       - run: npm test
-      - run: node scripts/site.mjs
+      - run: npm ci
+        working-directory: web
+      - run: npm run build
+        working-directory: web
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: web/out
       - id: deploy
         uses: actions/deploy-pages@v4
