@@ -1,2 +1,4 @@
-# Dev-only (generates icons-solid/ sources; never shipped): python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt
+# Dev-only (generates icons-solid/ and the icon font; never shipped): python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt
 shapely==2.0.7
+fonttools==4.60.2
+brotli==1.2.1

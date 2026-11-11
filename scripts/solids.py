@@ -16,13 +16,11 @@ def save(name,g): open(f'icons-solid/{name}.svg','w').write(H+f'  <path fill-rul
 # Shapes drawn with open strokes: a bold outline is not "solid", these get a design below instead.
 SHAPES=set('alarm-off bell-off book book-open camera-off cast eye-off flag flask folder-open headphones hourglass mic-off phone-off pin shield-off store timer-off trash umbrella video-off'.split())
 
-def home():
-    # door: the stroke door's own arch, cut as a line; its legs stop 1.5 above the edge so the base stays
-    return silhouette(src('home')[0]).difference(line('M9.75 19.5v-1.75a2.25 2.25 0 0 1 4.5 0V19.5'))
+def home(): return silhouette(src('home')[0])   # doorless since v4 (Sarthak's refs): plain silhouette
 def search():
     return line('M10.75 3.5a7.25 7.25 0 1 0 0 14.5a7.25 7.25 0 1 0 0-14.5Z',BOLD).union(line('m16.25 16.25 4.5 4.5',BOLD))
 def user():
-    return circle(12,7.75,5).union(silhouette('M4 20.75c0-3.75 3.6-6.25 8-6.25s8 2.5 8 6.25Z'))
+    return circle(12,7.5,3.75+W/2).union(silhouette(src('user')[0]))
 def calendar():
     frame=src('calendar')[0]; outer=silhouette(frame)
     ring=outer.difference(area(frame).buffer(-(BOLD-W/2)))          # bold frame, same outer edge
@@ -39,18 +37,22 @@ def settings():
 
 # ---- automatic solid for everything not designed by hand ----------------------------------------
 from shapely.geometry import LineString as LS
-from shapely.ops import substring
+from shapely.ops import substring, linemerge
 from shapely.affinity import translate
 GAP=.6    # smallest gap between separate solid parts
 HOLE=12   # inner closed shapes smaller than this (area) are cut as a solid shape; larger ones as a ring
 THROUGH={'mail','magnet'}   # icons whose edge-to-edge detail lines cut through the edge instead of stopping short
+# a single inner circle is cut out whole (one white circle, like the stroke's one circle), not as a ring around a dot
+CUT_WHOLE={'banknote','camera','disc','record','id-card','map-pin','radio','speaker','toggle','user-circle'}   # not target (nested rings) or eye (iris + pupil)
 # glyph-like icons (and ones a fill would change: wheels -> balls, glasses -> sunglasses): solid = bold stroke
-LINE_ICONS={'at-sign','bold','infinity','glasses','globe'}
+LINE_ICONS={'at-sign','bold','infinity','glasses','globe','earth'}
 # outside details drawn at stroke weight: they meet fused lines, so they must match their weight
 NORMAL_WEIGHT={'music'}
+# lines crossing into the body that stay solid there (calendar rings: no white notch under them)
+SOLID_CROSSING={'calendar-check','calendar-days','calendar-minus','calendar-plus','calendar-x'}
 
-def parts(n):
-    s=open(f'icons/{n}.svg').read()
+def parts(n,s=None):
+    s=s or open(f'icons/{n}.svg').read()
     ds=re.findall(r'<path d="([^"]+)"',s)
     circ=[(float(a),float(b),float(r)) for a,b,r in re.findall(r'<circle cx="([^"]+)" cy="([^"]+)" r="([^"]+)"',s)]
     closed,open_=[],[]
@@ -67,8 +69,8 @@ def detail_shape(pts,w,cap=1):
     if len(pts)<2 or LS(pts).length<.05: return Point(pts[0]).buffer(w/2,quad_segs=16)
     return LS(pts).buffer(w/2,quad_segs=16,cap_style=cap,join_style=1)
 
-def auto(n):
-    closed,open_=parts(n)
+def auto(n,svg=None):
+    closed,open_=parts(n,svg)
     closed.sort(key=lambda g:-g.area)
     outer=[]; inner=[]
     for g in closed:
@@ -78,7 +80,7 @@ def auto(n):
     for g in inner:
         # inner details are cut at their stroke footprint (same size as in the stroke icon):
         # small shapes (dots, pips, needles) as a solid white shape, larger ones as a white ring
-        G=G.difference(g.buffer(W/2,quad_segs=16,join_style=1) if g.area<HOLE else g.exterior.buffer(W/2,quad_segs=16,join_style=1))
+        G=G.difference(g.buffer(W/2,quad_segs=16,join_style=1) if g.area<HOLE or n in CUT_WHOLE else g.exterior.buffer(W/2,quad_segs=16,join_style=1))
     edge=body.boundary if outer else None
     for pts in open_:
         if len(pts)<2 or LS(pts).length<.05:                       # glyph dot
@@ -87,6 +89,9 @@ def auto(n):
             continue
         ln=LS(pts)
         inside=ln.intersection(body) if outer else ln.intersection(Polygon())
+        # floating-point wobble in the sampled points makes shapely split a straight line into fragments, and every
+        # fragment would get its ends trimmed (radio's dial lines came out pinched and short): rejoin them first
+        if inside.geom_type=='MultiLineString': inside=linemerge(inside)
         outside=ln.difference(body) if outer else ln
         if outside.length>.3:
             # the part outside the bodies is drawn bold (or at 1.5 if bold would crowd a neighbour);
@@ -103,6 +108,7 @@ def auto(n):
             elif n in NORMAL_WEIGHT or (not G.is_empty and not b.intersects(G) and b.distance(G)<GAP):
                 b=outside.buffer(W/2,quad_segs=16,cap_style=1,join_style=1)
             if b is not None: G=G.union(b)
+        if n in SOLID_CROSSING and outside.length>.3: continue
         for seg in getattr(inside,'geoms',[inside]):
             if seg.is_empty or seg.geom_type!='LineString' or seg.length<.3: continue
             G=cut_inside(G,seg,body,n)
@@ -151,9 +157,9 @@ def gapped(g,cut_line,w):
     # g with a gap band around a line drawn at weight w (keeps separate parts visibly separate)
     return g.difference(line(cut_line,w+2*.75))
 def book():
-    d=src('book')
-    cover=silhouette('M4.5 18.25V5.75A2.75 2.75 0 0 1 7.25 3H17.5a2 2 0 0 1 2 2V19a2 2 0 0 1-2 2H7.25A2.75 2.75 0 0 1 4.5 18.25Z')
-    pages=area('M7.25 15.5H19.5V21H7.25a2.75 2.75 0 0 1 0-5.5Z').buffer(-W/2)       # white pages strip, outlined
+    d=src('book'); foot=line(d[0]).union(line(d[1]))
+    cover=outline(foot)
+    pages=[Polygon(i) for p in getattr(foot,'geoms',[foot]) for i in p.interiors if Polygon(i).contains(Point(12,18.25))][0]
     ribbon=substring(LS(_pts(chains(d[1])[0])),1.5,LS(_pts(chains(d[1])[0])).length-1.5)
     return cover.difference(pages).difference(ribbon.buffer(W/2,quad_segs=16))
 def book_open():
@@ -222,17 +228,74 @@ def clapperboard():
     g=silhouette(body).difference(line(extend(bstripes),W+.5,'flat').intersection(band_zone))
     return g.union(silhouette(clap).difference(line(extend(cstripes),W+.5,'flat').intersection(area(clap).buffer(-W/2))))
 
-# "-off" icons: the base icon's solid, a gap band around the slash, the slash in bold
+# "-off" icons: the base icon's solid built only from the parts the stroke -off icon still has,
+# a gap band around the slash, the slash in bold; pieces the stroke -off icon doesn't draw are dropped
 OFF={'wifi-off':'wifi','alarm-off':'alarm','bell-off':'bell','camera-off':'camera','eye-off':'eye','mic-off':'mic','phone-off':'phone',
      'shield-off':'shield','timer-off':'timer','video-off':'video'}
+ELEM=r'<(?:path|circle) [^>]*/>'
+OFF_OWN={'wifi-off'}   # drawn on its own geometry (shifted from wifi), so not derived from the base
+def footprint(svg):
+    g=[line(d) for d in re.findall(r' d="([^"]+)"',svg)]
+    g+=[line(circle_path(float(a),float(b),float(r))) for a,b,r in re.findall(r'<circle cx="([^"]+)" cy="([^"]+)" r="([^"]+)"',svg)]
+    return unary_union(g)
 def off(n,base):
+    offsvg=open(f'icons/{n}.svg').read()
     slash=[d for d in src(n) if re.fullmatch(r'M[\d.]+ [\d.]+[lL][\d.\s-]+',d)][-1]
-    g=area(''.join(re.findall(r' d="([^"]+)"',open(f'icons-solid/{base}.svg').read())))
-    g=g.difference(line(slash,BOLD+2*.75)).union(line(slash,BOLD))
-    return unary_union([p for p in getattr(g,'geoms',[g]) if p.area>1.5])      # drop crumbs the gap leaves
+    foot=footprint(offsvg.replace(f' d="{slash}"',' d="M0 0"'))          # what the -off icon draws, slash excluded
+    if n in OFF_OWN: g=outline(bold_glyph(''.join(d for d in src(n) if d!=slash)))   # line icon: its own lines, bold, dot filled
+    elif base in DESIGNED: g=DESIGNED[base]()
+    else:
+        # base elements the -off icon no longer draws (alarm/timer hands) are left out before solidifying
+        bs=open(f'icons/{base}.svg').read()
+        keep=[e for e in re.findall(ELEM,bs) if footprint(e).intersection(foot).area>.15*footprint(e).area]
+        g=auto(base,'<svg>'+''.join(keep)+'</svg>')
+    g=g.difference(line(slash,BOLD+2*.75))
+    near=foot.buffer(1)
+    # keep a piece only if most of its outline follows the stroke -off icon (drops the left alarm ear)
+    g=unary_union([p for p in getattr(g,'geoms',[g]) if p.area>1.5 and p.exterior.intersection(near).length>.5*p.exterior.length])
+    return g.buffer(-.35,quad_segs=16).buffer(.35,quad_segs=16).union(line(slash,BOLD))   # no thin tips at the gap
+
+LAYER_GAP=.75   # gap between a part and the part in front of it
+def outline(g): return unary_union([Polygon(p.exterior) for p in getattr(g,'geoms',[g])])
+def layered(n,layers):
+    # front-to-back list of svg element subsets; each layer is solidified on its own (details cut as usual)
+    # and loses a LAYER_GAP band around everything in front of it, so the outer edges stay the stroke's
+    out=Polygon(); front=Polygon()
+    for svg in layers:
+        g=auto(n,'<svg>'+svg+'</svg>').difference(front.buffer(LAYER_GAP,quad_segs=16))
+        if not front.is_empty: g=g.buffer(-.35,quad_segs=16).buffer(.35,quad_segs=16)   # no thin tips where it tapers
+        out=out.union(g); front=front.union(outline(g))
+    return out
+P=lambda d:f'<path d="{d}"/>'
+def cloud_sun():
+    # sun = disc behind the cloud, dots at stroke weight (bold dots fused with the arc into a gear)
+    d=src('cloud-sun'); cloud=silhouette(d[0])
+    dots=unary_union([detail_shape(p,W) for p in [_pts(ch) for ch in chains(d[2]) if ch]])
+    return cloud.union(circle(8.5,8.75,3.75).difference(cloud.buffer(LAYER_GAP,quad_segs=16))).union(dots)
+def wallet():
+    d=src('wallet')
+    flap=d[1][:-len('L13.25 6.5')]+'L13.25 9L2.75 9Z'                       # closed behind the body
+    return layered('wallet',[P(d[2]),P(d[0]+'Z')+P(d[3]),P(flap)])
+def clipboard():
+    d=src('clipboard'); return layered('clipboard',[P(d[1]),P(d[0]+'Z')+P(d[2])])
+def coins():
+    return layered('coins',['<circle cx="9.5" cy="9.5" r="6.75"/><circle cx="9.5" cy="9.5" r="3.25"/>','<circle cx="14.5" cy="14.5" r="6.75"/>'])
+def copy():
+    d=src('copy'); return layered('copy',[P(d[0]),P(d[1]+'L8 8Z')])
+def images():
+    d=src('images'); s_=open('icons/images.svg').read()
+    sun=re.findall(r'<circle [^>]*/>',s_)[0]
+    return layered('images',[P(d[0])+P(d[2])+sun,P(d[1]+'L7.75 7.5Z')])
+def pie_chart():
+    # three-quarter disc behind the slice; its cut edges sit where the stroke arc's caps end
+    d=src('pie-chart'); slice_=auto('pie-chart','<svg>'+P(d[1])+'</svg>')
+    from shapely.geometry import box
+    disc=circle(11.5,12.5,9+W/2).difference(box(10.38,0,24,13.62))
+    disc=disc.buffer(-.75,quad_segs=16).buffer(.75,quad_segs=16)                  # soft inner corner
+    return slice_.union(disc.difference(outline(slice_).buffer(LAYER_GAP)))
 
 DESIGNED={n:fn for n,fn in list(globals().items()) if n in ('home','search','user','calendar','heart','bell','mail','settings')}
-DESIGNED.update({'bike':bike,'film':film,'clapperboard':clapperboard,'book':book,'book-open':book_open,'cast':cast,'flag':flag,'flask':flask,'folder-open':folder_open,
+DESIGNED.update({'cloud-sun':cloud_sun,'wallet':wallet,'clipboard':clipboard,'coins':coins,'copy':copy,'images':images,'pie-chart':pie_chart,'bike':bike,'film':film,'clapperboard':clapperboard,'book':book,'book-open':book_open,'cast':cast,'flag':flag,'flask':flask,'folder-open':folder_open,
                  'headphones':headphones,'hourglass':hourglass,'pin':pin,'store':store,'trash':trash,'umbrella':umbrella})
 
 if __name__=='__main__':
