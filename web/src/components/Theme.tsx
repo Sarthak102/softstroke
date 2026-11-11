@@ -13,9 +13,9 @@ const MS = 800;
 function apply(next: Theme) {
   document.documentElement.dataset.theme = next;
   try {
-    localStorage.setItem("theme", next);
+    sessionStorage.setItem("theme", next); // this tab only: every new visit opens light (lib/theme.ts)
   } catch {
-    // Private mode: the switch still works for this visit.
+    // Storage blocked: the switch still works on this page.
   }
 }
 
