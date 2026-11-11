@@ -59,6 +59,13 @@
     "boat",
     "nautical"
   ],
+  "apple": [
+    "fruit",
+    "food",
+    "nutrition",
+    "health",
+    "diet"
+  ],
   "archive": [
     "box",
     "storage",
@@ -254,6 +261,13 @@
     "save",
     "favorite",
     "ribbon",
+    "read later"
+  ],
+  "bookmark-check": [
+    "saved",
+    "bookmarked",
+    "done",
+    "favorite",
     "read later"
   ],
   "briefcase": [
@@ -522,6 +536,13 @@
     "lightning",
     "forecast"
   ],
+  "cloud-moon": [
+    "night",
+    "partly cloudy",
+    "weather",
+    "forecast",
+    "evening"
+  ],
   "cloud-rain": [
     "weather",
     "rain",
@@ -655,6 +676,13 @@
     "humidity",
     "rain"
   ],
+  "earth": [
+    "world",
+    "planet",
+    "globe",
+    "map",
+    "international"
+  ],
   "edit": [
     "pencil",
     "write",
@@ -748,6 +776,13 @@
     "burn",
     "trending",
     "heat"
+  ],
+  "flashlight": [
+    "torch",
+    "light",
+    "flash",
+    "lamp",
+    "dark"
   ],
   "flask": [
     "lab",
@@ -954,6 +989,13 @@
     "security",
     "credentials"
   ],
+  "lamp": [
+    "light",
+    "spotlight",
+    "ceiling",
+    "smart home",
+    "bulb"
+  ],
   "laptop": [
     "computer",
     "notebook",
@@ -1037,6 +1079,13 @@
     "private",
     "locked",
     "security"
+  ],
+  "lock-rotate": [
+    "rotation lock",
+    "orientation",
+    "portrait",
+    "screen",
+    "lock"
   ],
   "log-in": [
     "sign in",
@@ -1379,6 +1428,13 @@
     "order",
     "payment"
   ],
+  "record": [
+    "rec",
+    "capture",
+    "screen recording",
+    "dot",
+    "live"
+  ],
   "redo": [
     "forward",
     "repeat",
@@ -1480,6 +1536,13 @@
     "lookup",
     "zoom",
     "query"
+  ],
+  "search-sparkle": [
+    "ai search",
+    "smart search",
+    "magic",
+    "find",
+    "assistant"
   ],
   "send": [
     "submit",
@@ -1666,6 +1729,13 @@
     "review",
     "bookmark",
     "featured"
+  ],
+  "sticky-note": [
+    "note",
+    "memo",
+    "post-it",
+    "notes",
+    "reminder"
   ],
   "stop": [
     "media",
