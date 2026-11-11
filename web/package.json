@@ -1,0 +1,35 @@
+{
+  "name": "softstroke-web",
+  "private": true,
+  "scripts": {
+    "predev": "node -e \"require('fs').cpSync('../packages/font/dist','public/font',{recursive:true})\"",
+    "dev": "next dev",
+    "prebuild": "node -e \"require('fs').cpSync('../packages/font/dist','public/font',{recursive:true})\"",
+    "build": "next build",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@gsap/react": "^2.1.2",
+    "@softstroke/react": "file:../packages/react",
+    "@softstroke/svg": "file:../packages/svg",
+    "gsap": "^3.15.1",
+    "lenis": "^1.3.27",
+    "marked": "^18.1.2",
+    "next": "^15.5.29",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "shiki": "^4.5.0",
+    "simple-icons": "^16.37.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.5",
+    "@types/node": "^20.19.43",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^5.9.3"
+  },
+  "overrides": {
+    "postcss": ">=8.5.23"
+  }
+}
