@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { drawIn } from "@/lib/draw";
 import { BellIcon, BookmarkIcon, CalendarIcon, CameraIcon, CartIcon, ChatIcon, CloudIcon, CoffeeIcon, CompassIcon, CrownIcon, FlagIcon, FlameIcon, FolderIcon, GemIcon, GiftIcon, GlobeIcon, HeadphonesIcon, HeartIcon, HomeIcon, ImageIcon, KeyIcon, LeafIcon, LightbulbIcon, LockIcon, MailIcon, MapPinIcon, MicIcon, MoonIcon, MusicIcon, PaletteIcon, PhoneIcon, PlayCircleIcon, PuzzleIcon, RocketIcon, SearchIcon, SettingsIcon, ShieldCheckIcon, SparklesIcon, StarIcon, SunIcon, TagIcon, TerminalIcon, TrophyIcon, UmbrellaIcon, UserIcon, VideoIcon, WalletIcon, ZapIcon } from "@softstroke/react";
 import { BellIcon as BellSolidIcon, BookmarkIcon as BookmarkSolidIcon, CalendarIcon as CalendarSolidIcon, CameraIcon as CameraSolidIcon, CartIcon as CartSolidIcon, ChatIcon as ChatSolidIcon, CloudIcon as CloudSolidIcon, CoffeeIcon as CoffeeSolidIcon, CompassIcon as CompassSolidIcon, CrownIcon as CrownSolidIcon, FlagIcon as FlagSolidIcon, FlameIcon as FlameSolidIcon, FolderIcon as FolderSolidIcon, GemIcon as GemSolidIcon, GiftIcon as GiftSolidIcon, GlobeIcon as GlobeSolidIcon, HeadphonesIcon as HeadphonesSolidIcon, HeartIcon as HeartSolidIcon, HomeIcon as HomeSolidIcon, ImageIcon as ImageSolidIcon, KeyIcon as KeySolidIcon, LeafIcon as LeafSolidIcon, LightbulbIcon as LightbulbSolidIcon, LockIcon as LockSolidIcon, MailIcon as MailSolidIcon, MapPinIcon as MapPinSolidIcon, MicIcon as MicSolidIcon, MoonIcon as MoonSolidIcon, MusicIcon as MusicSolidIcon, PaletteIcon as PaletteSolidIcon, PhoneIcon as PhoneSolidIcon, PlayCircleIcon as PlayCircleSolidIcon, PuzzleIcon as PuzzleSolidIcon, RocketIcon as RocketSolidIcon, SearchIcon as SearchSolidIcon, SettingsIcon as SettingsSolidIcon, ShieldCheckIcon as ShieldCheckSolidIcon, SparklesIcon as SparklesSolidIcon, StarIcon as StarSolidIcon, SunIcon as SunSolidIcon, TagIcon as TagSolidIcon, TerminalIcon as TerminalSolidIcon, TrophyIcon as TrophySolidIcon, UmbrellaIcon as UmbrellaSolidIcon, UserIcon as UserSolidIcon, VideoIcon as VideoSolidIcon, WalletIcon as WalletSolidIcon, ZapIcon as ZapSolidIcon } from "@softstroke/react/solid";
 
@@ -105,9 +104,7 @@ export function IconField() {
       });
       io.observe(box);
 
-      // a quick rise, then each icon draws its own lines in (the fade is short so the drawing shows)
-      gsap.from(cells, { autoAlpha: 0, y: 14, duration: 0.45, ease: "power3.out", stagger: { grid: "auto", from: "center", amount: 0.4 } });
-      drawIn(gsap.utils.toArray<SVGElement>(".f-stroke", box), { duration: 1.3, each: 0.025, delay: 0.1 });
+      gsap.from(cells, { autoAlpha: 0, y: 14, duration: 0.9, ease: "power3.out", stagger: { grid: "auto", from: "center", amount: 0.6 } });
 
       return () => {
         gsap.ticker.remove(tick);
@@ -136,7 +133,7 @@ export function IconField() {
             className={`f-cell relative grid aspect-square place-items-center [--p:0] [color:color-mix(in_srgb,var(--accent)_calc(var(--p)*100%),var(--muted))] [scale:calc(1_+_var(--p)*0.6)] ${i >= 36 ? "max-sm:hidden" : ""}`}
           >
             <span className="absolute inset-[18%] rounded-full bg-accent opacity-[calc(var(--p)*0.14)]" />
-            <S className="f-stroke absolute size-6 opacity-[calc(0.75_-_var(--p)*0.75)] sm:size-7" />
+            <S className="absolute size-6 opacity-[calc(0.75_-_var(--p)*0.75)] sm:size-7" />
             <F className="absolute size-6 opacity-[var(--p)] sm:size-7" />
           </div>
         );
