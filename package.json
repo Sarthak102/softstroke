@@ -4,14 +4,26 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "build": "node scripts/build.mjs",
+    "build": "node scripts/build.mjs && ng-packagr -p packages/angular/ng-package.json",
     "test": "npm run build && node scripts/check.mjs",
     "preview": "node scripts/preview.mjs && open preview.html",
-    "site": "npm run build && node scripts/site.mjs"
+    "site": "npm test && npm --prefix web run build"
   },
   "devDependencies": {
+    "@angular/common": "^22.2.3",
+    "@angular/compiler": "^22.2.3",
+    "@angular/compiler-cli": "^22.2.3",
+    "@angular/core": "^22.2.3",
+    "@angular/platform-browser": "^22.2.3",
+    "@angular/platform-server": "^22.2.3",
+    "ng-packagr": "^22.2.5",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "svgo": "^4.1.0"
+    "rxjs": "^7.8.2",
+    "svelte": "^5.57.3",
+    "svgo": "^4.1.0",
+    "tslib": "^2.9.1",
+    "typescript": "^6.0.3",
+    "vue": "^3.5.44"
   }
 }

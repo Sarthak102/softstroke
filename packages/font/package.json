@@ -1,0 +1,31 @@
+{
+  "name": "@softstroke/font",
+  "version": "1.0.0",
+  "description": "Softstroke icons as a web font (stroke and solid), one CSS file",
+  "license": "MIT",
+  "style": "./dist/softstroke.css",
+  "exports": {
+    "./softstroke.css": "./dist/softstroke.css",
+    "./codepoints.json": "./dist/codepoints.json",
+    "./dist/*": "./dist/*"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "icons",
+    "svg",
+    "softstroke",
+    "icon-font",
+    "webfont"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sarthak102/softstroke.git",
+    "directory": "packages/font"
+  },
+  "homepage": "https://sarthak102.github.io/softstroke/",
+  "bugs": {
+    "url": "https://github.com/Sarthak102/softstroke/issues"
+  }
+}

@@ -1,5 +1,7 @@
-// icons/*.svg (stroke) + icons-solid/*.svg (solid twins) -> SVGO -> shape list -> packages/{react,react-native,svg}/dist
+// icons/*.svg (stroke) + icons-solid/*.svg (solid twins) -> SVGO -> shape list ->
+// packages/{react,react-native,vue,svelte,svg}/dist + packages/angular/{src,solid} (compiled by ng-packagr, see package.json)
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, rmSync, copyFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { optimize } from 'svgo';
 
 const TAGS = { path: 'Path', circle: 'Circle', rect: 'Rect', line: 'Line', polyline: 'Polyline', polygon: 'Polygon', ellipse: 'Ellipse' };
@@ -124,6 +126,179 @@ export type Icon = ForwardRefExoticComponent<IconProps & RefAttributes<unknown>>
 export declare function createIcon(displayName: string, nodes: [string, Record<string, string>][], solid?: boolean): Icon;
 `);
 
+const kebab = (k) => k.replace(/[A-Z]/g, (c) => '-' + c.toLowerCase());
+const kebabNodes = (nodes) => nodes.map(([t, a]) => [t, Object.fromEntries(Object.entries(a).map(([k, v]) => [kebab(k), v]))]);
+
+writePackage('packages/vue', `import { defineComponent, h } from 'vue';
+
+export function createIcon(name, nodes, solid = false) {
+  return defineComponent({
+    name,
+    inheritAttrs: false,
+    props: {
+      size: { type: [Number, String], default: 24 },
+      color: { type: String, default: 'currentColor' },
+      strokeWidth: { type: [Number, String], default: 1.5 },
+    },
+    setup(props, { attrs, slots }) {
+      return () => h('svg', {
+        xmlns: 'http://www.w3.org/2000/svg', width: props.size, height: props.size, viewBox: '0 0 24 24',
+        // Solid icons are pure fills: strokeWidth has nothing to act on.
+        ...(solid ? { fill: props.color } : { fill: 'none', stroke: props.color, 'stroke-width': props.strokeWidth, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }),
+        // Decorative by default; passing aria-label makes it meaningful.
+        'aria-hidden': attrs['aria-label'] || attrs['aria-labelledby'] ? undefined : 'true',
+        ...attrs,
+      }, [...nodes.map(([tag, a]) => h(tag, a)), slots.default?.()]);
+    },
+  });
+}
+`, `import type { DefineComponent } from 'vue';
+export interface IconProps {
+  size?: number | string;
+  color?: string;
+  strokeWidth?: number | string;
+}
+export type Icon = DefineComponent<IconProps>;
+export declare function createIcon(name: string, nodes: [string, Record<string, string>][], solid?: boolean): Icon;
+`);
+// Vue sets SVG attributes as written, so its shape lists use the kebab-case names.
+for (const [dir, list, up, solid] of [['packages/vue/dist', icons, './', false], ['packages/vue/dist/solid', solidIcons, '../', true]]) {
+  for (const { name, component, nodes } of list) {
+    writeFileSync(`${dir}/icons/${name}.js`, `import { createIcon } from '${up}../create-icon.js';\nexport default createIcon('${component}', ${JSON.stringify(kebabNodes(nodes))}${solid ? ', true' : ''});\n`);
+  }
+}
+
+// Svelte 5: one shared Icon.svelte, a thin .svelte file per icon, a typed barrel.
+rmSync('packages/svelte/dist', { recursive: true, force: true });
+mkdirSync('packages/svelte/dist', { recursive: true });
+writeFileSync('packages/svelte/dist/Icon.svelte', `<script>
+  let { nodes, solid = false, size = 24, color = 'currentColor', strokeWidth = 1.5, children, ...rest } = $props();
+  // Solid icons are pure fills: strokeWidth has nothing to act on.
+  const paint = $derived(solid ? { fill: color } : { fill: 'none', stroke: color, 'stroke-width': strokeWidth, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' });
+</script>
+
+<svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...paint} aria-hidden={rest['aria-label'] || rest['aria-labelledby'] ? undefined : 'true'} {...rest}>
+  {#each nodes as [tag, attrs]}<svelte:element this={tag} {...attrs} />{/each}
+  {@render children?.()}
+</svg>
+`);
+const svelteTypes = `import type { Component, Snippet } from 'svelte';
+import type { SVGAttributes } from 'svelte/elements';
+export interface IconProps extends Omit<SVGAttributes<SVGSVGElement>, 'color'> {
+  size?: number | string;
+  color?: string;
+  strokeWidth?: number | string;
+  children?: Snippet;
+}
+export type Icon = Component<IconProps>;
+`;
+writeFileSync('packages/svelte/dist/types.d.ts', svelteTypes);
+for (const [dir, list, up, solid] of [['packages/svelte/dist', icons, '', false], ['packages/svelte/dist/solid', solidIcons, '../', true]]) {
+  mkdirSync(`${dir}/icons`, { recursive: true });
+  for (const { name, component, nodes } of list) {
+    writeFileSync(`${dir}/icons/${name}.svelte`, `<script>\n  import Icon from '${up}../Icon.svelte';\n  let props = $props();\n</script>\n\n<Icon nodes={${JSON.stringify(kebabNodes(nodes))}}${solid ? ' solid' : ''} {...props} />\n`);
+    writeFileSync(`${dir}/icons/${name}.svelte.d.ts`, `import type { Icon } from '${up}../types.js';\ndeclare const ${component}: Icon;\nexport default ${component};\n`);
+  }
+  const exp = list.map(({ name, component }) => `export { default as ${component} } from './icons/${name}.svelte';`).join('\n');
+  writeFileSync(`${dir}/index.js`, `${exp}\n`);
+  writeFileSync(`${dir}/index.d.ts`, `export type { Icon, IconProps } from '${up}types.js';\n${exp}\n`);
+}
+
+// Angular: TypeScript sources for ng-packagr (partial compilation). One standalone component per icon,
+// selector ss-<name> (solid: ss-<name>-solid, from the @softstroke/angular/solid entry point).
+rmSync('packages/angular/src', { recursive: true, force: true });
+rmSync('packages/angular/solid', { recursive: true, force: true });
+mkdirSync('packages/angular/src', { recursive: true });
+mkdirSync('packages/angular/solid', { recursive: true });
+writeFileSync('packages/angular/src/icon.ts', `import { Directive, ElementRef, Input, OnChanges, OnInit, Renderer2, inject } from '@angular/core';
+
+export type IconNode = [string, Record<string, string>];
+
+/** Shared base: draws the icon's <svg> into the host element and keeps it in sync with the inputs. */
+@Directive({ host: { style: 'display: inline-flex' } })
+export abstract class SoftstrokeIcon implements OnInit, OnChanges {
+  @Input() size: number | string = 24;
+  @Input() color = 'currentColor';
+  @Input() strokeWidth: number | string = 1.5;
+
+  protected abstract readonly nodes: IconNode[];
+  protected readonly solid: boolean = false;
+
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly renderer = inject(Renderer2);
+  private svg?: SVGElement;
+
+  ngOnInit(): void {
+    const r = this.renderer;
+    this.svg = r.createElement('svg', 'svg') as SVGElement;
+    r.setAttribute(this.svg, 'viewBox', '0 0 24 24');
+    // Decorative by default; an aria-label on the host makes the host an image instead.
+    r.setAttribute(this.svg, 'aria-hidden', 'true');
+    if (this.host.nativeElement.getAttribute('aria-label')) r.setAttribute(this.host.nativeElement, 'role', 'img');
+    for (const [tag, attrs] of this.nodes) {
+      const el = r.createElement(tag, 'svg');
+      for (const [k, v] of Object.entries(attrs)) r.setAttribute(el, k, v);
+      r.appendChild(this.svg, el);
+    }
+    this.paint();
+    r.appendChild(this.host.nativeElement, this.svg);
+  }
+
+  ngOnChanges(): void {
+    this.paint();
+  }
+
+  private paint(): void {
+    if (!this.svg) return;
+    const set = (k: string, v: string | number) => this.renderer.setAttribute(this.svg, k, String(v));
+    set('width', this.size);
+    set('height', this.size);
+    if (this.solid) {
+      // Solid icons are pure fills: strokeWidth has nothing to act on.
+      set('fill', this.color);
+    } else {
+      set('fill', 'none');
+      set('stroke', this.color);
+      set('stroke-width', this.strokeWidth);
+      set('stroke-linecap', 'round');
+      set('stroke-linejoin', 'round');
+    }
+  }
+}
+`);
+const ngSet = (list, solid, from) => `import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { SoftstrokeIcon } from '${from}';
+${list.map(({ name, component, nodes }) => `
+@Component({ selector: 'ss-${name}${solid ? '-solid' : ''}', standalone: true, template: '', changeDetection: ChangeDetectionStrategy.OnPush })
+export class ${component} extends SoftstrokeIcon {
+  protected readonly nodes = ${JSON.stringify(kebabNodes(nodes))} as [string, Record<string, string>][];${solid ? '\n  protected override readonly solid = true;' : ''}
+}`).join('\n')}
+`;
+writeFileSync('packages/angular/src/icons.ts', ngSet(icons, false, './icon'));
+writeFileSync('packages/angular/src/public-api.ts', `export { SoftstrokeIcon } from './icon';\nexport type { IconNode } from './icon';\nexport * from './icons';\n`);
+writeFileSync('packages/angular/solid/icons.ts', ngSet(solidIcons, true, '@softstroke/angular'));
+writeFileSync('packages/angular/solid/public-api.ts', `export * from './icons';\n`);
+writeFileSync('packages/angular/solid/ng-package.json', JSON.stringify({ lib: { entryFile: 'public-api.ts' } }) + '\n');
+
+// Icon font: font/ is generated by scripts/font.py (Python, committed) so this build stays Node-only.
+// A font built from older sources is an error, not a silent mismatch.
+const fontHash = createHash('sha256').update(Buffer.concat(['icons', 'icons-solid'].flatMap((d) =>
+  icons.map(({ name }) => name).sort().map((name) => readFileSync(`${d}/${name}.svg`))))).digest('hex');  // same order as font.py
+if (readFileSync('font/source.sha256', 'utf8').trim() !== fontHash) throw new Error('font/ is out of date with the icons: run .venv/bin/python scripts/font.py');
+const codes = JSON.parse(readFileSync('font/codepoints.json', 'utf8'));
+rmSync('packages/font/dist', { recursive: true, force: true });
+mkdirSync('packages/font/dist', { recursive: true });
+for (const f of ['softstroke.woff2', 'softstroke-solid.woff2']) copyFileSync(`font/${f}`, `packages/font/dist/${f}`);
+writeFileSync('packages/font/dist/softstroke.css', `/* Softstroke icon font. <i class="ss ss-home"></i> (stroke), <i class="ss-solid ss-home"></i> (solid). MIT */
+@font-face { font-family: "Softstroke"; src: url("softstroke.woff2") format("woff2"); font-display: block; }
+@font-face { font-family: "Softstroke Solid"; src: url("softstroke-solid.woff2") format("woff2"); font-display: block; }
+.ss, .ss-solid { display: inline-block; font-style: normal; font-weight: normal; font-variant: normal; line-height: 1; text-transform: none; vertical-align: -0.125em; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.ss { font-family: "Softstroke"; }
+.ss-solid { font-family: "Softstroke Solid"; }
+${icons.map(({ name }) => `.ss-${name}::before { content: "\\${codes[name].toString(16)}"; }`).join('\n')}
+`);
+writeFileSync('packages/font/dist/codepoints.json', JSON.stringify(Object.fromEntries(icons.map(({ name }) => [name, codes[name]]))) + '\n');
+
 // Plain SVGs (optimized, with the shared root attributes) + one sprite for <use href="sprite.svg#name">.
 rmSync('packages/svg/dist', { recursive: true, force: true });
 mkdirSync('packages/svg/dist/icons', { recursive: true });
@@ -146,8 +321,14 @@ const missing = [...names].filter((n) => !keywords[n]?.length);
 const stale = Object.keys(keywords).filter((n) => !names.has(n));
 if (missing.length || stale.length) throw new Error(`keywords.json: missing [${missing}] stale [${stale}]`);
 writeFileSync('packages/svg/dist/keywords.json', JSON.stringify(keywords) + '\n');
+// Every icon also needs a category (icon browser filters); same rules as keywords.
+const categories = JSON.parse(readFileSync('categories.json', 'utf8'));
+const noCat = [...names].filter((n) => !categories[n]);
+const staleCat = Object.keys(categories).filter((n) => !names.has(n));
+if (noCat.length || staleCat.length) throw new Error(`categories.json: missing [${noCat}] stale [${staleCat}]`);
+writeFileSync('packages/svg/dist/categories.json', JSON.stringify(categories) + '\n');
 writeFileSync('packages/svg/dist/icons.json', JSON.stringify(Object.fromEntries(icons.map(({ name, nodes }) => [name, nodes])), null, 1) + '\n');
 
-for (const p of ['react', 'react-native', 'svg']) for (const f of ['README.md', 'LICENSE']) copyFileSync(f, `packages/${p}/${f}`);
+for (const p of ['react', 'react-native', 'vue', 'svelte', 'angular', 'svg', 'font']) for (const f of ['README.md', 'LICENSE']) copyFileSync(f, `packages/${p}/${f}`);
 
-console.log(`built ${icons.length} stroke + ${solidIcons.length} solid icons -> react, react-native, svg`);
+console.log(`built ${icons.length} stroke + ${solidIcons.length} solid icons -> react, react-native, vue, svelte, angular (sources), svg, font`);

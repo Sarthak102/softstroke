@@ -1,0 +1,48 @@
+{
+  "name": "@softstroke/vue",
+  "version": "1.0.0",
+  "description": "Softstroke icons as Vue 3 components",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./icons/*": {
+      "types": "./dist/icons/*.d.ts",
+      "default": "./dist/icons/*.js"
+    },
+    "./solid": {
+      "types": "./dist/solid/index.d.ts",
+      "default": "./dist/solid/index.js"
+    },
+    "./solid/icons/*": {
+      "types": "./dist/solid/icons/*.d.ts",
+      "default": "./dist/solid/icons/*.js"
+    }
+  },
+  "peerDependencies": {
+    "vue": ">=3.3"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "icons",
+    "svg",
+    "softstroke"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sarthak102/softstroke.git",
+    "directory": "packages/vue"
+  },
+  "homepage": "https://sarthak102.github.io/softstroke/",
+  "bugs": {
+    "url": "https://github.com/Sarthak102/softstroke/issues"
+  }
+}

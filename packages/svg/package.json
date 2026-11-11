@@ -12,7 +12,8 @@
     "./keywords.json": "./dist/keywords.json",
     "./solid-sprite.svg": "./dist/solid-sprite.svg",
     "./icons-solid.json": "./dist/icons-solid.json",
-    "./solid/icons/*": "./dist/solid/icons/*"
+    "./solid/icons/*": "./dist/solid/icons/*",
+    "./categories.json": "./dist/categories.json"
   },
   "files": [
     "dist"

@@ -5,4 +5,7 @@ packages/*/README.md
 packages/*/LICENSE
 .venv
 .DS_Store
-site
+packages/angular/src
+packages/angular/solid
+inspo
+drafts
