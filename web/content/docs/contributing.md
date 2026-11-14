@@ -5,7 +5,7 @@ description: Request an icon, report a bug, or draw one yourself.
 
 ## Requests and bugs
 
-Open an issue on [GitHub](https://github.com/Sarthak102/softstroke/issues) with the icon you need and where you'd use it.
+Open an issue on [GitHub](https://github.com/softstroke/softstroke/issues) with the icon you need and where you'd use it.
 
 ## Drawing an icon
 

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Sarthak102/softstroke/main/docs/logo.svg" alt="Softstroke logo" width="96">
+  <img src="https://raw.githubusercontent.com/softstroke/softstroke/main/docs/logo.svg" alt="Softstroke logo" width="96">
 </p>
 
 <h1 align="center">Softstroke</h1>
@@ -9,15 +9,15 @@
 </p>
 
 <p align="center">
-  <a href="https://sarthak102.github.io/softstroke/"><strong>Browse the icons</strong></a>
+  <a href="https://softstroke.github.io/softstroke/"><strong>Browse the icons</strong></a>
   &nbsp;·&nbsp;
-  <a href="https://sarthak102.github.io/softstroke/docs/">Docs</a>
+  <a href="https://softstroke.github.io/softstroke/docs/">Docs</a>
   &nbsp;·&nbsp;
-  <a href="https://sarthak102.github.io/softstroke/use-cases/">Use cases</a>
+  <a href="https://softstroke.github.io/softstroke/use-cases/">Use cases</a>
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Sarthak102/softstroke/main/docs/preview.webp" alt="Weather, health, smart home and music app cards built with Softstroke icons" width="800">
+  <img src="https://raw.githubusercontent.com/softstroke/softstroke/main/docs/preview.webp" alt="Weather, health, smart home and music app cards built with Softstroke icons" width="800">
 </p>
 
 ## What it is

@@ -38,11 +38,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sarthak102/softstroke.git",
+    "url": "git+https://github.com/softstroke/softstroke.git",
     "directory": "packages/react"
   },
-  "homepage": "https://sarthak102.github.io/softstroke/",
+  "homepage": "https://softstroke.github.io/softstroke/",
   "bugs": {
-    "url": "https://github.com/Sarthak102/softstroke/issues"
+    "url": "https://github.com/softstroke/softstroke/issues"
   }
 }
