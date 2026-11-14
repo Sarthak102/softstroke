@@ -329,6 +329,59 @@ if (noCat.length || staleCat.length) throw new Error(`categories.json: missing [
 writeFileSync('packages/svg/dist/categories.json', JSON.stringify(categories) + '\n');
 writeFileSync('packages/svg/dist/icons.json', JSON.stringify(Object.fromEntries(icons.map(({ name, nodes }) => [name, nodes])), null, 1) + '\n');
 
+// shadcn registry, served by the site at /r/: `npx shadcn add <site>/r/home.json` copies one standalone component
+// (same props as @softstroke/react) into the project. Generated here, not committed (web/public/r is ignored).
+const REG = 'web/public/r';
+rmSync(REG, { recursive: true, force: true });
+mkdirSync(REG, { recursive: true });
+const tsx = ({ name, component: base, nodes }, solid) => {
+  const component = solid ? base.replace(/Icon$/, 'SolidIcon') : base;   // both styles can live in one project
+  const paint = solid ? 'fill={color}' : 'fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round"';
+  const shapes = nodes.map(([t, a]) => `      <${t} ${Object.entries(a).map(([k, v]) => `${k}="${v}"`).join(' ')} />`).join('\n');
+  return `import { forwardRef, type SVGProps } from "react";
+
+// Softstroke ${name}${solid ? ' (solid)' : ''}, MIT. https://softstroke.github.io/softstroke/
+export interface IconProps extends Omit<SVGProps<SVGSVGElement>, "ref"> {
+  size?: number | string;
+  color?: string;
+  strokeWidth?: number | string;
+}
+
+export const ${component} = forwardRef<SVGSVGElement, IconProps>(
+  ({ size = 24, color = "currentColor", strokeWidth = 1.5, children, ...rest }, ref) => (
+    <svg
+      ref={ref}
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      ${paint}
+      aria-hidden={rest["aria-label"] || rest["aria-labelledby"] ? undefined : true}
+      {...rest}
+    >
+${shapes}
+      {children}
+    </svg>
+  ),
+);
+${component}.displayName = "${component}";
+`.replace(solid ? /\n  strokeWidth\?: number \| string;/ : /^$/, '').replace(solid ? 'strokeWidth = 1.5, ' : /^$/, '');
+};
+const registryItems = [];
+for (const [list, solid] of [[icons, false], [solidIcons, true]]) for (const icon of list) {
+  const item = {
+    $schema: 'https://ui.shadcn.com/schema/registry-item.json',
+    name: solid ? `${icon.name}-solid` : icon.name,
+    type: 'registry:component',
+    title: `${icon.component.slice(0, -4)}${solid ? ' (solid)' : ''}`,
+    description: `Softstroke ${icon.name} icon, ${solid ? 'solid' : 'stroke'}.`,
+    files: [{ path: `components/icons/${icon.name}${solid ? '-solid' : ''}.tsx`, type: 'registry:component', content: tsx(icon, solid) }],
+  };
+  writeFileSync(`${REG}/${item.name}.json`, JSON.stringify(item) + '\n');
+  registryItems.push({ name: item.name, type: item.type, title: item.title, description: item.description, files: [{ path: item.files[0].path, type: item.files[0].type }] });
+}
+writeFileSync(`${REG}/registry.json`, JSON.stringify({ $schema: 'https://ui.shadcn.com/schema/registry.json', name: 'softstroke', homepage: 'https://softstroke.github.io/softstroke/', items: registryItems }) + '\n');
+
 for (const p of ['react', 'react-native', 'vue', 'svelte', 'angular', 'svg', 'font']) for (const f of ['README.md', 'LICENSE']) copyFileSync(f, `packages/${p}/${f}`);
 
-console.log(`built ${icons.length} stroke + ${solidIcons.length} solid icons -> react, react-native, vue, svelte, angular (sources), svg, font`);
+console.log(`built ${icons.length} stroke + ${solidIcons.length} solid icons -> react, react-native, vue, svelte, angular (sources), svg, font, shadcn registry`);

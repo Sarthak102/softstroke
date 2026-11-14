@@ -7,7 +7,7 @@
     "build": "node scripts/build.mjs && ng-packagr -p packages/angular/ng-package.json",
     "test": "npm run build && node scripts/check.mjs",
     "preview": "node scripts/preview.mjs && open preview.html",
-    "site": "npm test && npm --prefix web run build"
+    "site": "npm test && NEXT_DIST_DIR=out npm --prefix web run build"
   },
   "devDependencies": {
     "@angular/common": "^22.2.3",

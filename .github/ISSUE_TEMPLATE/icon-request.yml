@@ -1,0 +1,35 @@
+name: Request an icon
+description: Ask for an icon that Softstroke does not have yet.
+title: "Icon request: "
+labels: ["icon request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for asking. Please search the [icon browser](https://softstroke.github.io/softstroke/icons/) first: the icon may exist under another name.
+        Brand logos are not added (trademarks). Every icon is drawn from scratch in the Softstroke style, so please do not attach files from other icon sets.
+  - type: input
+    id: name
+    attributes:
+      label: Icon name
+      description: One or two words, kebab-case if you can (e.g. "pill-bottle").
+    validations:
+      required: true
+  - type: textarea
+    id: use
+    attributes:
+      label: Where would you use it?
+      description: The screen, button or feature it is for. This helps choose the clearest shape.
+    validations:
+      required: true
+  - type: textarea
+    id: looks
+    attributes:
+      label: What should it show?
+      description: Describe the object or idea. Optional; a rough sketch or a link to a photo of the real object helps.
+  - type: checkboxes
+    id: style
+    attributes:
+      label: Styles
+      options:
+        - label: I need the solid version too

@@ -7,6 +7,8 @@ import solidNodes from "@softstroke/svg/icons-solid.json";
 import keywords from "@softstroke/svg/keywords.json";
 import categories from "@softstroke/svg/categories.json";
 import { useCopy } from "../CopyCommand";
+import Link from "next/link";
+import { REQUEST_URL, SITE_URL } from "@/lib/site";
 import { ICON_COUNT } from "@/lib/count";
 
 type Nodes = [string, Record<string, string>][];
@@ -199,6 +201,9 @@ export function IconBrowser() {
           <button type="button" onClick={() => { setQuery(""); setCat(null); }} className="mt-6 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-ink active:scale-[0.98]">
             {cat ? "Clear search and category" : "Clear search"}
           </button>
+          <a href={`${REQUEST_URL}&title=${encodeURIComponent(`Icon request: ${query.trim()}`)}`} className="mt-3 text-sm text-accent-text hover:underline">
+            Request &ldquo;{query.trim()}&rdquo; as a new icon
+          </a>
         </div>
       ) : (
         <ul className="grid grid-cols-[repeat(auto-fill,minmax(96px,1fr))] gap-2">
@@ -275,6 +280,7 @@ function Detail({ name, style, onClose }: { name: string | null; style: Style; o
   const imp = useCopy();
   const svg = useCopy();
   const share = useCopy();
+  const shad = useCopy();
 
   useEffect(() => setView(style), [style, name]);
   // Keep the last icon rendered while the panel slides out.
@@ -352,6 +358,7 @@ function Detail({ name, style, onClose }: { name: string | null; style: Style; o
               <Action label="Copy JSX" hint={`<${C} />`} state={jsx.state} onClick={() => jsx.copy(`<${C} />`)} />
               <Action label="Copy import" hint={`from "${from}"`} state={imp.state} onClick={() => imp.copy(`import { ${C} } from "${from}";`)} />
               <Action label="Copy SVG" hint={`${view}, 24px`} state={svg.state} onClick={() => svg.copy(toSvg(n, view))} />
+              <Action label="Copy shadcn" hint="npx shadcn add" state={shad.state} onClick={() => shad.copy(`npx shadcn@latest add ${SITE_URL}/r/${n}${view === "solid" ? "-solid" : ""}.json`)} />
               <Action label="Copy link" hint="to this icon" state={share.state} onClick={() => share.copy(window.location.href)} />
               <button
                 type="button"
@@ -361,6 +368,9 @@ function Detail({ name, style, onClose }: { name: string | null; style: Style; o
                 <DownloadIcon size={18} />
                 Download SVG
               </button>
+              <Link href={`/icons/${n}/`} className="py-1 text-center text-sm text-accent-text hover:underline">
+                Open the {n} page
+              </Link>
             </div>
           </div>
         )}

@@ -4,6 +4,7 @@ import { SmoothScroll } from "@/components/SmoothScroll";
 import { themeScript } from "@/lib/theme";
 import "./globals.css";
 import { ICON_COUNT } from "@/lib/count";
+import { SITE_URL } from "@/lib/site";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -22,7 +23,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   // Relative URLs (og.png) resolve against this, including the /softstroke base path.
-  metadataBase: new URL("https://sarthak102.github.io/softstroke/"),
+  metadataBase: new URL(`${SITE_URL}/`),
   title: "Softstroke | Soft, rounded open-source icons",
   description: `${ICON_COUNT} soft, rounded icons in stroke and solid for React, React Native, Vue, Svelte, Angular, SVG and an icon font. MIT licensed.`,
   openGraph: {

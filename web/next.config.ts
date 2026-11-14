@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
   images: { unoptimized: true },
   trailingSlash: true,
   devIndicators: false,
+  // `npm run site` builds into out/ (the static export) so it never breaks a running dev server, which uses .next.
+  distDir: process.env.NEXT_DIST_DIR ?? ".next",
   env: { NEXT_PUBLIC_ICON_COUNT: String(Object.keys(icons).length) },
 };
 
