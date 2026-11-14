@@ -1,0 +1,20 @@
+# Cloudflare Worker behind the site's feedback modal (see README.md for setup).
+name = "softstroke-feedback"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+
+[vars]
+# Pages that may call the Worker (the live site and the local dev server).
+ALLOWED_ORIGINS = "https://softstroke.github.io,http://localhost:3123"
+GITHUB_REPO = "softstroke/softstroke"
+
+# Per-visitor limit (key = IP): 5 submissions a minute.
+[[ratelimits]]
+name = "LIMITER"
+namespace_id = "1001"
+
+[ratelimits.simple]
+limit = 5
+period = 60
+
+# Secrets (never in this file): GITHUB_TOKEN, TURNSTILE_SECRET. Set with `npx wrangler secret put <NAME>`.

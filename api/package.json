@@ -1,0 +1,18 @@
+{
+  "name": "softstroke-feedback",
+  "private": true,
+  "type": "module",
+  "description": "Cloudflare Worker that turns the site's request-an-icon and report-an-issue forms into GitHub issues.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20261029.1",
+    "typescript": "5.9.3",
+    "vitest": "4.1.12",
+    "wrangler": "4.156.0"
+  }
+}
