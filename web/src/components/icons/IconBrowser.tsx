@@ -107,7 +107,10 @@ export function IconBrowser() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "/" && document.activeElement !== input.current) {
+      // "/" jumps to search, but never while typing somewhere else (the feedback modal's fields, for one).
+      const t = e.target as HTMLElement | null;
+      const typing = !!t && (t.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(t.tagName));
+      if (e.key === "/" && !typing && document.activeElement !== input.current) {
         e.preventDefault();
         input.current?.focus();
       }
