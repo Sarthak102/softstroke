@@ -272,7 +272,8 @@ export function FeedbackModal() {
                 I need the solid version too
               </label>
             )}
-            {DIRECT && <div ref={captcha} className="min-h-[65px]" />}
+            {/* Turnstile mounts here; the widget is set to Invisible in Cloudflare, so normally nothing shows */}
+            {DIRECT && <div ref={captcha} />}
             {error && (
               <p role="alert" className="text-sm text-red-600 [[data-theme=dark]_&]:text-red-400">
                 {error}

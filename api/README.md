@@ -11,7 +11,7 @@ Every request is checked, in this order: allowed origin (CORS), 5 submissions a 
 ## One-time setup
 
 1. **Cloudflare account** (free): https://dash.cloudflare.com/sign-up
-2. **Turnstile widget**: Cloudflare dashboard → Turnstile → Add widget. Name `softstroke`, hostnames `softstroke.github.io` and `localhost`, mode *Managed*. Keep the page open: you need the **site key** (public) and the **secret key** (private).
+2. **Turnstile widget**: Cloudflare dashboard → Turnstile → Add widget. Name `softstroke`, hostnames `softstroke.github.io` and `localhost`, mode *Invisible* (no box on the form), pre-clearance off. Keep the page open: you need the **site key** (public) and the **secret key** (private).
 3. **GitHub token**: https://github.com/settings/personal-access-tokens/new
    - Resource owner: `softstroke` (if it is not listed, allow fine-grained tokens in the org: Settings → Personal access tokens).
    - Repository access: only `softstroke/softstroke`.
