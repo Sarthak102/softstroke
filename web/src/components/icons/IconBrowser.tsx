@@ -8,7 +8,8 @@ import keywords from "@softstroke/svg/keywords.json";
 import categories from "@softstroke/svg/categories.json";
 import { useCopy } from "../CopyCommand";
 import Link from "next/link";
-import { REQUEST_URL, SITE_URL } from "@/lib/site";
+import { SITE_URL } from "@/lib/site";
+import { FeedbackLink } from "../Feedback";
 import { ICON_COUNT } from "@/lib/count";
 
 type Nodes = [string, Record<string, string>][];
@@ -201,9 +202,9 @@ export function IconBrowser() {
           <button type="button" onClick={() => { setQuery(""); setCat(null); }} className="mt-6 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-ink active:scale-[0.98]">
             {cat ? "Clear search and category" : "Clear search"}
           </button>
-          <a href={`${REQUEST_URL}&title=${encodeURIComponent(`Icon request: ${query.trim()}`)}`} className="mt-3 text-sm text-accent-text hover:underline">
+          <FeedbackLink kind="request" prefill={{ name: query.trim().slice(0, 60) }} className="mt-3 text-sm text-accent-text hover:underline">
             Request &ldquo;{query.trim()}&rdquo; as a new icon
-          </a>
+          </FeedbackLink>
         </div>
       ) : (
         <ul className="grid grid-cols-[repeat(auto-fill,minmax(96px,1fr))] gap-2">

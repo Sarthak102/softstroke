@@ -1,5 +1,6 @@
 export const GITHUB_URL = "https://github.com/softstroke/softstroke";
 export const REQUEST_URL = `${GITHUB_URL}/issues/new?template=icon-request.yml`;
+export const ISSUE_URL = `${GITHUB_URL}/issues/new?template=bug-report.yml`;
 // Public address of the site (sitemap, robots, metadata, shadcn commands). Change here if the site moves.
 export const SITE_URL = "https://softstroke.github.io/softstroke";
 // GitHub Pages serves the site from /softstroke. next/link adds it; plain URLs (rendered docs, font CSS) need it too.

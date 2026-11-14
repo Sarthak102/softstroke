@@ -5,6 +5,7 @@ import { themeScript } from "@/lib/theme";
 import "./globals.css";
 import { ICON_COUNT } from "@/lib/count";
 import { SITE_URL } from "@/lib/site";
+import { FeedbackModal } from "@/components/Feedback";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -51,6 +52,7 @@ export default function RootLayout({
       >
         <SmoothScroll />
         {children}
+        <FeedbackModal />
       </body>
     </html>
   );

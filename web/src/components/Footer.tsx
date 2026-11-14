@@ -8,7 +8,8 @@ import { useGSAP } from "@gsap/react";
 import { ArrowRightIcon } from "@softstroke/react";
 import { CopyCommand } from "./CopyCommand";
 import { LogoMark } from "./Logo";
-import { GITHUB_URL, REQUEST_URL } from "@/lib/site";
+import { GITHUB_URL } from "@/lib/site";
+import { FeedbackLink } from "./Feedback";
 import { ICON_COUNT } from "@/lib/count";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -16,7 +17,7 @@ gsap.registerPlugin(ScrollTrigger);
 const COLUMNS: { title: string; links: [string, string][] }[] = [
   { title: "Product", links: [["Icons", "/icons/"], ["Icon font", "/icon-font/"], ["Docs", "/docs/"], ["Playground", "/#playground"]] },
   { title: "Packages", links: [["React", "/docs/react/"], ["React Native", "/docs/react-native/"], ["Vue", "/docs/vue/"], ["Svelte", "/docs/svelte/"], ["Angular", "/docs/angular/"], ["SVG and CDN", "/docs/svg/"]] },
-  { title: "Resources", links: [["GitHub", GITHUB_URL], ["npm", "https://www.npmjs.com/org/softstroke"], ["Changelog", "/changelog/"], ["Request an icon", REQUEST_URL], ["Report an issue", `${GITHUB_URL}/issues`], ["MIT License", `${GITHUB_URL}/blob/main/LICENSE`]] },
+  { title: "Resources", links: [["GitHub", GITHUB_URL], ["npm", "https://www.npmjs.com/org/softstroke"], ["Changelog", "/changelog/"], ["Request an icon", "#request"], ["Report an issue", "#issue"], ["MIT License", `${GITHUB_URL}/blob/main/LICENSE`]] },
 ];
 
 export function Footer() {
@@ -63,7 +64,9 @@ export function Footer() {
                   <ul className="space-y-3 text-muted">
                     {c.links.map(([label, href]) => (
                       <li key={label}>
-                        {href.startsWith("http") ? (
+                        {href === "#request" || href === "#issue" ? (
+                          <FeedbackLink kind={href === "#request" ? "request" : "issue"} className="transition-colors hover:text-ink">{label}</FeedbackLink>
+                        ) : href.startsWith("http") ? (
                           <a href={href} className="transition-colors hover:text-ink">{label}</a>
                         ) : (
                           <Link href={href} className="transition-colors hover:text-ink">{label}</Link>

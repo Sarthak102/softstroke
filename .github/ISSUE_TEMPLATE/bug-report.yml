@@ -1,0 +1,24 @@
+name: Report an issue
+description: Something looks wrong or does not work (an icon, a package or the website).
+title: "Bug: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you saw, and what you expected instead.
+    validations:
+      required: true
+  - type: input
+    id: where
+    attributes:
+      label: Where?
+      description: The icon name, the package (e.g. @softstroke/react 1.2.0) or the page URL.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Optional. A code snippet or the steps that show the problem.
