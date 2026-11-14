@@ -4,7 +4,7 @@ export const ISSUE_URL = `${GITHUB_URL}/issues/new?template=bug-report.yml`;
 // Feedback Worker (api/) and its Turnstile site key: both public values. While either is empty the feedback
 // modal hands off to the GitHub issue forms instead of sending directly.
 export const FEEDBACK_API = process.env.NEXT_PUBLIC_FEEDBACK_API ?? "";
-export const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
+export const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "0x4AAAAAAGBI7UEHUIHucLHH";
 // Public address of the site (sitemap, robots, metadata, shadcn commands). Change here if the site moves.
 export const SITE_URL = "https://softstroke.github.io/softstroke";
 // GitHub Pages serves the site from /softstroke. next/link adds it; plain URLs (rendered docs, font CSS) need it too.
