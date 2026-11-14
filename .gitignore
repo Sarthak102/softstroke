@@ -13,3 +13,5 @@ web/public/r
 packages/flutter/lib
 packages/flutter/fonts
 !packages/flutter/README.md
+packages/flutter/.dart_tool
+packages/flutter/pubspec.lock
