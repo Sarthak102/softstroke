@@ -1,0 +1,37 @@
+# Publishes packages/flutter to pub.dev when a tag like flutter-v1.3.0 is pushed.
+# pub.dev trusts this repo through GitHub's OIDC token (package Admin > Automated publishing,
+# tag pattern flutter-v{{version}}), so no secret is stored here.
+# lib/ and fonts/ are generated, so the build runs first (Node only; font/ is committed).
+name: Flutter publish
+on:
+  push:
+    tags: ['flutter-v[0-9]+.[0-9]+.[0-9]+']
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: pub.dev
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - name: Tag matches pubspec version
+        run: |
+          want="flutter-v$(sed -n 's/^version: //p' packages/flutter/pubspec.yaml)"
+          [ "$GITHUB_REF_NAME" = "$want" ] || { echo "tag $GITHUB_REF_NAME != $want"; exit 1; }
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: flutter pub publish --dry-run
+        working-directory: packages/flutter
+      # setup-dart exchanges GitHub's short-lived OIDC token for pub.dev credentials (flutter's pub reads
+      # the same config), so it runs right before the upload.
+      - uses: dart-lang/setup-dart@v1
+      - run: flutter pub publish --force
+        working-directory: packages/flutter

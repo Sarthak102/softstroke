@@ -319,6 +319,7 @@ library softstroke;
 
 import 'package:flutter/widgets.dart';
 
+/// Every Softstroke icon as an [IconData]: \`<name>\` is the stroke style, \`<name>Solid\` the solid one.
 @staticIconProvider
 abstract final class SoftstrokeIcons {
 ${icons.map(({ name }) => dartIcon(name, false)).join('\n')}
