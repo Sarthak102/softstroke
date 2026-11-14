@@ -30,6 +30,9 @@ def heart(): return silhouette(src('heart')[0])
 def bell():
     # clapper at stroke weight, 0.25 lower than in the stroke icon: the silhouette's lip is wider
     b=src('bell'); return silhouette(b[0]).union(translate(line(b[1],W),0,.25))
+def bell_plus():
+    # as bell(): clapper at stroke weight, a little lower; the plus bold
+    b=src('bell-plus'); return silhouette(b[0]).union(translate(line(b[1],W),0,.25)).union(line(b[2],BOLD))
 def mail():
     m=src('mail'); return silhouette(m[0]).difference(line(extend(m[1]),W,'flat'))
 def settings():
@@ -45,7 +48,7 @@ THROUGH={'mail','magnet'}   # icons whose edge-to-edge detail lines cut through 
 # a single inner circle is cut out whole (one white circle, like the stroke's one circle), not as a ring around a dot
 CUT_WHOLE={'banknote','camera','coins','cpu','fuel','disc','record','id-card','map-pin','radio','speaker','toggle','user-circle'}   # not target (nested rings) or eye (iris + pupil)
 # glyph-like icons (and ones a fill would change: wheels -> balls, glasses -> sunglasses): solid = bold stroke
-LINE_ICONS={'at-sign','bold','infinity','glasses','globe','earth'}
+LINE_ICONS={'at-sign','bold','infinity','glasses','globe','earth','command','crosshair'}
 # outside details drawn at stroke weight: they meet fused lines, so they must match their weight
 NORMAL_WEIGHT={'music','key'}
 # lines crossing into the body that stay solid there (calendar rings: no white notch under them)
@@ -313,20 +316,21 @@ def ship():
     # hull in front of the cabin in front of the funnel: each closed against the part below it, gaps between
     d=src('ship'); return layered('ship',[P(d[0]),P(d[1]+'Z'),P(d[2]+'Z')])
 def award():
-    # medal in front of the ribbon (closed under the medal): the tails read solid, not as outlines
+    # medal + ribbon (closed under the medal) as one shape: they touch in the stroke icon (Sarthak 2026-11-14:
+    # where stroke parts touch, the solid keeps them together)
     d=src('award'); s_=open('icons/award.svg').read()
-    return layered('award',[re.findall(r'<circle [^>]*/>',s_)[0],P(d[0]+'Z')])
+    return auto('award','<svg>'+re.findall(r'<circle [^>]*/>',s_)[0]+P(d[0]+'Z')+'</svg>')
 def graduation_cap():
-    # cap (and tassel) in front of the band (closed under the cap)
-    d=src('graduation-cap'); return layered('graduation-cap',[P(d[0])+P(d[2]),P(d[1]+'Z')])
+    # cap, band (closed under the cap) and tassel as one shape, as they touch in the stroke icon
+    d=src('graduation-cap'); return auto('graduation-cap','<svg>'+P(d[0])+P(d[1]+'Z')+P(d[2])+'</svg>')
 def fuel():
     # pump body is open at the base in the stroke icon: closed along the base so it fills; window cut whole
     d=src('fuel'); return auto('fuel','<svg>'+P(d[0]+'Z')+''.join(P(x) for x in d[1:])+'</svg>')
 # bodies drawn open in the stroke icon (gaps for wheels, lid, plus) never filled in auto(): closed here
 def truck():
-    # wheels in front of the cargo box in front of the cab, gaps between
+    # cargo box + cab as one shape (they touch in the stroke icon); the wheels keep a gap or they vanish into the body
     d=src('truck'); s_=open('icons/truck.svg').read()
-    return layered('truck',[''.join(re.findall(r'<circle [^>]*/>',s_)),P(d[0]+'Z'),P(d[2]+'L14.11 18.32Z')])
+    return layered('truck',[''.join(re.findall(r'<circle [^>]*/>',s_)),P(d[0]+'Z')+P(d[2]+'L14.11 18.32Z')])
 def archive():
     d=src('archive'); return layered('archive',[P(d[0]),P(d[1]+'Z')+P(d[2])])
 def cart():
@@ -335,20 +339,25 @@ def cart():
     basket='M5.14 6.32L6.69 13.02Q7.08 14.7 8.81 14.7L17.95 14.7Q19.68 14.7 20.14 13.04L21.6 7.78Q22 6.32 20.49 6.32Z'
     return auto('cart','<svg>'+P(basket)+P('M2.27 2.81L3.3 2.81Q4.32 2.81 4.62 4.08L5.14 6.32')+''.join(re.findall(r'<circle [^>]*/>',s_))+'</svg>')
 def gift():
-    # lid + bow in front of the box; the ribbon is cut inside the box
-    d=src('gift'); return layered('gift',[P(d[0])+P(d[3])+P(d[4]),P(d[1]+'Z')+P(d[2])])
+    # lid, bow and box (closed) as one shape, as they touch in the stroke icon; the ribbon is cut inside
+    # (ribbon cut only in the box: inside the short lid the stop-short rule left a stray dot)
+    d=src('gift'); return auto('gift','<svg>'+''.join(P(x) for x in (d[0],d[1]+'Z','M12 11.46V20.81',d[3],d[4]))+'</svg>')
 def image_plus():
     # the image solid (same frame as image) behind the plus, gap between
     d=src('image-plus'); s_=open('icons/image-plus.svg').read()
     g=layered('image-plus',[P(d[2]),P(src('image')[0])+P(d[1])+re.findall(r'<circle [^>]*/>',s_)[0]])
     return unary_union([p for p in getattr(g,'geoms',[g]) if p.area>1.5])   # drop the frame-corner crumb beside the plus
+def pipette():
+    # exactly the stroke icon's outer silhouette: tube, collar and bulb as one shape, the collar's ends showing past
+    # the body. Gaps between the parts (two earlier versions) made it read as another object (Sarthak, 2026-11-14)
+    d=src('pipette'); return silhouette(d[0]).union(silhouette(d[2])).union(line(d[1],W))
 def rocket():
     # fins are open strokes drawn bold; since v1.1 they no longer fill the pocket against the body: fill it
     g=auto('rocket')
     return unary_union([Polygon(p.exterior,[i for i in p.interiors if Polygon(i).area>3]) for p in getattr(g,'geoms',[g])])
 
 DESIGNED={n:fn for n,fn in list(globals().items()) if n in ('home','search','user','calendar','heart','bell','mail','settings')}
-DESIGNED.update({'cloud-sun':cloud_sun,'rocket':rocket,'bug':bug,'database':database,'award':award,'truck':truck,'archive':archive,'cart':cart,'gift':gift,'image-plus':image_plus,'fuel':fuel,'graduation-cap':graduation_cap,'printer':printer,'ship':ship,'wallet':wallet,'clipboard':clipboard,'coins':coins,'copy':copy,'images':images,'pie-chart':pie_chart,'bike':bike,'film':film,'clapperboard':clapperboard,'book':book,'book-open':book_open,'cast':cast,'flag':flag,'flask':flask,'folder-open':folder_open,
+DESIGNED.update({'bell-plus':bell_plus,'cloud-sun':cloud_sun,'rocket':rocket,'bug':bug,'database':database,'award':award,'pipette':pipette,'truck':truck,'archive':archive,'cart':cart,'gift':gift,'image-plus':image_plus,'fuel':fuel,'graduation-cap':graduation_cap,'printer':printer,'ship':ship,'wallet':wallet,'clipboard':clipboard,'coins':coins,'copy':copy,'images':images,'pie-chart':pie_chart,'bike':bike,'film':film,'clapperboard':clapperboard,'book':book,'book-open':book_open,'cast':cast,'flag':flag,'flask':flask,'folder-open':folder_open,
                  'headphones':headphones,'hourglass':hourglass,'pin':pin,'store':store,'trash':trash,'umbrella':umbrella})
 
 if __name__=='__main__':

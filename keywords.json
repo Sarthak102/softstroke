@@ -40,6 +40,13 @@
     "center",
     "paragraph"
   ],
+  "align-justify": [
+    "justify",
+    "text",
+    "paragraph",
+    "format",
+    "block"
+  ],
   "align-left": [
     "text",
     "alignment",
@@ -58,6 +65,13 @@
     "sea",
     "boat",
     "nautical"
+  ],
+  "app-window": [
+    "browser",
+    "window",
+    "application",
+    "desktop",
+    "frame"
   ],
   "apple": [
     "fruit",
@@ -79,6 +93,13 @@
     "down",
     "descend"
   ],
+  "arrow-down-circle": [
+    "down",
+    "download",
+    "bottom",
+    "decrease",
+    "circle"
+  ],
   "arrow-down-left": [
     "diagonal",
     "southwest",
@@ -90,11 +111,25 @@
     "southeast",
     "trend down"
   ],
+  "arrow-down-to-line": [
+    "bottom",
+    "download",
+    "save",
+    "last",
+    "minimum"
+  ],
   "arrow-left": [
     "direction",
     "west",
     "back",
     "previous"
+  ],
+  "arrow-left-circle": [
+    "back",
+    "previous",
+    "left",
+    "return",
+    "circle"
   ],
   "arrow-left-right": [
     "swap",
@@ -109,11 +144,25 @@
     "forward",
     "next"
   ],
+  "arrow-right-circle": [
+    "next",
+    "forward",
+    "right",
+    "continue",
+    "circle"
+  ],
   "arrow-up": [
     "direction",
     "north",
     "up",
     "ascend"
+  ],
+  "arrow-up-circle": [
+    "up",
+    "upload",
+    "top",
+    "increase",
+    "circle"
   ],
   "arrow-up-down": [
     "swap",
@@ -133,6 +182,13 @@
     "trend up",
     "open",
     "external"
+  ],
+  "arrow-up-to-line": [
+    "top",
+    "scroll to top",
+    "upload",
+    "first",
+    "maximum"
   ],
   "at-sign": [
     "email",
@@ -168,6 +224,13 @@
     "store",
     "buy",
     "tote"
+  ],
+  "ban": [
+    "block",
+    "forbidden",
+    "prohibited",
+    "not allowed",
+    "cancel"
   ],
   "banknote": [
     "money",
@@ -215,6 +278,13 @@
     "silent",
     "disabled",
     "do not disturb"
+  ],
+  "bell-plus": [
+    "add reminder",
+    "subscribe",
+    "notification",
+    "alert",
+    "new alert"
   ],
   "bell-ring": [
     "notification",
@@ -276,6 +346,13 @@
     "business",
     "portfolio",
     "career"
+  ],
+  "brush": [
+    "paint",
+    "art",
+    "draw",
+    "design",
+    "style"
   ],
   "bug": [
     "debug",
@@ -415,6 +492,13 @@
     "success",
     "ok"
   ],
+  "check-check": [
+    "read",
+    "seen",
+    "delivered",
+    "done",
+    "double check"
+  ],
   "check-circle": [
     "done",
     "success",
@@ -436,6 +520,20 @@
     "caret",
     "down"
   ],
+  "chevron-first": [
+    "first",
+    "start",
+    "beginning",
+    "pagination",
+    "skip back"
+  ],
+  "chevron-last": [
+    "last",
+    "end",
+    "pagination",
+    "skip forward",
+    "final"
+  ],
   "chevron-left": [
     "back",
     "previous",
@@ -455,6 +553,13 @@
     "caret",
     "up"
   ],
+  "chevrons-down": [
+    "scroll down",
+    "bottom",
+    "expand",
+    "more",
+    "double"
+  ],
   "chevrons-left": [
     "first",
     "rewind",
@@ -465,6 +570,13 @@
     "last",
     "skip",
     "forward",
+    "double"
+  ],
+  "chevrons-up": [
+    "scroll up",
+    "top",
+    "collapse",
+    "expand up",
     "double"
   ],
   "chevrons-up-down": [
@@ -593,6 +705,20 @@
     "savings",
     "change"
   ],
+  "columns": [
+    "split",
+    "two columns",
+    "layout",
+    "side by side",
+    "compare"
+  ],
+  "command": [
+    "cmd",
+    "shortcut",
+    "keyboard",
+    "mac",
+    "hotkey"
+  ],
   "compass": [
     "direction",
     "explore",
@@ -605,6 +731,34 @@
     "clone",
     "clipboard",
     "paste"
+  ],
+  "corner-down-left": [
+    "enter",
+    "return",
+    "newline",
+    "reply",
+    "back"
+  ],
+  "corner-down-right": [
+    "indent",
+    "sub item",
+    "nested",
+    "continue",
+    "branch"
+  ],
+  "corner-up-left": [
+    "back",
+    "undo",
+    "return",
+    "previous",
+    "turn"
+  ],
+  "corner-up-right": [
+    "forward",
+    "redo",
+    "share",
+    "next",
+    "turn"
   ],
   "cpu": [
     "chip",
@@ -627,12 +781,26 @@
     "resize",
     "photo"
   ],
+  "crosshair": [
+    "aim",
+    "target",
+    "locate",
+    "precise",
+    "focus"
+  ],
   "crown": [
     "premium",
     "king",
     "vip",
     "pro",
     "royal"
+  ],
+  "dashboard": [
+    "overview",
+    "widgets",
+    "tiles",
+    "admin",
+    "home"
   ],
   "database": [
     "storage",
@@ -689,6 +857,27 @@
     "change",
     "modify",
     "compose"
+  ],
+  "ellipsis-circle": [
+    "more",
+    "options",
+    "menu",
+    "overflow",
+    "actions"
+  ],
+  "eraser": [
+    "erase",
+    "clear",
+    "rubber",
+    "remove",
+    "clean"
+  ],
+  "expand": [
+    "fullscreen",
+    "enlarge",
+    "grow",
+    "zoom",
+    "open"
   ],
   "external-link": [
     "open",
@@ -837,6 +1026,13 @@
     "console",
     "gaming"
   ],
+  "gauge": [
+    "speed",
+    "meter",
+    "performance",
+    "dial",
+    "speedometer"
+  ],
   "gem": [
     "diamond",
     "premium",
@@ -880,12 +1076,33 @@
     "dashboard",
     "gallery"
   ],
+  "grip-horizontal": [
+    "drag",
+    "handle",
+    "reorder",
+    "move",
+    "dots"
+  ],
+  "grip-vertical": [
+    "drag",
+    "handle",
+    "reorder",
+    "move",
+    "dots"
+  ],
   "hammer": [
     "tool",
     "build",
     "construction",
     "fix",
     "auction"
+  ],
+  "heading": [
+    "title",
+    "h1",
+    "header",
+    "text",
+    "format"
   ],
   "headphones": [
     "audio",
@@ -906,6 +1123,13 @@
     "support",
     "info",
     "unknown"
+  ],
+  "highlighter": [
+    "marker",
+    "highlight",
+    "emphasis",
+    "annotate",
+    "text"
   ],
   "history": [
     "recent",
@@ -961,6 +1185,13 @@
     "messages",
     "received"
   ],
+  "indent": [
+    "indent",
+    "increase indent",
+    "tab",
+    "nest",
+    "text"
+  ],
   "infinity": [
     "unlimited",
     "forever",
@@ -982,6 +1213,13 @@
     "emphasis",
     "typography"
   ],
+  "kanban": [
+    "board",
+    "tasks",
+    "columns",
+    "project",
+    "progress"
+  ],
   "key": [
     "password",
     "access",
@@ -995,6 +1233,13 @@
     "ceiling",
     "smart home",
     "bulb"
+  ],
+  "languages": [
+    "translate",
+    "language",
+    "localization",
+    "i18n",
+    "multilingual"
   ],
   "laptop": [
     "computer",
@@ -1016,6 +1261,13 @@
     "panels",
     "grid",
     "wireframe"
+  ],
+  "layout-list": [
+    "list view",
+    "items",
+    "rows",
+    "thumbnails",
+    "feed"
   ],
   "leaf": [
     "nature",
@@ -1052,12 +1304,26 @@
     "rows",
     "todo"
   ],
+  "list-checks": [
+    "checklist",
+    "todo",
+    "tasks",
+    "done",
+    "items"
+  ],
   "list-music": [
     "playlist",
     "queue",
     "songs",
     "audio",
     "library"
+  ],
+  "list-ordered": [
+    "numbered list",
+    "steps",
+    "ordered",
+    "1 2 3",
+    "sequence"
   ],
   "loader": [
     "loading",
@@ -1187,6 +1453,13 @@
     "decrease",
     "delete"
   ],
+  "minus-square": [
+    "remove",
+    "subtract",
+    "collapse",
+    "square",
+    "less"
+  ],
   "monitor": [
     "desktop",
     "screen",
@@ -1235,6 +1508,13 @@
     "arrows",
     "reorder"
   ],
+  "move-diagonal": [
+    "resize",
+    "scale",
+    "diagonal",
+    "stretch",
+    "drag"
+  ],
   "music": [
     "song",
     "audio",
@@ -1256,6 +1536,13 @@
     "blog",
     "feed"
   ],
+  "outdent": [
+    "outdent",
+    "decrease indent",
+    "unindent",
+    "text",
+    "format"
+  ],
   "package": [
     "box",
     "parcel",
@@ -1269,6 +1556,20 @@
     "theme",
     "design",
     "art"
+  ],
+  "panel-bottom": [
+    "footer",
+    "console",
+    "drawer",
+    "layout",
+    "panel"
+  ],
+  "panel-right": [
+    "sidebar",
+    "drawer",
+    "inspector",
+    "layout",
+    "panel"
   ],
   "paperclip": [
     "attachment",
@@ -1296,6 +1597,13 @@
     "player",
     "break",
     "wait"
+  ],
+  "pen-line": [
+    "edit text",
+    "write",
+    "rename",
+    "sign",
+    "compose"
   ],
   "percent": [
     "discount",
@@ -1339,6 +1647,13 @@
     "stick",
     "save"
   ],
+  "pipette": [
+    "eyedropper",
+    "color picker",
+    "sample",
+    "colour",
+    "design"
+  ],
   "plane": [
     "flight",
     "airport",
@@ -1380,6 +1695,13 @@
     "create",
     "insert"
   ],
+  "plus-square": [
+    "add",
+    "new",
+    "create",
+    "square",
+    "insert"
+  ],
   "podcast": [
     "broadcast",
     "audio",
@@ -1406,6 +1728,13 @@
     "barcode",
     "link",
     "payment"
+  ],
+  "quote": [
+    "blockquote",
+    "citation",
+    "testimonial",
+    "quotation",
+    "say"
   ],
   "radio": [
     "fm",
@@ -1496,12 +1825,26 @@
     "trip",
     "way"
   ],
+  "rows": [
+    "split",
+    "two rows",
+    "layout",
+    "stack",
+    "horizontal"
+  ],
   "rss": [
     "feed",
     "subscribe",
     "news",
     "blog",
     "podcast"
+  ],
+  "ruler": [
+    "measure",
+    "scale",
+    "length",
+    "size",
+    "design"
   ],
   "save": [
     "floppy",
@@ -1612,6 +1955,13 @@
     "ferry",
     "travel"
   ],
+  "shrink": [
+    "exit fullscreen",
+    "reduce",
+    "compress",
+    "collapse",
+    "minimize"
+  ],
   "shuffle": [
     "random",
     "mix",
@@ -1631,6 +1981,13 @@
     "open sidebar",
     "drawer",
     "navigation"
+  ],
+  "signature": [
+    "sign",
+    "autograph",
+    "contract",
+    "approve",
+    "handwriting"
   ],
   "signpost": [
     "directions",
@@ -1659,6 +2016,13 @@
     "controls",
     "filters",
     "preferences"
+  ],
+  "sliders-vertical": [
+    "equalizer",
+    "controls",
+    "adjust",
+    "mixer",
+    "settings"
   ],
   "smartphone": [
     "phone",
@@ -1758,6 +2122,13 @@
     "storefront",
     "business"
   ],
+  "strikethrough": [
+    "strike",
+    "cross out",
+    "deleted text",
+    "format",
+    "text"
+  ],
   "sun": [
     "light mode",
     "day",
@@ -1778,6 +2149,13 @@
     "sun",
     "night",
     "weather"
+  ],
+  "table": [
+    "spreadsheet",
+    "grid",
+    "data",
+    "cells",
+    "rows"
   ],
   "tablet": [
     "ipad",
@@ -1812,6 +2190,13 @@
     "shell",
     "cli",
     "developer"
+  ],
+  "text-cursor": [
+    "caret",
+    "input",
+    "type",
+    "i-beam",
+    "text field"
   ],
   "thermometer": [
     "temperature",
@@ -1858,6 +2243,13 @@
     "switch",
     "on",
     "enable",
+    "setting",
+    "boolean"
+  ],
+  "toggle-left": [
+    "switch",
+    "off",
+    "disable",
     "setting",
     "boolean"
   ],
@@ -2105,6 +2497,13 @@
     "close",
     "failed",
     "remove"
+  ],
+  "x-square": [
+    "close",
+    "cancel",
+    "remove",
+    "delete",
+    "square"
   ],
   "zap": [
     "lightning",
