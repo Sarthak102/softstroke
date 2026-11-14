@@ -380,6 +380,49 @@ def shift(d,dx,dy):
         out.append(' '.join(f(x) for x in v)+' ')
     return re.sub(r' (?=[A-Za-z])','',''.join(out)).strip()
 
+def scale(d,s,c=12):
+    # scale any path about (c,c) (abs + rel commands; a leading m is absolute); arc flags kept.
+    # Relative steps are differences of rounded absolute points (no drift: closed paths stay closed);
+    # arc radii round down, so a semicircle stays one (SVG grows a too-small radius to fit the chord).
+    toks=re.findall(r'[MmLlHhVvCcSsQqTtAaZz]|-?\d*\.?\d+(?:e-?\d+)?',d)
+    ar={'m':2,'l':2,'h':1,'v':1,'c':6,'s':4,'q':4,'t':2,'a':7,'z':0}
+    R=lambda x:round(c+s*(x-c),2)   # scaled, rounded absolute coordinate
+    out=[]; i=0; cmd=None; first=True; cur=[0.0,0.0]; start=[0.0,0.0]
+    while i<len(toks):
+        if toks[i].isalpha(): cmd=toks[i]; out.append(cmd); i+=1
+        if cmd in 'Zz': cur=start[:]; continue
+        n=ar[cmd.lower()]; v=[float(x) for x in toks[i:i+n]]; i+=n
+        rel=cmd.islower() and not (first and cmd=='m')
+        if cmd in 'Hh': ab=[v[0]+cur[0]*rel]; o=[R(ab[0])-R(cur[0])*rel]; cur[0]=ab[0]
+        elif cmd in 'Vv': ab=[v[0]+cur[1]*rel]; o=[R(ab[0])-R(cur[1])*rel]; cur[1]=ab[0]
+        else:
+            pts=v[5:] if cmd in 'Aa' else v
+            ab=[x+cur[k%2]*rel for k,x in enumerate(pts)]
+            o=[R(x)-R(cur[k%2])*rel for k,x in enumerate(ab)]
+            if cmd in 'Aa':
+                rr=[v[0]*s,v[1]*s]
+                if v[0]==v[1] and not v[2]:
+                    # circular arc: keep the scaled centre's distance from the rounded chord (near-semicircles
+                    # move ~0.3 for a 0.005 radius error), floored at 4 decimals so a semicircle stays exact
+                    h0=math.dist(cur,ab)/2*s; h1=math.dist([R(x) for x in cur],[R(x) for x in ab])/2
+                    rr=[math.sqrt(max(rr[0]**2-h0**2,0)+h1**2)]*2
+                o=[math.floor(r*1e4)/1e4 for r in rr]+v[2:5]+o
+            cur=ab[-2:]
+        if rel and cmd not in 'Aa': o=[x if x or not y else round(y*s,2) or .01 for x,y in zip(o,v)]   # dots (h.01) stay
+        if cmd in 'Mm': start=cur[:]
+        first=False
+        out.append(' '.join(f"{x:.4f}".rstrip('0').rstrip('.') if cmd in 'Aa' and k<2 else f(x) for k,x in enumerate(o))+' ')
+    return re.sub(r' (?=[A-Za-z])','',''.join(out)).strip()
+
+def scale_icon(path,s,c=12):
+    # scale a whole icon file (paths + circles) about (c,c); stroke width unchanged.
+    # Dot circles (r .75, rule 9) only move: grown to .81 they render as a ring with a speck in the middle.
+    t=open(path).read()
+    t=re.sub(r' d="([^"]+)"',lambda m:f' d="{scale(m.group(1),s,c)}"',t)
+    R=lambda r:f(r if r<=.75 else r*s)
+    t=re.sub(r'cx="([^"]+)" cy="([^"]+)" r="([^"]+)"',lambda m:f'cx="{f(c+s*(float(m.group(1))-c))}" cy="{f(c+s*(float(m.group(2))-c))}" r="{R(float(m.group(3)))}"',t)
+    open(path,'w').write(t)
+
 def shift_icon(path,dx,dy):
     # move a whole icon file (paths + circles)
     s=open(path).read()
