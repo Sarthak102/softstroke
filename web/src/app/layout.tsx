@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   // Relative URLs (og.png) resolve against this, including the /softstroke base path.
   metadataBase: new URL(`${SITE_URL}/`),
   title: "Softstroke | Soft, rounded open-source icons",
-  description: `${ICON_COUNT} soft, rounded icons in stroke and solid for React, React Native, Vue, Svelte, Angular, SVG and an icon font. MIT licensed.`,
+  description: `${ICON_COUNT} soft, rounded icons in stroke and solid for React, React Native, Flutter, Vue, Svelte, Angular, SVG and an icon font. MIT licensed.`,
   openGraph: {
     type: "website",
     siteName: "Softstroke",

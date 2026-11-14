@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { siAngular, siReact, siSvelte, siSvg, siVuedotjs } from "simple-icons";
+import { siAngular, siFlutter, siReact, siSvelte, siSvg, siVuedotjs } from "simple-icons";
 import { GITHUB_URL } from "@/lib/site";
 import { Brand, type Logo } from "./Brand";
 import { LogoMark } from "./Logo";
@@ -13,6 +13,7 @@ import { ArrowRightIcon, BookOpenIcon, ChevronDownIcon, CodeIcon, GridIcon, Layo
 const PACKAGES: { name: string; body: string; href: string; logo: Logo; mobile?: boolean }[] = [
   { name: "React", body: "Components for React and Next.js", href: "/docs/react/", logo: siReact },
   { name: "React Native", body: "Expo and bare React Native", href: "/docs/react-native/", logo: siReact, mobile: true },
+  { name: "Flutter", body: "iOS, Android, web, desktop", href: "/docs/flutter/", logo: siFlutter, mobile: true },
   { name: "Vue", body: "Vue 3 and Nuxt", href: "/docs/vue/", logo: siVuedotjs },
   { name: "Svelte", body: "Svelte 5 and SvelteKit", href: "/docs/svelte/", logo: siSvelte },
   { name: "Angular", body: "Standalone components", href: "/docs/angular/", logo: siAngular },

@@ -1,0 +1,24 @@
+name: softstroke
+description: Soft, rounded open-source icons for Flutter, each in a stroke and a solid style, shipped as an icon font. MIT licensed.
+version: 1.2.0
+homepage: https://softstroke.github.io/softstroke/
+repository: https://github.com/softstroke/softstroke/tree/main/packages/flutter
+issue_tracker: https://github.com/softstroke/softstroke/issues
+topics: [icons, icon-font, ui, design]
+
+environment:
+  sdk: ^3.0.0
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+flutter:
+  fonts:
+    - family: Softstroke
+      fonts:
+        - asset: fonts/softstroke.ttf
+    - family: SoftstrokeSolid
+      fonts:
+        - asset: fonts/softstroke-solid.ttf

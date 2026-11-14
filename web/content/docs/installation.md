@@ -11,6 +11,7 @@ Every package exports the same icon names, so what you learn in one carries over
 |---|---|
 | React | `npm i @softstroke/react` |
 | React Native / Expo | `npx expo install react-native-svg && npm i @softstroke/react-native` |
+| Flutter | `flutter pub add softstroke` |
 | Vue 3 | `npm i @softstroke/vue` |
 | Svelte 5 | `npm i @softstroke/svelte` |
 | Angular | `npm i @softstroke/angular` |
@@ -37,4 +38,4 @@ import { HomeIcon } from "@softstroke/react/solid";
 
 ## Naming
 
-Icon files use kebab-case (`arrow-up-right`). Components use PascalCase with an `Icon` suffix (`ArrowUpRightIcon`). The icon font and Angular selectors keep the kebab-case name (`ss-arrow-up-right`).
+Icon files use kebab-case (`arrow-up-right`). Components use PascalCase with an `Icon` suffix (`ArrowUpRightIcon`). The icon font and Angular selectors keep the kebab-case name (`ss-arrow-up-right`). Flutter uses camelCase on `SoftstrokeIcons` (`SoftstrokeIcons.arrowUpRight`).

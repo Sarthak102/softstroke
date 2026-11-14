@@ -25,7 +25,7 @@
 Softstroke is an open-source icon set drawn on a 24px grid with a 1.5px stroke, round caps and squircle corners. Every icon has a solid twin under the same name, so an active state is a one-word import change.
 
 - **Two styles, one name.** `HomeIcon` from `@softstroke/react` is the stroke; from `@softstroke/react/solid` it's the solid.
-- **Every major framework.** React, React Native, Vue, Svelte and Angular packages, plain SVG with a sprite, and an icon font.
+- **Every major framework.** React, React Native, Flutter, Vue, Svelte and Angular packages, plain SVG with a sprite, and an icon font.
 - **Small.** About 0.4 KB per icon, tree-shakable, no runtime.
 - **Accessible by default.** Icons are hidden from screen readers unless you give them a label.
 - **MIT licensed.** Free for personal and commercial work.
@@ -36,6 +36,7 @@ Softstroke is an open-source icon set drawn on a 24px grid with a 1.5px stroke, 
 |---|---|
 | `@softstroke/react` | React, Next.js, Vite, Remix |
 | `@softstroke/react-native` | React Native, Expo (needs `react-native-svg`) |
+| `softstroke` ([pub.dev](https://pub.dev/packages/softstroke)) | Flutter: iOS, Android, web, desktop |
 | `@softstroke/vue` | Vue 3, Nuxt |
 | `@softstroke/svelte` | Svelte 5, SvelteKit |
 | `@softstroke/angular` | Angular 17+ (standalone components) |
@@ -138,6 +139,23 @@ import { HomeIcon as HomeSolidIcon } from '@softstroke/angular/solid';
 })
 export class Toolbar {}
 ```
+</details>
+
+<details>
+<summary><strong>Flutter</strong></summary>
+
+```bash
+flutter pub add softstroke
+```
+
+```dart
+import 'package:softstroke/softstroke.dart';
+
+Icon(SoftstrokeIcons.home)        // stroke
+Icon(SoftstrokeIcons.homeSolid)   // solid
+```
+
+Names are camelCase (`arrow-up-right` is `SoftstrokeIcons.arrowUpRight`). Release builds keep only the icons you use.
 </details>
 
 <details>

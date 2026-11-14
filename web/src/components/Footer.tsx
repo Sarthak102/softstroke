@@ -16,7 +16,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const COLUMNS: { title: string; links: [string, string][] }[] = [
   { title: "Product", links: [["Icons", "/icons/"], ["Icon font", "/icon-font/"], ["Docs", "/docs/"], ["Playground", "/#playground"]] },
-  { title: "Packages", links: [["React", "/docs/react/"], ["React Native", "/docs/react-native/"], ["Vue", "/docs/vue/"], ["Svelte", "/docs/svelte/"], ["Angular", "/docs/angular/"], ["SVG and CDN", "/docs/svg/"]] },
+  { title: "Packages", links: [["React", "/docs/react/"], ["React Native", "/docs/react-native/"], ["Flutter", "/docs/flutter/"], ["Vue", "/docs/vue/"], ["Svelte", "/docs/svelte/"], ["Angular", "/docs/angular/"], ["SVG and CDN", "/docs/svg/"]] },
   { title: "Resources", links: [["GitHub", GITHUB_URL], ["npm", "https://www.npmjs.com/org/softstroke"], ["Changelog", "/changelog/"], ["Request an icon", "#request"], ["Report an issue", "#issue"], ["MIT License", `${GITHUB_URL}/blob/main/LICENSE`]] },
 ];
 

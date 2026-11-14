@@ -52,9 +52,10 @@ def build(names, folder, shape_of, family, out):
     fb.setupNameTable({'familyName': family, 'styleName': 'Regular'})
     fb.setupOS2(sTypoAscender=ASC, sTypoDescender=DESC, usWinAscent=ASC, usWinDescent=-DESC)
     fb.setupPost()
+    fb.save(out[:-6] + '.ttf')            # TrueType for Flutter (it cannot read woff2)
     fb.font.flavor = 'woff2'
     fb.save(out)
-    check(out, names, folder, shape_of)
+    for f in (out, out[:-6] + '.ttf'): check(f, names, folder, shape_of)
 
 def check(out, names, folder, shape_of):
     # re-open the built font: every icon is mapped, and each glyph's box is its icon's box (within half a font unit

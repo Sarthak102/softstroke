@@ -9,7 +9,7 @@ Softstroke is a set of **{icon-count} soft, rounded icons** for web and mobile i
 
 - {icon-count} icons drawn on a 24px grid with a 1.5px stroke, round caps and joins, and squircle corners.
 - A solid twin for every icon, built from the stroke icon's own outline.
-- Native packages for React, React Native, Vue, Svelte and Angular.
+- Native packages for React, React Native, Flutter, Vue, Svelte and Angular.
 - Plain SVG files, sprites and JSON for everything else, served from a CDN.
 - An icon font for pages that can't run a build step.
 
@@ -19,6 +19,7 @@ Softstroke is a set of **{icon-count} soft, rounded icons** for web and mobile i
 |---|---|
 | `@softstroke/react` | React, Next.js, Vite, Remix |
 | `@softstroke/react-native` | React Native and Expo |
+| `softstroke` (pub.dev) | Flutter: iOS, Android, web, desktop |
 | `@softstroke/vue` | Vue 3 and Nuxt |
 | `@softstroke/svelte` | Svelte 5 and SvelteKit |
 | `@softstroke/angular` | Angular 17 and newer |

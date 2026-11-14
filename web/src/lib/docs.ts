@@ -13,6 +13,7 @@ export const DOC_GROUPS: { title: string; pages: { slug: string; title: string }
       { slug: "react", title: "React" },
       { slug: "shadcn", title: "shadcn" },
       { slug: "react-native", title: "React Native" },
+      { slug: "flutter", title: "Flutter" },
       { slug: "vue", title: "Vue" },
       { slug: "svelte", title: "Svelte" },
       { slug: "angular", title: "Angular" },
@@ -47,7 +48,7 @@ let highlighter: ReturnType<typeof createHighlighter> | null = null;
 const getHighlighter = () =>
   (highlighter ??= createHighlighter({
     themes: ["github-light", "github-dark"],
-    langs: ["bash", "tsx", "ts", "js", "json", "html", "css", "vue", "svelte"],
+    langs: ["bash", "tsx", "ts", "js", "json", "html", "css", "vue", "svelte", "dart"],
   }));
 
 export async function loadDoc(slug: string): Promise<Doc> {

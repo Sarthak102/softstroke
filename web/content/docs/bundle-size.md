@@ -17,6 +17,10 @@ Metro doesn't tree-shake. Import single files in large apps:
 import HomeIcon from "@softstroke/react-native/icons/home";
 ```
 
+## Flutter
+
+Flutter tree-shakes icon fonts in release builds, so an app keeps only the glyphs it uses. See [Flutter](/docs/flutter/).
+
 ## Icon font
 
 The font always loads the whole set, about 48 KB per style. That's the trade for a no-build setup.

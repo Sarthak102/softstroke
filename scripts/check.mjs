@@ -133,3 +133,19 @@ console.log(`ok: vue, svelte, angular render all ${names.length} icons in both s
   for (const f of ['softstroke.woff2', 'softstroke-solid.woff2']) assert.equal(rf(`packages/font/dist/${f}`).subarray(0, 4).toString(), 'wOF2', `font: ${f} is woff2`);
   console.log(`ok: icon font, ${rules.length} classes, stroke + solid woff2`);
 }
+
+// ---- Flutter: one const IconData per icon and style, web font code points, TrueType files ----
+{
+  const { readFileSync: rf } = await import('node:fs');
+  const dart = rf('packages/flutter/lib/softstroke.dart', 'utf8');
+  const codes = JSON.parse(rf('packages/font/dist/codepoints.json', 'utf8'));
+  const decls = [...dart.matchAll(/static const IconData (\w+) = IconData\(0x([0-9a-f]+), fontFamily: '(\w+)', fontPackage: 'softstroke'\);/g)];
+  assert.equal(decls.length, names.length + solidNames.length, 'flutter: stroke + solid');
+  assert.equal(new Set(decls.map((d) => d[1])).size, decls.length, 'flutter: unique names');
+  const camel = (s) => s.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
+  const byId = Object.fromEntries(decls.map((d) => [d[1], d]));
+  for (const f of names) { const d = byId[camel(f.slice(0, -4))]; assert.ok(d && d[3] === 'Softstroke' && parseInt(d[2], 16) === codes[f.slice(0, -4)], `flutter: ${f}`); }
+  for (const f of solidNames) { const d = byId[camel(f.slice(0, -4)) + 'Solid']; assert.ok(d && d[3] === 'SoftstrokeSolid' && parseInt(d[2], 16) === codes[f.slice(0, -4)], `flutter: solid ${f}`); }
+  for (const f of ['softstroke.ttf', 'softstroke-solid.ttf']) assert.equal(rf(`packages/flutter/fonts/${f}`).readUInt32BE(0), 0x00010000, `flutter: ${f} is TrueType`);
+  console.log(`ok: flutter, ${decls.length} IconData`);
+}

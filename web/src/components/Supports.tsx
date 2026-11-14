@@ -56,6 +56,13 @@ const TARGETS: { name: string; logo: Logo; install: string; code: string; mobile
     code: `import { HomeIcon } from "@softstroke/react-native";\n\n<HomeIcon size={24} color="#0b2545" />`,
   },
   {
+    name: "Flutter",
+    logo: siFlutter,
+    mobile: true,
+    install: "flutter pub add softstroke",
+    code: `import 'package:softstroke/softstroke.dart';\n\nIcon(SoftstrokeIcons.home, size: 24)`,
+  },
+  {
     name: "CDN",
     logo: siJsdelivr,
     install: "No install needed",
@@ -72,7 +79,6 @@ const TARGETS: { name: string; logo: Logo; install: string; code: string; mobile
 const LATER = [
   { name: "Figma", logo: siFigma },
   { name: "Framer", logo: siFramer },
-  { name: "Flutter", logo: siFlutter },
   { name: "WordPress", logo: siWordpress },
   { name: "VS Code", logo: null },
 ];

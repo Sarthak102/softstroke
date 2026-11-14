@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ name: str
   const words = (KEYWORDS[name] ?? []).slice(0, 4).join(", ");
   return {
     title: `${title(name)} icon | Softstroke`,
-    description: `Free ${name} icon in stroke and solid (${words}). SVG, React, Vue, Svelte, Angular, React Native and shadcn. MIT licensed.`,
+    description: `Free ${name} icon in stroke and solid (${words}). SVG, React, Vue, Svelte, Angular, React Native, Flutter and shadcn. MIT licensed.`,
     alternates: { canonical: `${SITE_URL}/icons/${name}/` },
   };
 }
@@ -105,8 +105,9 @@ export default async function IconPage({ params }: { params: Promise<{ name: str
             <Snippet label="shadcn" code={`npx shadcn@latest add ${SITE_URL}/r/${name}.json`} />
             <Snippet label="shadcn, solid" code={`npx shadcn@latest add ${SITE_URL}/r/${name}-solid.json`} />
             <Snippet label="Icon font" code={`<i class="ss ss-${name}"></i>`} />
+            <Snippet label="Flutter" code={`Icon(SoftstrokeIcons.${name.replace(/-([a-z])/g, (_, c) => c.toUpperCase())})`} />
             <p className="text-sm text-muted">
-              Vue, Svelte, Angular, React Native and plain SVG use the same name: see the{" "}
+              Vue, Svelte, Angular, React Native, Flutter and plain SVG use the same name: see the{" "}
               <Link href="/docs/" className="text-accent-text hover:underline">docs</Link>. To copy the SVG or download it,{" "}
               <Link href={`/icons/?icon=${name}`} className="text-accent-text hover:underline">open it in the browser</Link>.
             </p>
