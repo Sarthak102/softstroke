@@ -42,6 +42,13 @@ const RELEASES: { version: string; date: string; summary: string; groups: { icon
         ],
       },
       {
+        icon: "SmartphoneIcon",
+        title: "Flutter",
+        items: [
+          "New on November 15: the softstroke package on pub.dev. Run flutter pub add softstroke, then use Icon(SoftstrokeIcons.home) or SoftstrokeIcons.homeSolid. Release builds keep only the icons you use.",
+        ],
+      },
+      {
         icon: "SparklesIcon",
         title: "Fixes",
         items: [
