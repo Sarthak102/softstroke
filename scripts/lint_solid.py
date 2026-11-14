@@ -19,8 +19,8 @@ for n in names:
     ds=re.findall(r' d="([^"]+)"',open(f'icons-solid/{n}.svg').read())
     G=area(''.join(ds)); r=MIN/2; out=[]
     x0,y0,x1,y1=G.bounds
-    # bold (2.25) parts on rule-4 centre lines reach 1.375
-    if x0<1.3 or y0<1.3 or x1>22.7 or y1>22.7: out.append(f'bounds {x0:.2f},{y0:.2f}-{x1:.2f},{y1:.2f}')
+    # bold (2.25) parts on rule-4 centre lines (2-22 since v1.1) reach 0.875
+    if x0<.85 or y0<.85 or x1>23.15 or y1>23.15: out.append(f'bounds {x0:.2f},{y0:.2f}-{x1:.2f},{y1:.2f}')
     for p in getattr(G,'geoms',[G]):
         if p.area<.8: out.append(f'island {p.area:.2f} at {p.centroid.x:.1f},{p.centroid.y:.1f}')
     thin=G.difference(G.buffer(-r).buffer(r)).buffer(-.05)

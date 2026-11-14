@@ -18,14 +18,14 @@ SHAPES=set('alarm-off bell-off book book-open camera-off cast eye-off flag flask
 
 def home(): return silhouette(src('home')[0])   # doorless since v4 (Sarthak's refs): plain silhouette
 def search():
-    return line('M10.75 3.5a7.25 7.25 0 1 0 0 14.5a7.25 7.25 0 1 0 0-14.5Z',BOLD).union(line('m16.25 16.25 4.5 4.5',BOLD))
+    return line('M10.69 3.06a7.6249 7.6249 0 1 0 0 15.25a7.6249 7.6249 0 1 0 0 -15.25Z',BOLD).union(line('M16.47 16.47l4.73 4.73',BOLD))
 def user():
-    return circle(12,7.5,3.75+W/2).union(silhouette(src('user')[0]))
+    return circle(12,7.26,3.95+W/2).union(silhouette(src('user')[0]))
 def calendar():
     frame=src('calendar')[0]; outer=silhouette(frame)
     ring=outer.difference(area(frame).buffer(-(BOLD-W/2)))          # bold frame, same outer edge
-    header=outer.intersection(area('M0 0H24V9.5H0Z'))                 # band above the header line, filled
-    return ring.union(header).union(line('M8 2.5v3M16 2.5v3',BOLD))
+    header=outer.intersection(area('M0 0H24V9.37H0Z'))                 # band above the header line, filled
+    return ring.union(header).union(line('M7.79 2v3.16M16.21 2v3.16',BOLD))
 def heart(): return silhouette(src('heart')[0])
 def bell():
     # clapper at stroke weight, 0.25 lower than in the stroke icon: the silhouette's lip is wider
@@ -33,7 +33,7 @@ def bell():
 def mail():
     m=src('mail'); return silhouette(m[0]).difference(line(extend(m[1]),W,'flat'))
 def settings():
-    return silhouette(src('settings')[0],.35).difference(circle(12,12,3))
+    return silhouette(src('settings')[0],.35).difference(circle(12,12,3.24))
 
 # ---- automatic solid for everything not designed by hand ----------------------------------------
 from shapely.geometry import LineString as LS
@@ -43,11 +43,11 @@ GAP=.6    # smallest gap between separate solid parts
 HOLE=12   # inner closed shapes smaller than this (area) are cut as a solid shape; larger ones as a ring
 THROUGH={'mail','magnet'}   # icons whose edge-to-edge detail lines cut through the edge instead of stopping short
 # a single inner circle is cut out whole (one white circle, like the stroke's one circle), not as a ring around a dot
-CUT_WHOLE={'banknote','camera','disc','record','id-card','map-pin','radio','speaker','toggle','user-circle'}   # not target (nested rings) or eye (iris + pupil)
+CUT_WHOLE={'banknote','camera','coins','cpu','fuel','disc','record','id-card','map-pin','radio','speaker','toggle','user-circle'}   # not target (nested rings) or eye (iris + pupil)
 # glyph-like icons (and ones a fill would change: wheels -> balls, glasses -> sunglasses): solid = bold stroke
 LINE_ICONS={'at-sign','bold','infinity','glasses','globe','earth'}
 # outside details drawn at stroke weight: they meet fused lines, so they must match their weight
-NORMAL_WEIGHT={'music'}
+NORMAL_WEIGHT={'music','key'}
 # lines crossing into the body that stay solid there (calendar rings: no white notch under them)
 SOLID_CROSSING={'calendar-check','calendar-days','calendar-minus','calendar-plus','calendar-x'}
 
@@ -175,22 +175,22 @@ def flask():
     return cut_inside(body,LS(_pts(chains(d[2])[0])),area(d[1]+'Z'),'flask')
 def folder_open():
     d=src('folder-open')[0]
-    whole=area(d+'Z').union(area('M6 16.5L8.28 12.7Q9 11.5 10.4 11.5H19.75Q21.25 11.5 20.78 12.92L19.07 18.04Q18.5 19.75 16.7 19.75H6Z')).buffer(W/2,quad_segs=16,join_style=1)
-    return whole.difference(line('M6 16.5L8.28 12.7Q9 11.5 10.4 11.5L19.75 11.5',W))
+    whole=area(d+'Z').union(area('M5.51 16.86L7.98 12.76Q8.76 11.46 10.27 11.46H20.38Q22 11.46 21.49 12.99L19.64 18.53Q19.03 20.38 17.08 20.38H5.51Z')).buffer(W/2,quad_segs=16,join_style=1)
+    return whole.difference(line('M5.51 16.86L7.98 12.76Q8.76 11.46 10.27 11.46L20.38 11.46',W))
 def headphones():
-    cup='M3 14.25h3a2 2 0 0 1 2 2v2.5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z'
+    cup='M2.27 14.43h3.24a2.1636 2.1636 0 0 1 2.17 2.16v2.71a2.1636 2.1636 0 0 1 -2.17 2.16H4.43a2.1611 2.1611 0 0 1 -2.16 -2.16Z'
     # band centred 0.375 in from the cups' outer side so its bold edge lines up with the cups
-    return silhouette(cup).union(silhouette(mirror_abs(cup))).union(line('M3.375 15V12a8.625 8.625 0 0 1 17.25 0v3',BOLD))
+    return silhouette(cup).union(silhouette(mirror_abs(cup))).union(line('M2.645 15.24V12a9.355 9.355 0 0 1 18.71 0v3.24',BOLD))
 def hourglass():
-    top=silhouette('M7 2.75V5.25C7 6.75 7.6 7.65 8.7 8.65L12 12L15.3 8.65C16.4 7.65 17 6.75 17 5.25V2.75Z')
-    bot=silhouette('M7 21.25V18.75C7 17.25 7.6 16.35 8.7 15.35L12 12L15.3 15.35C16.4 16.35 17 17.25 17 18.75V21.25Z')
-    return top.union(bot).union(line('M5 2.75h14M5 21.25h14',BOLD))
+    top=silhouette('M6.59 2V4.7C6.59 6.32 7.24 7.3 8.43 8.38L12 12L15.57 8.38C16.76 7.3 17.41 6.32 17.41 4.7V2Z')
+    bot=silhouette('M6.59 22V19.3C6.59 17.68 7.24 16.7 8.43 15.62L12 12L15.57 15.62C16.76 16.7 17.41 17.68 17.41 19.3V22Z')
+    return top.union(bot).union(line('M4.43 2h15.14M4.43 22h15.14',BOLD))
 def pin():
     d=src('pin'); return silhouette(d[1]+'Z').union(line(d[0],BOLD)).union(line(d[2],BOLD))
 def store():
     d=src('store'); awning=silhouette(d[0])
     body=gapped(silhouette(d[1]+'Z'),d[0],W).difference(awning)
-    return awning.union(body).difference(line('M9.75 19.5v-1.75a2.25 2.25 0 0 1 4.5 0V19.5'))
+    return awning.union(body).difference(line('M9.57 20.11v-1.89a2.4299 2.4299 0 0 1 4.86 0V20.11'))
 def trash():
     d=src('trash'); can=silhouette(d[2]+'Z')
     can=can.difference(line(d[0],BOLD+2*.75))                        # gap under the lid
@@ -215,8 +215,8 @@ def film():
     # solid strip with white perforations in the side strips (centre stays solid)
     frame=src('film')[0]; inner=area(frame).buffer(-W/2)
     holes=[]
-    for x0,x1 in ((3.75,7.25),(16.75,20.25)):
-        for y0,y1 in ((3.75,7.0),(8.5,11.25),(12.75,15.5),(17.0,20.25)):
+    for x0,x1 in ((3.08,6.86),(17.14,20.92)):
+        for y0,y1 in ((3.08,6.59),(8.22,11.19),(12.81,15.78),(17.41,20.92)):
             holes.append(area(f'M{x0} {y0}H{x1}V{y1}H{x0}Z'))
     return silhouette(frame).difference(unary_union(holes).intersection(inner).buffer(-.3).buffer(.3))
 def clapperboard():
@@ -224,7 +224,7 @@ def clapperboard():
     d=src('clapperboard'); body,band,bstripes,clap,cstripes=d
     body_in=area(body).buffer(-W/2); top=area(body).bounds[1]
     # stripes extended past the band and clipped to the stroke icon's white band: straight top + bottom
-    band_zone=area(f'M0 {f(top)}H24V{f(top+4-W/2)}H0Z').intersection(body_in)
+    band_zone=area(f'M0 {f(top)}H24V{f(top+4.21-W/2)}H0Z').intersection(body_in)
     g=silhouette(body).difference(line(extend(bstripes),W+.5,'flat').intersection(band_zone))
     return g.union(silhouette(clap).difference(line(extend(cstripes),W+.5,'flat').intersection(area(clap).buffer(-W/2))))
 
@@ -271,31 +271,84 @@ def cloud_sun():
     # sun = disc behind the cloud, dots at stroke weight (bold dots fused with the arc into a gear)
     d=src('cloud-sun'); cloud=silhouette(d[0])
     dots=unary_union([detail_shape(p,W) for p in [_pts(ch) for ch in chains(d[2]) if ch]])
-    return cloud.union(circle(8.5,8.75,3.75).difference(cloud.buffer(LAYER_GAP,quad_segs=16))).union(dots)
+    return cloud.union(circle(8.32,8.58,3.95).difference(cloud.buffer(LAYER_GAP,quad_segs=16))).union(dots)
 def wallet():
     d=src('wallet')
-    flap=d[1][:-len('L13.25 6.5')]+'L13.25 9L2.75 9Z'                       # closed behind the body
+    flap=re.sub(r'L[\d.]+ [\d.]+$','',d[1])+'L13.35 8.76L2 8.76Z'                       # closed behind the body
     return layered('wallet',[P(d[2]),P(d[0]+'Z')+P(d[3]),P(flap)])
 def clipboard():
     d=src('clipboard'); return layered('clipboard',[P(d[1]),P(d[0]+'Z')+P(d[2])])
 def coins():
-    return layered('coins',['<circle cx="9.5" cy="9.5" r="6.75"/><circle cx="9.5" cy="9.5" r="3.25"/>','<circle cx="14.5" cy="14.5" r="6.75"/>'])
+    return layered('coins',['<circle cx="9.3" cy="9.3" r="7.3"/><circle cx="9.3" cy="9.3" r="3.51"/>','<circle cx="14.7" cy="14.7" r="7.3"/>'])
 def copy():
-    d=src('copy'); return layered('copy',[P(d[0]),P(d[1]+'L8 8Z')])
+    d=src('copy'); return layered('copy',[P(d[0]),P(d[1]+'L7.68 7.68Z')])
 def images():
     d=src('images'); s_=open('icons/images.svg').read()
     sun=re.findall(r'<circle [^>]*/>',s_)[0]
-    return layered('images',[P(d[0])+P(d[2])+sun,P(d[1]+'L7.75 7.5Z')])
+    return layered('images',[P(d[0])+P(d[2])+sun,P(d[1]+'L7.53 7.26Z')])
 def pie_chart():
     # three-quarter disc behind the slice; its cut edges sit where the stroke arc's caps end
     d=src('pie-chart'); slice_=auto('pie-chart','<svg>'+P(d[1])+'</svg>')
     from shapely.geometry import box
-    disc=circle(11.5,12.5,9+W/2).difference(box(10.38,0,24,13.62))
-    disc=disc.buffer(-.75,quad_segs=16).buffer(.75,quad_segs=16)                  # soft inner corner
+    disc=circle(11.47,12.53,9.47+W/2).difference(box(10.3,0,24,13.7))
+    disc=disc.buffer(-.75,quad_segs=16).buffer(.75,quad_segs=16)                  # soft outer corners
+    disc=disc.buffer(1,quad_segs=16).buffer(-1,quad_segs=16)                       # soft centre corner (was sharp, Sarthak 2026-11-14)
     return slice_.union(disc.difference(outline(slice_).buffer(LAYER_GAP)))
 
+def bug():
+    # the stroke head is an open arc on the body line: auto() drew it as a bold line with a white inside the
+    # antennae poked into (Sarthak 2026-11-14); here the head is a filled dome behind the body, antennae fused on
+    d=src('bug'); return layered('bug',[P(d[0])+P(d[3])+P(d[4]),P(d[1]+'Z')+P(d[2])])
+def database():
+    # filled cylinder (top ellipse + body closed across the top); rim and middle lines cut inside, stopping short
+    d=src('database'); body=area(d[0]).union(area(d[1]+'Z'))
+    g=body.buffer(W/2,quad_segs=16,join_style=1)
+    for ln in ('M20.65 4.97c0 1.65 -3.87 2.98 -8.65 2.98S3.35 6.62 3.35 4.97',d[2]):
+        g=cut_inside(g,LS(_pts(chains(ln)[0])),body,'database')
+    return g
+def printer():
+    # front to back: page, body (closed under the page, indicator cut), top paper; gaps between, no nubs
+    d=src('printer'); return layered('printer',[P(d[2]),P(d[0]+'Z')+P(d[3]),P(d[1]+'Z')])
+def ship():
+    # hull in front of the cabin in front of the funnel: each closed against the part below it, gaps between
+    d=src('ship'); return layered('ship',[P(d[0]),P(d[1]+'Z'),P(d[2]+'Z')])
+def award():
+    # medal in front of the ribbon (closed under the medal): the tails read solid, not as outlines
+    d=src('award'); s_=open('icons/award.svg').read()
+    return layered('award',[re.findall(r'<circle [^>]*/>',s_)[0],P(d[0]+'Z')])
+def graduation_cap():
+    # cap (and tassel) in front of the band (closed under the cap)
+    d=src('graduation-cap'); return layered('graduation-cap',[P(d[0])+P(d[2]),P(d[1]+'Z')])
+def fuel():
+    # pump body is open at the base in the stroke icon: closed along the base so it fills; window cut whole
+    d=src('fuel'); return auto('fuel','<svg>'+P(d[0]+'Z')+''.join(P(x) for x in d[1:])+'</svg>')
+# bodies drawn open in the stroke icon (gaps for wheels, lid, plus) never filled in auto(): closed here
+def truck():
+    # wheels in front of the cargo box in front of the cab, gaps between
+    d=src('truck'); s_=open('icons/truck.svg').read()
+    return layered('truck',[''.join(re.findall(r'<circle [^>]*/>',s_)),P(d[0]+'Z'),P(d[2]+'L14.11 18.32Z')])
+def archive():
+    d=src('archive'); return layered('archive',[P(d[0]),P(d[1]+'Z')+P(d[2])])
+def cart():
+    # basket closed on its own (its left side runs along the handle's line); handle stays a line
+    s_=open('icons/cart.svg').read()
+    basket='M5.14 6.32L6.69 13.02Q7.08 14.7 8.81 14.7L17.95 14.7Q19.68 14.7 20.14 13.04L21.6 7.78Q22 6.32 20.49 6.32Z'
+    return auto('cart','<svg>'+P(basket)+P('M2.27 2.81L3.3 2.81Q4.32 2.81 4.62 4.08L5.14 6.32')+''.join(re.findall(r'<circle [^>]*/>',s_))+'</svg>')
+def gift():
+    # lid + bow in front of the box; the ribbon is cut inside the box
+    d=src('gift'); return layered('gift',[P(d[0])+P(d[3])+P(d[4]),P(d[1]+'Z')+P(d[2])])
+def image_plus():
+    # the image solid (same frame as image) behind the plus, gap between
+    d=src('image-plus'); s_=open('icons/image-plus.svg').read()
+    g=layered('image-plus',[P(d[2]),P(src('image')[0])+P(d[1])+re.findall(r'<circle [^>]*/>',s_)[0]])
+    return unary_union([p for p in getattr(g,'geoms',[g]) if p.area>1.5])   # drop the frame-corner crumb beside the plus
+def rocket():
+    # fins are open strokes drawn bold; since v1.1 they no longer fill the pocket against the body: fill it
+    g=auto('rocket')
+    return unary_union([Polygon(p.exterior,[i for i in p.interiors if Polygon(i).area>3]) for p in getattr(g,'geoms',[g])])
+
 DESIGNED={n:fn for n,fn in list(globals().items()) if n in ('home','search','user','calendar','heart','bell','mail','settings')}
-DESIGNED.update({'cloud-sun':cloud_sun,'wallet':wallet,'clipboard':clipboard,'coins':coins,'copy':copy,'images':images,'pie-chart':pie_chart,'bike':bike,'film':film,'clapperboard':clapperboard,'book':book,'book-open':book_open,'cast':cast,'flag':flag,'flask':flask,'folder-open':folder_open,
+DESIGNED.update({'cloud-sun':cloud_sun,'rocket':rocket,'bug':bug,'database':database,'award':award,'truck':truck,'archive':archive,'cart':cart,'gift':gift,'image-plus':image_plus,'fuel':fuel,'graduation-cap':graduation_cap,'printer':printer,'ship':ship,'wallet':wallet,'clipboard':clipboard,'coins':coins,'copy':copy,'images':images,'pie-chart':pie_chart,'bike':bike,'film':film,'clapperboard':clapperboard,'book':book,'book-open':book_open,'cast':cast,'flag':flag,'flask':flask,'folder-open':folder_open,
                  'headphones':headphones,'hourglass':hourglass,'pin':pin,'store':store,'trash':trash,'umbrella':umbrella})
 
 if __name__=='__main__':
