@@ -12,8 +12,32 @@ export const metadata: Metadata = {
 // Newest first. Set the date when the version is published to npm.
 const RELEASES: { version: string; date: string; summary: string; groups: { icon: IconName; title: string; items: string[] }[] }[] = [
   {
+    version: "1.1.0",
+    date: "November 14, 2026",
+    summary: "Better proportions and cleaner solids. Same 310 icons and names, nothing to change in your code.",
+    groups: [
+      {
+        icon: "MaximizeIcon",
+        title: "Proportions",
+        items: [
+          "Icons fill more of the 24px canvas (a 2px margin instead of 2.5px), so they read about 7% larger at the same size. Arrows, chevrons, check and x keep their size.",
+          "The slash on -off icons leaves a wider gap, so it stays open at 16px.",
+          "Separate parts sit at least 1 unit apart, so details no longer fill in at small sizes (bell, cake, sliders, qr-code and 25 more).",
+        ],
+      },
+      {
+        icon: "SparklesIcon",
+        title: "Solid icons",
+        items: [
+          "Solids that came out as thick outlines are now filled: archive, award, bug, cart, database, fuel, gift, graduation-cap, image-plus, printer, ship and truck.",
+          "Inner shapes are cut out cleanly in coins, cpu and fuel; key keeps the stroke's line weight; pie-chart has a rounded centre corner.",
+        ],
+      },
+    ],
+  },
+  {
     version: "1.0.0",
-    date: "Not released yet",
+    date: "November 11, 2026",
     summary: "The first public release: 310 icons in stroke and solid, with packages for every major framework.",
     groups: [
       {
