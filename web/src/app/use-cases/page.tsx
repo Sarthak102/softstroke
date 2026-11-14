@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { StrokeIcon, type IconName } from "@/lib/icons";
 import { BASE } from "@/lib/site";
+import { ICON_COUNT } from "@/lib/count";
 
 export const metadata: Metadata = {
   title: "Use cases | Softstroke",
@@ -98,7 +99,7 @@ export default function UseCasesPage() {
             prefetch={false}
             className="group flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-medium text-accent-ink shadow-[var(--shadow)] transition-transform active:scale-[0.98]"
           >
-            Browse all 310 icons
+            Browse all {ICON_COUNT} icons
             <ArrowRightIcon size={18} className="transition-transform group-hover:translate-x-0.5" />
           </Link>
           <Link href="/docs/" className="rounded-full px-4 py-3 text-sm font-medium text-accent-text hover:underline">

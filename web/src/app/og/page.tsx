@@ -3,6 +3,7 @@ import * as Stroke from "@softstroke/react";
 import * as Solid from "@softstroke/react/solid";
 import { LogoMark } from "@/components/Logo";
 import type { IconName } from "@/lib/icons";
+import { ICON_COUNT } from "@/lib/count";
 
 // Social preview source: screenshot at 1200x630 into public/og.png (see web/README or the plan). Not linked, not indexed.
 export const metadata: Metadata = { title: "Softstroke preview", robots: { index: false, follow: false } };
@@ -18,7 +19,7 @@ export default function OgImage() {
           Softstroke
         </p>
         <h1 className="mt-10 font-display text-[68px] font-semibold leading-[1.02] tracking-tight">Soft icons for crisp interfaces.</h1>
-        <p className="mt-6 text-2xl text-[#3f5878]">310 icons in stroke and solid. MIT licensed.</p>
+        <p className="mt-6 text-2xl text-[#3f5878]">{ICON_COUNT} icons in stroke and solid. MIT licensed.</p>
       </div>
       <div className="grid grid-cols-4 gap-4">
         {NAMES.map((n, i) => {

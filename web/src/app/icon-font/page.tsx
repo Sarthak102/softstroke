@@ -8,10 +8,11 @@ import { GlyphWall } from "@/components/iconfont/GlyphWall";
 import { highlight } from "@/lib/docs";
 import { StrokeIcon, type IconName } from "@/lib/icons";
 import { BASE, FONT_CDN } from "@/lib/site";
+import { ICON_COUNT } from "@/lib/count";
 
 export const metadata: Metadata = {
   title: "Icon font | Softstroke",
-  description: "All 310 Softstroke icons in stroke and solid as a web font. One CSS link, no build step.",
+  description: `All ${ICON_COUNT} Softstroke icons in stroke and solid as a web font. One CSS link, no build step.`,
 };
 
 const LINK = `<link rel="stylesheet" href="${FONT_CDN}" />`;
@@ -57,7 +58,7 @@ export default async function IconFontPage() {
             <div className="min-w-0">
               <h1 className="font-display text-5xl font-semibold leading-[1.02] tracking-tight md:text-6xl">Every icon, one CSS link.</h1>
               <p className="mt-6 max-w-[44ch] text-lg leading-relaxed text-muted">
-                All 310 icons in stroke and solid as a web font. For pages where a build step is more than you need.
+                All {ICON_COUNT} icons in stroke and solid as a web font. For pages where a build step is more than you need.
               </p>
               <div className="glass mt-8 flex max-w-full items-center gap-2 rounded-2xl py-2 pl-4 pr-2">
                 <code className="min-w-0 flex-1 overflow-x-auto whitespace-nowrap font-mono text-[13px]">{FONT_CDN}</code>

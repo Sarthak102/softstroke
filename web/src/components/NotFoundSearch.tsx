@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SearchIcon } from "@softstroke/react";
+import { ICON_COUNT } from "@/lib/count";
 
 export function NotFoundSearch() {
   const [q, setQ] = useState("");
@@ -18,7 +19,7 @@ export function NotFoundSearch() {
     >
       <SearchIcon size={18} className="shrink-0 text-muted" />
       <label htmlFor="nf-q" className="sr-only">Search icons</label>
-      <input id="nf-q" value={q} maxLength={50} onChange={(e) => setQ(e.target.value)} placeholder="Search 310 icons" className="h-10 min-w-0 flex-1 bg-transparent outline-none placeholder:text-muted focus-visible:outline-none" />
+      <input id="nf-q" value={q} maxLength={50} onChange={(e) => setQ(e.target.value)} placeholder={`Search ${ICON_COUNT} icons`} className="h-10 min-w-0 flex-1 bg-transparent outline-none placeholder:text-muted focus-visible:outline-none" />
       <button type="submit" className="rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-ink active:scale-[0.98]">Search</button>
     </form>
   );

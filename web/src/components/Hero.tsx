@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRightIcon } from "@softstroke/react";
 import { CopyCommand } from "./CopyCommand";
 import { IconField } from "./IconField";
+import { ICON_COUNT } from "@/lib/count";
 
 export function Hero() {
   return (
@@ -12,7 +13,7 @@ export function Hero() {
             Soft icons for crisp interfaces.
           </h1>
           <p className="mt-6 max-w-[46ch] text-lg leading-relaxed text-muted">
-            310 icons in stroke and solid, drawn on a 24px grid. Free and MIT licensed for every major framework.
+            {ICON_COUNT} icons in stroke and solid, drawn on a 24px grid. Free and MIT licensed for every major framework.
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <Link

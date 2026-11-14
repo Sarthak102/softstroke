@@ -5,7 +5,7 @@
 <h1 align="center">Softstroke</h1>
 
 <p align="center">
-  Soft, rounded icons for web and mobile. 310 icons, each in stroke and solid.
+  Soft, rounded icons for web and mobile. 367 icons, each in stroke and solid.
 </p>
 
 <p align="center">

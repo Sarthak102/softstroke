@@ -12,6 +12,46 @@ export const metadata: Metadata = {
 // Newest first. Set the date when the version is published to npm.
 const RELEASES: { version: string; date: string; summary: string; groups: { icon: IconName; title: string; items: string[] }[] }[] = [
   {
+    version: "1.2.0",
+    date: "November 14, 2026",
+    summary: "57 new icons for interfaces, arrows and text editing, each in stroke and solid. 367 icons in total; no icon renamed or removed.",
+    groups: [
+      {
+        icon: "DashboardIcon",
+        title: "Interface",
+        items: [
+          "plus-square, minus-square, x-square, check-check, ban, ellipsis-circle, bell-plus, command, crosshair, gauge.",
+          "Layout: app-window, columns, rows, table, kanban, dashboard, layout-list, panel-right, panel-bottom.",
+          "Controls: grip-vertical, grip-horizontal, sliders-vertical, toggle-left.",
+        ],
+      },
+      {
+        icon: "ArrowRightCircleIcon",
+        title: "Arrows",
+        items: [
+          "arrow-up, arrow-down, arrow-left and arrow-right in a circle; arrow-up-to-line, arrow-down-to-line.",
+          "chevrons-up, chevrons-down, chevron-first, chevron-last; four corner arrows; move-diagonal, expand, shrink.",
+        ],
+      },
+      {
+        icon: "PenLineIcon",
+        title: "Text and editing",
+        items: [
+          "heading, strikethrough, quote, text-cursor, align-justify, list-ordered, list-checks, indent, outdent.",
+          "Tools: pen-line, highlighter, eraser, brush, pipette, ruler; plus languages and signature.",
+        ],
+      },
+      {
+        icon: "SparklesIcon",
+        title: "Fixes",
+        items: [
+          "The award, gift, graduation-cap and truck solids follow their stroke icon's outline: parts that touch stay together.",
+          "Icon browser: two new categories (Charts and data, Development) and 23 icons moved to the category they belong in.",
+        ],
+      },
+    ],
+  },
+  {
     version: "1.1.0",
     date: "November 14, 2026",
     summary: "Better proportions and cleaner solids. Same 310 icons and names, nothing to change in your code.",

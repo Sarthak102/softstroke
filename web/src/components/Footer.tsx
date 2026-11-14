@@ -9,6 +9,7 @@ import { ArrowRightIcon } from "@softstroke/react";
 import { CopyCommand } from "./CopyCommand";
 import { LogoMark } from "./Logo";
 import { GITHUB_URL } from "@/lib/site";
+import { ICON_COUNT } from "@/lib/count";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -46,7 +47,7 @@ export function Footer() {
           <div className="grid gap-14 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
             <div>
               <h2 className="ft-in max-w-[14ch] font-display text-5xl font-semibold leading-[1.02] tracking-tight md:text-6xl">Start with one icon.</h2>
-              <p className="ft-in mt-5 max-w-[40ch] text-lg text-muted">All 310, in both styles, free for personal and commercial work.</p>
+              <p className="ft-in mt-5 max-w-[40ch] text-lg text-muted">All {ICON_COUNT}, in both styles, free for personal and commercial work.</p>
               <div className="ft-in mt-8 flex flex-wrap gap-3">
                 <Link href="/icons/" prefetch={false} className="group flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-medium text-accent-ink shadow-[var(--shadow)] transition-transform active:scale-[0.98]">
                   Browse icons

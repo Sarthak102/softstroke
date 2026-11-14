@@ -3,11 +3,11 @@ title: Introduction
 description: What Softstroke is, what ships in v1, and where to start.
 ---
 
-Softstroke is a set of **310 soft, rounded icons** for web and mobile interfaces. Every icon comes in two styles that share one name: **stroke** for resting states and **solid** for active ones. The set is MIT licensed, free for personal and commercial work.
+Softstroke is a set of **{icon-count} soft, rounded icons** for web and mobile interfaces. Every icon comes in two styles that share one name: **stroke** for resting states and **solid** for active ones. The set is MIT licensed, free for personal and commercial work.
 
 ## What's in the box
 
-- 310 icons drawn on a 24px grid with a 1.5px stroke, round caps and joins, and squircle corners.
+- {icon-count} icons drawn on a 24px grid with a 1.5px stroke, round caps and joins, and squircle corners.
 - A solid twin for every icon, built from the stroke icon's own outline.
 - Native packages for React, React Native, Vue, Svelte and Angular.
 - Plain SVG files, sprites and JSON for everything else, served from a CDN.

@@ -7,6 +7,7 @@ import solidNodes from "@softstroke/svg/icons-solid.json";
 import keywords from "@softstroke/svg/keywords.json";
 import categories from "@softstroke/svg/categories.json";
 import { useCopy } from "../CopyCommand";
+import { ICON_COUNT } from "@/lib/count";
 
 type Nodes = [string, Record<string, string>][];
 type Style = "stroke" | "solid";
@@ -16,7 +17,8 @@ const KEYWORDS = keywords as Record<string, string[]>;
 const CATEGORY = categories as Record<string, string>;
 // Categories alphabetically, each with its icon count and a representative icon (sidebar).
 const CAT_ICON: Record<string, string> = {
-  Arrows: "arrow-up-right", Commerce: "cart", Communication: "chat", Devices: "smartphone", Editing: "type", Files: "folder",
+  Arrows: "arrow-up-right", "Charts and data": "bar-chart", Commerce: "cart", Communication: "chat", Development: "code", Devices: "smartphone",
+  Editing: "type", Files: "folder",
   Interface: "layout", Media: "play-circle", Objects: "lightbulb", "People and security": "shield-check", Time: "clock",
   Travel: "map-pin", "Weather and nature": "cloud-sun",
 };
@@ -128,7 +130,7 @@ export function IconBrowser() {
             value={query}
             maxLength={50}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search 310 icons"
+            placeholder={`Search ${ICON_COUNT} icons`}
             className="h-11 min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-muted focus-visible:outline-none"
           />
           {query ? (

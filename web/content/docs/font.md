@@ -1,6 +1,6 @@
 ---
 title: Icon font
-description: All 310 icons in stroke and solid from one CSS link.
+description: All {icon-count} icons in stroke and solid from one CSS link.
 ---
 
 The icon font is for places where you can't run a build: plain HTML, WordPress, Webflow, or a quick prototype. Each icon is a character in a font, so it sizes and colors like text.

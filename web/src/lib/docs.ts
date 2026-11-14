@@ -3,6 +3,7 @@ import { join } from "node:path";
 import { Marked, type Tokens } from "marked";
 import { createHighlighter } from "shiki";
 import { BASE } from "./site";
+import { ICON_COUNT } from "./count";
 
 export const DOC_GROUPS: { title: string; pages: { slug: string; title: string }[] }[] = [
   { title: "Getting started", pages: [{ slug: "", title: "Introduction" }, { slug: "installation", title: "Installation" }] },
@@ -51,7 +52,8 @@ const getHighlighter = () =>
 export async function loadDoc(slug: string): Promise<Doc> {
   const page = DOC_PAGES.find((p) => p.slug === slug);
   if (!page) throw new Error(`no doc page "${slug}"`);
-  const file = readFileSync(join(process.cwd(), "content/docs", `${slug || "introduction"}.md`), "utf8");
+  // {icon-count} in the docs = the current number of icons
+  const file = readFileSync(join(process.cwd(), "content/docs", `${slug || "introduction"}.md`), "utf8").replaceAll("{icon-count}", ICON_COUNT ?? "");
   const [, front, body] = file.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/)!;
   const meta = Object.fromEntries(front.split("\n").map((l) => [l.slice(0, l.indexOf(":")), l.slice(l.indexOf(":") + 1).trim()]));
 
