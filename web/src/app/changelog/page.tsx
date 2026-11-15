@@ -12,6 +12,58 @@ export const metadata: Metadata = {
 // Newest first. Set the date when the version is published to npm.
 const RELEASES: { version: string; date: string; summary: string; groups: { icon: IconName; title: string; items: string[] }[] }[] = [
   {
+    version: "1.3.0",
+    date: "November 15, 2026",
+    summary: "62 new icons for communication, people, security, files, notes and search, each in stroke and solid. 429 icons in total; no icon renamed or removed.",
+    groups: [
+      {
+        icon: "ChatDotsIcon",
+        title: "Communication",
+        items: [
+          "chat-circle, chat-plus, chat-check, chat-dots, chats, reply-all, voicemail, contact-book, headset, bell-dot.",
+          "Mail: mail-plus, mail-check, mail-x, mails. Calls: phone-incoming, phone-outgoing, phone-missed.",
+        ],
+      },
+      {
+        icon: "UserCogIcon",
+        title: "People",
+        items: [
+          "user-cog, user-lock, user-search, user-star, user-shield, user-pen, user-heart.",
+          "id-badge, accessibility, person-standing.",
+        ],
+      },
+      {
+        icon: "ShieldLockIcon",
+        title: "Security",
+        items: [
+          "shield-plus, shield-x, shield-user, shield-lock, vault, password, scan-eye, eye-closed, alert-octagon, badge-alert.",
+        ],
+      },
+      {
+        icon: "FilesIcon",
+        title: "Files",
+        items: [
+          "files, file-x, file-minus, file-search, file-lock, file-pen, file-code, file-image, file-video, file-audio, file-archive, file-spreadsheet.",
+          "folder-x, folder-minus, folder-check, folder-search, folder-lock.",
+        ],
+      },
+      {
+        icon: "ZoomInIcon",
+        title: "Notes and search",
+        items: [
+          "clipboard-check, clipboard-list, clipboard-pen, zoom-in, zoom-out, search-check, search-x, scan.",
+        ],
+      },
+      {
+        icon: "SmartphoneIcon",
+        title: "Flutter",
+        items: [
+          "The pub.dev package now ships an example and full API docs.",
+        ],
+      },
+    ],
+  },
+  {
     version: "1.2.0",
     date: "November 14, 2026",
     summary: "57 new icons for interfaces, arrows and text editing, each in stroke and solid. 367 icons in total; no icon renamed or removed.",
