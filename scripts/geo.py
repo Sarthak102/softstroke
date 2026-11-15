@@ -90,11 +90,13 @@ def _pt(c,t):
     u=1-t
     return (u**3*c[0][0]+3*u*u*t*c[1][0]+3*u*t*t*c[2][0]+t**3*c[3][0],u**3*c[0][1]+3*u*u*t*c[1][1]+3*u*t*t*c[2][1]+t**3*c[3][1])
 
-def cut(cubics,a,b,gap,min_len=2.0):
+def cut(cubics,a,b,gap,min_len=2.0,near=None):
     # Remove every part of a chain of cubics that lies within `gap` of the infinite line through a,b.
     # Used for slashed icons (eye-off ...): the slash gets clean breaks instead of crossing strokes.
-    dx,dy=b[0]-a[0],b[1]-a[1]; L=math.hypot(dx,dy)
-    near=lambda p:abs((p[0]-a[0])*dy-(p[1]-a[1])*dx)/L<gap
+    # near(p) -> bool replaces the line test (cut by any region: a badge's clearance, a front layer)
+    if near is None:
+        dx,dy=b[0]-a[0],b[1]-a[1]; L=math.hypot(dx,dy)
+        near=lambda p:abs((p[0]-a[0])*dy-(p[1]-a[1])*dx)/L<gap
     pieces=[]; cur=[]
     for c in cubics:
         N=400; ts=[i/N for i in range(N+1)]; inside=[near(_pt(c,t)) for t in ts]
@@ -422,6 +424,11 @@ def scale_icon(path,s,c=12):
     R=lambda r:f(r if r<=.75 else r*s)
     t=re.sub(r'cx="([^"]+)" cy="([^"]+)" r="([^"]+)"',lambda m:f'cx="{f(c+s*(float(m.group(1))-c))}" cy="{f(c+s*(float(m.group(2))-c))}" r="{R(float(m.group(3)))}"',t)
     open(path,'w').write(t)
+
+def place(d,s,frm,to):
+    # scale about (12,12), then move the point `frm` (after scaling) to `to`
+    x,y=12+s*(frm[0]-12),12+s*(frm[1]-12)
+    return shift(scale(d,s),round(to[0]-x,2),round(to[1]-y,2))
 
 def shift_icon(path,dx,dy):
     # move a whole icon file (paths + circles)

@@ -1,4 +1,11 @@
 {
+  "accessibility": [
+    "a11y",
+    "universal access",
+    "disability",
+    "inclusive",
+    "person"
+  ],
   "alarm": [
     "clock",
     "wake",
@@ -26,6 +33,13 @@
     "exclamation",
     "attention",
     "danger"
+  ],
+  "alert-octagon": [
+    "stop",
+    "error",
+    "danger",
+    "warning",
+    "critical"
   ],
   "alert-triangle": [
     "warning",
@@ -211,6 +225,13 @@
     "prize",
     "certificate"
   ],
+  "badge-alert": [
+    "unverified",
+    "warning",
+    "attention",
+    "issue",
+    "badge"
+  ],
   "badge-check": [
     "verified",
     "certified",
@@ -271,6 +292,13 @@
     "alarm",
     "reminder",
     "ring"
+  ],
+  "bell-dot": [
+    "notification",
+    "unread",
+    "alert",
+    "badge",
+    "new"
   ],
   "bell-off": [
     "notification",
@@ -485,6 +513,41 @@
     "speech",
     "reply"
   ],
+  "chat-check": [
+    "message read",
+    "seen",
+    "delivered",
+    "resolved",
+    "comment"
+  ],
+  "chat-circle": [
+    "message",
+    "comment",
+    "conversation",
+    "talk",
+    "bubble"
+  ],
+  "chat-dots": [
+    "typing",
+    "message",
+    "pending",
+    "chatting",
+    "comment"
+  ],
+  "chat-plus": [
+    "new message",
+    "compose",
+    "add comment",
+    "start chat",
+    "reply"
+  ],
+  "chats": [
+    "messages",
+    "conversations",
+    "threads",
+    "discussion",
+    "inbox"
+  ],
   "check": [
     "done",
     "confirm",
@@ -607,6 +670,27 @@
     "tasks",
     "board"
   ],
+  "clipboard-check": [
+    "task done",
+    "checklist",
+    "approved",
+    "complete",
+    "report"
+  ],
+  "clipboard-list": [
+    "checklist",
+    "tasks",
+    "todo",
+    "inventory",
+    "list"
+  ],
+  "clipboard-pen": [
+    "edit notes",
+    "fill form",
+    "survey",
+    "write",
+    "report"
+  ],
   "clock": [
     "time",
     "hour",
@@ -725,6 +809,13 @@
     "north",
     "orientation",
     "travel"
+  ],
+  "contact-book": [
+    "address book",
+    "contacts",
+    "directory",
+    "people",
+    "phonebook"
   ],
   "copy": [
     "duplicate",
@@ -893,6 +984,13 @@
     "watch",
     "preview"
   ],
+  "eye-closed": [
+    "hidden",
+    "hide",
+    "invisible",
+    "private",
+    "sleep"
+  ],
   "eye-off": [
     "hide",
     "hidden",
@@ -913,10 +1011,59 @@
     "paper",
     "sheet"
   ],
+  "file-archive": [
+    "zip",
+    "compressed",
+    "rar",
+    "package",
+    "backup"
+  ],
+  "file-audio": [
+    "sound file",
+    "music",
+    "mp3",
+    "song",
+    "podcast"
+  ],
   "file-check": [
     "approved",
     "verified",
     "done",
+    "document"
+  ],
+  "file-code": [
+    "source",
+    "script",
+    "developer",
+    "html",
+    "program"
+  ],
+  "file-image": [
+    "photo file",
+    "picture",
+    "jpg",
+    "png",
+    "media"
+  ],
+  "file-lock": [
+    "private file",
+    "protected",
+    "encrypted",
+    "secure",
+    "document"
+  ],
+  "file-minus": [
+    "remove file",
+    "delete",
+    "subtract",
+    "document",
+    "page"
+  ],
+  "file-pen": [
+    "edit file",
+    "write",
+    "draft",
+    "sign",
     "document"
   ],
   "file-plus": [
@@ -925,12 +1072,47 @@
     "create",
     "document"
   ],
+  "file-search": [
+    "find file",
+    "search document",
+    "lookup",
+    "browse",
+    "page"
+  ],
+  "file-spreadsheet": [
+    "excel",
+    "sheet",
+    "csv",
+    "table",
+    "data"
+  ],
   "file-text": [
     "document",
     "text",
     "page",
     "notes",
     "article"
+  ],
+  "file-video": [
+    "movie file",
+    "clip",
+    "mp4",
+    "media",
+    "film"
+  ],
+  "file-x": [
+    "delete file",
+    "remove",
+    "invalid",
+    "error",
+    "document"
+  ],
+  "files": [
+    "documents",
+    "copies",
+    "pages",
+    "duplicate",
+    "stack"
   ],
   "film": [
     "movie",
@@ -993,6 +1175,27 @@
     "collection",
     "category"
   ],
+  "folder-check": [
+    "folder done",
+    "verified",
+    "synced",
+    "complete",
+    "directory"
+  ],
+  "folder-lock": [
+    "private folder",
+    "protected",
+    "secure",
+    "encrypted",
+    "directory"
+  ],
+  "folder-minus": [
+    "remove folder",
+    "collapse",
+    "delete",
+    "directory",
+    "subtract"
+  ],
   "folder-open": [
     "open",
     "directory",
@@ -1004,6 +1207,20 @@
     "add",
     "create",
     "directory"
+  ],
+  "folder-search": [
+    "find folder",
+    "browse",
+    "explore",
+    "lookup",
+    "directory"
+  ],
+  "folder-x": [
+    "delete folder",
+    "remove",
+    "error",
+    "directory",
+    "close"
   ],
   "forward": [
     "send on",
@@ -1111,6 +1328,13 @@
     "headset",
     "support"
   ],
+  "headset": [
+    "support",
+    "customer service",
+    "call center",
+    "help",
+    "microphone"
+  ],
   "heart": [
     "like",
     "love",
@@ -1150,6 +1374,13 @@
     "loading",
     "sand",
     "timer"
+  ],
+  "id-badge": [
+    "employee",
+    "badge",
+    "pass",
+    "staff",
+    "identification"
   ],
   "id-card": [
     "identity",
@@ -1379,12 +1610,40 @@
     "letter",
     "inbox"
   ],
+  "mail-check": [
+    "email sent",
+    "read",
+    "verified email",
+    "delivered",
+    "envelope"
+  ],
   "mail-open": [
     "email",
     "read",
     "opened",
     "envelope",
     "letter"
+  ],
+  "mail-plus": [
+    "new email",
+    "compose",
+    "add email",
+    "write",
+    "envelope"
+  ],
+  "mail-x": [
+    "email failed",
+    "unsubscribe",
+    "delete email",
+    "bounce",
+    "envelope"
+  ],
+  "mails": [
+    "emails",
+    "inbox",
+    "messages",
+    "newsletter",
+    "envelopes"
   ],
   "map": [
     "location",
@@ -1584,6 +1843,13 @@
     "lot",
     "garage"
   ],
+  "password": [
+    "passcode",
+    "pin",
+    "secret",
+    "login",
+    "credentials"
+  ],
   "pause": [
     "stop",
     "hold",
@@ -1612,6 +1878,13 @@
     "percentage",
     "offer"
   ],
+  "person-standing": [
+    "person",
+    "human",
+    "body",
+    "figure",
+    "stand"
+  ],
   "phone": [
     "call",
     "telephone",
@@ -1626,12 +1899,33 @@
     "contact",
     "dial"
   ],
+  "phone-incoming": [
+    "incoming call",
+    "receive",
+    "ringing",
+    "call in",
+    "phone"
+  ],
+  "phone-missed": [
+    "missed call",
+    "declined",
+    "unanswered",
+    "call",
+    "phone"
+  ],
   "phone-off": [
     "hang up",
     "end call",
     "decline",
     "missed",
     "disabled"
+  ],
+  "phone-outgoing": [
+    "outgoing call",
+    "dial",
+    "call out",
+    "calling",
+    "phone"
   ],
   "pie-chart": [
     "graph",
@@ -1797,6 +2091,13 @@
     "message",
     "mail"
   ],
+  "reply-all": [
+    "reply to all",
+    "email",
+    "respond",
+    "answer",
+    "group"
+  ],
   "rewind": [
     "back",
     "seek",
@@ -1859,6 +2160,20 @@
     "compare",
     "legal"
   ],
+  "scan": [
+    "scanner",
+    "scan line",
+    "barcode",
+    "capture",
+    "read"
+  ],
+  "scan-eye": [
+    "iris scan",
+    "biometric",
+    "watch",
+    "inspect",
+    "preview"
+  ],
   "scan-face": [
     "face id",
     "biometric",
@@ -1880,12 +2195,26 @@
     "zoom",
     "query"
   ],
+  "search-check": [
+    "found",
+    "verified",
+    "search done",
+    "match",
+    "result"
+  ],
   "search-sparkle": [
     "ai search",
     "smart search",
     "magic",
     "find",
     "assistant"
+  ],
+  "search-x": [
+    "clear search",
+    "no results",
+    "not found",
+    "cancel",
+    "remove"
   ],
   "send": [
     "submit",
@@ -1941,12 +2270,40 @@
     "safe",
     "trust"
   ],
+  "shield-lock": [
+    "encrypted",
+    "secure",
+    "privacy",
+    "protection",
+    "locked"
+  ],
   "shield-off": [
     "unprotected",
     "insecure",
     "disabled",
     "security",
     "unsafe"
+  ],
+  "shield-plus": [
+    "add protection",
+    "insurance",
+    "security",
+    "health cover",
+    "shield"
+  ],
+  "shield-user": [
+    "account security",
+    "protected user",
+    "privacy",
+    "admin",
+    "guard"
+  ],
+  "shield-x": [
+    "unprotected",
+    "blocked",
+    "security error",
+    "threat",
+    "shield"
   ],
   "ship": [
     "boat",
@@ -2368,6 +2725,27 @@
     "person",
     "me"
   ],
+  "user-cog": [
+    "account settings",
+    "profile settings",
+    "preferences",
+    "admin",
+    "manage user"
+  ],
+  "user-heart": [
+    "follow",
+    "favorite person",
+    "friend",
+    "like user",
+    "care"
+  ],
+  "user-lock": [
+    "private account",
+    "locked user",
+    "security",
+    "restricted",
+    "profile"
+  ],
   "user-minus": [
     "remove",
     "person",
@@ -2375,12 +2753,40 @@
     "delete",
     "unfollow"
   ],
+  "user-pen": [
+    "edit profile",
+    "rename",
+    "update account",
+    "author",
+    "user"
+  ],
   "user-plus": [
     "add user",
     "invite",
     "new member",
     "follow",
     "signup"
+  ],
+  "user-search": [
+    "find people",
+    "search user",
+    "lookup",
+    "recruit",
+    "directory"
+  ],
+  "user-shield": [
+    "admin",
+    "moderator",
+    "protected account",
+    "verified",
+    "guard"
+  ],
+  "user-star": [
+    "favorite contact",
+    "vip",
+    "featured user",
+    "top member",
+    "rating"
   ],
   "user-x": [
     "remove",
@@ -2396,6 +2802,13 @@
     "members",
     "community"
   ],
+  "vault": [
+    "safe",
+    "bank",
+    "secure storage",
+    "money",
+    "lockbox"
+  ],
   "video": [
     "camera",
     "movie",
@@ -2408,6 +2821,13 @@
     "no video",
     "disabled",
     "meeting"
+  ],
+  "voicemail": [
+    "voice message",
+    "answering machine",
+    "recording",
+    "tape",
+    "call"
   ],
   "volume": [
     "sound",
@@ -2511,5 +2931,19 @@
     "power",
     "energy",
     "fast"
+  ],
+  "zoom-in": [
+    "magnify",
+    "enlarge",
+    "zoom",
+    "bigger",
+    "search plus"
+  ],
+  "zoom-out": [
+    "shrink",
+    "smaller",
+    "zoom",
+    "reduce",
+    "search minus"
   ]
 }

@@ -7,6 +7,7 @@ import os, re, sys
 sys.path.insert(0, os.path.dirname(__file__))
 from solid import *
 from solid import _pts
+from geo import place, shift, mirror
 import math
 
 H='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">\n'
@@ -44,15 +45,15 @@ from shapely.ops import substring, linemerge
 from shapely.affinity import translate
 GAP=.6    # smallest gap between separate solid parts
 HOLE=12   # inner closed shapes smaller than this (area) are cut as a solid shape; larger ones as a ring
-THROUGH={'mail','magnet'}   # icons whose edge-to-edge detail lines cut through the edge instead of stopping short
+THROUGH={'mail','magnet','mails'}   # icons whose edge-to-edge detail lines cut through the edge instead of stopping short
 # a single inner circle is cut out whole (one white circle, like the stroke's one circle), not as a ring around a dot
-CUT_WHOLE={'banknote','camera','coins','cpu','fuel','disc','record','id-card','map-pin','radio','speaker','toggle','user-circle'}   # not target (nested rings) or eye (iris + pupil)
+CUT_WHOLE={'banknote','contact-book','id-badge','file-video','camera','coins','cpu','fuel','disc','record','id-card','map-pin','radio','speaker','toggle','user-circle'}   # not target (nested rings) or eye (iris + pupil)
 # glyph-like icons (and ones a fill would change: wheels -> balls, glasses -> sunglasses): solid = bold stroke
-LINE_ICONS={'at-sign','bold','infinity','glasses','globe','earth','command','crosshair'}
+LINE_ICONS={'at-sign','bold','infinity','glasses','voicemail','globe','earth','command','crosshair'}
 # outside details drawn at stroke weight: they meet fused lines, so they must match their weight
 NORMAL_WEIGHT={'music','key'}
 # lines crossing into the body that stay solid there (calendar rings: no white notch under them)
-SOLID_CROSSING={'calendar-check','calendar-days','calendar-minus','calendar-plus','calendar-x'}
+SOLID_CROSSING={'contact-book','calendar-check','calendar-days','calendar-minus','calendar-plus','calendar-x'}
 
 def parts(n,s=None):
     s=s or open(f'icons/{n}.svg').read()
@@ -356,8 +357,89 @@ def rocket():
     g=auto('rocket')
     return unary_union([Polygon(p.exterior,[i for i in p.interiors if Polygon(i).area>3]) for p in getattr(g,'geoms',[g])])
 
+# 1.3.0 batch 1: back layers drawn open in the stroke icon are solidified whole, behind the front one
+def chats():
+    d=src('chats'); back=place(src('chat-bubble')[0].replace('L10.43 18.73Q8.49 18.73 6.76 19.62L3.61 21.27Q2.27 21.97 2.27 20.46Z','L8.76 18.73C5.7 18.73 4.17 18.73 3.22 17.78C2.27 16.83 2.27 15.3 2.27 12.24Z'),.72,(21.73,3.32),(21.73,3.32))
+    return layered('chats',[P(d[0]),P(back)])
+def mails():
+    # the back card keeps its gap from the front's plain silhouette: following the flap cut's notches
+    # it dipped into the front envelope (Sarthak 2026-11-15)
+    d=src('mails'); back=place(src('mail')[0],.78,(22,3.58),(22,3.58))
+    front=auto('mails','<svg>'+P(d[0])+P(d[1])+'</svg>')
+    rear=auto('mails','<svg>'+P(back)+'</svg>').difference(silhouette(d[0]).buffer(LAYER_GAP,quad_segs=16))
+    return front.union(rear.buffer(-.35,quad_segs=16).buffer(.35,quad_segs=16))
+def mail_badge(n):
+    # mail's solid, opened around the glyph as far as the stroke frame is (its ink edge), the glyph bold
+    C=(18.25,6.75); R=math.dist(C,(22,11.21))-W/2
+    g=mail().difference(circle(*C,R)).buffer(-.35,quad_segs=16).buffer(.35,quad_segs=16)
+    return g.union(line(src(n)[2],BOLD))
+def headset():
+    # headphones' designed solid, on the headset's smaller placement; the boom bold
+    hp,hs=src('headphones')[0],src('headset')
+    a,b=chains(place(hp,.85,(12,2.27),(12,2.27)))[0][0][0],chains(hs[0])[0][0][0]
+    T=lambda d:shift(place(d,.85,(12,2.27),(12,2.27)),round(b[0]-a[0],2),round(b[1]-a[1],2))
+    cup='M2.27 14.43h3.24a2.1636 2.1636 0 0 1 2.17 2.16v2.71a2.1636 2.1636 0 0 1 -2.17 2.16H4.43a2.1611 2.1611 0 0 1 -2.16 -2.16Z'
+    cups=(silhouette(T(cup)).union(silhouette(T(mirror_abs(cup))))
+            .union(line(T('M2.645 15.24V12a9.355 9.355 0 0 1 18.71 0v3.24'),BOLD)))
+    # boom at stroke weight so its outer edge lines up with the cup's (bold, it stepped out past it), fused to the cup
+    # and the mic pill; the joins rounded (closing), nothing else touched (Sarthak 2026-11-15)
+    boom=line(hs[1],W); mic=silhouette(hs[2]); G=cups.union(boom).union(mic)
+    # like the stroke: the boom runs on from the cup's side, its run and the mic keep their gap below the cup
+    # (Sarthak 2026-11-15); closing the joins fused the mic into the cup. Only pinholes < 1 are filled.
+    return unary_union([Polygon(p.exterior,[i for i in p.interiors if Polygon(i).area>1]) for p in getattr(G,'geoms',[G])])
+def bell_dot():
+    # bell's solid opened around the dot as far as the stroke bell is (its ink edge), the dot filled
+    b=src('bell'); C,r=(18,6),3
+    g=silhouette(b[0]).difference(circle(*C,r+2.6-W/2)).buffer(-.35,quad_segs=16).buffer(.35,quad_segs=16)
+    return g.union(translate(line(b[1],W),0,.25)).union(circle(*C,r+W/2))
+def user_badge(n):
+    # 1.3.0 batch 2: the glyph in front, the whole person (user-plus's, moved as the icon was) behind it with a gap
+    s_=open(f'icons/{n}.svg').read(); d=src(n)
+    cx,cy=[float(v) for v in re.findall(r'<circle cx="([^"]+)" cy="([^"]+)"',s_)[0]]
+    body=shift(src('user-plus')[0],round(cx-9.89,2),round(cy-7.26,2))
+    front=auto(n,'<svg>'+''.join(P(x) for x in d[1:])+'</svg>')
+    back=auto(n,'<svg>'+re.findall(r'<circle [^>]*/>',s_)[0]+P(body)+'</svg>').difference(outline(front).buffer(LAYER_GAP,quad_segs=16))
+    return front.union(back.buffer(-.45,quad_segs=16).buffer(.45,quad_segs=16))   # no thin tips where the body tapers into the gap (user-search)
+def moved(d,ref,icon_d):
+    # d moved by however far the batch script's centring moved ref (its first point) to icon_d
+    a,b=chains(ref)[0][0][0],chains(icon_d)[0][0][0]
+    return shift(d,round(b[0]-a[0],2),round(b[1]-a[1],2))
+def front_back(n,front_svg,back_svg):
+    # front part solid; the whole back part behind it, a gap around the front's plain silhouette, thin tips rounded off
+    front=auto(n,'<svg>'+front_svg+'</svg>')
+    back=auto(n,'<svg>'+back_svg+'</svg>').difference(outline(front).buffer(LAYER_GAP,quad_segs=16))
+    back=back.buffer(-.45,quad_segs=16).buffer(.45,quad_segs=16)
+    ps=list(getattr(back,'geoms',[back])); big=max((p.area for p in ps),default=0)
+    back=unary_union([p for p in ps if p.area>.1*big])   # crumbs cut off by the front (file-pen's corner: 8 vs 263)
+    return front.union(back)
+def files():
+    # 1.3.0 batch 4: the front file over the whole back file (stroke: the back is cut around the front)
+    d=src('files'); F=src('file')
+    ref=place(F[0],.82,(3.89,22),(3.89,22))
+    return front_back('files',P(d[0])+P(d[1]),P(moved(place(F[0],.82,(20.11,2),(20.11,2)),ref,d[0])))   # back = outline only, as in the stroke
+def file_pen():
+    # badge rule: the pencil in front, the whole file behind it
+    d=src('file-pen'); F=src('file'); ref=place(src('edit')[0],.55,(12,12),(17.25,17.25))
+    return front_back('file-pen',P(d[-1]),''.join(P(moved(x,ref,d[-1])) for x in F))
+def clipboard_glyph(n):
+    # 1.3.0 batch 5: clipboard's own layering (clip in front of the closed body), the glyph cut into the body
+    d=src(n); return layered(n,[P(d[1]),P(d[0]+'Z')+''.join(P(x) for x in d[2:])])
+def clipboard_pen():
+    # badge rule: the pencil in front, the whole clipboard (its own layering) behind with a gap
+    d=src('clipboard-pen'); C=src('clipboard'); ref=place(src('edit')[0],.55,(12,12),(17.25,17.25)); m=lambda x:moved(x,ref,d[-1])
+    front=auto('clipboard-pen','<svg>'+P(d[-1])+'</svg>')
+    back=layered('clipboard-pen',[P(m(C[1])),P(m(C[0])+'Z')+P(m(C[2]))]).difference(outline(front).buffer(LAYER_GAP,quad_segs=16))
+    back=back.buffer(-.45,quad_segs=16).buffer(.45,quad_segs=16)
+    ps=list(getattr(back,'geoms',[back])); big=max(p.area for p in ps)
+    return front.union(unary_union([p for p in ps if p.area>.1*big]))
+def search_glyph(n):
+    # like search: a bold ring + handle (not a disc), the glyph bold inside
+    return search().union(line(src(n)[1],BOLD))
+
 DESIGNED={n:fn for n,fn in list(globals().items()) if n in ('home','search','user','calendar','heart','bell','mail','settings')}
-DESIGNED.update({'bell-plus':bell_plus,'cloud-sun':cloud_sun,'rocket':rocket,'bug':bug,'database':database,'award':award,'pipette':pipette,'truck':truck,'archive':archive,'cart':cart,'gift':gift,'image-plus':image_plus,'fuel':fuel,'graduation-cap':graduation_cap,'printer':printer,'ship':ship,'wallet':wallet,'clipboard':clipboard,'coins':coins,'copy':copy,'images':images,'pie-chart':pie_chart,'bike':bike,'film':film,'clapperboard':clapperboard,'book':book,'book-open':book_open,'cast':cast,'flag':flag,'flask':flask,'folder-open':folder_open,
+DESIGNED.update({'bell-plus':bell_plus,'clipboard-check':lambda:clipboard_glyph('clipboard-check'),'clipboard-list':lambda:clipboard_glyph('clipboard-list'),'clipboard-pen':clipboard_pen,
+                 **{n:(lambda n=n:search_glyph(n)) for n in 'zoom-in zoom-out search-check search-x'.split()},'files':files,'file-pen':file_pen,**{n:(lambda n=n:user_badge(n)) for n in 'user-cog user-lock user-search user-star user-shield user-pen user-heart'.split()},'bell-dot':bell_dot,'chats':chats,'mails':mails,'headset':headset,
+                 'mail-plus':lambda:mail_badge('mail-plus'),'mail-check':lambda:mail_badge('mail-check'),'mail-x':lambda:mail_badge('mail-x'),'cloud-sun':cloud_sun,'rocket':rocket,'bug':bug,'database':database,'award':award,'pipette':pipette,'truck':truck,'archive':archive,'cart':cart,'gift':gift,'image-plus':image_plus,'fuel':fuel,'graduation-cap':graduation_cap,'printer':printer,'ship':ship,'wallet':wallet,'clipboard':clipboard,'coins':coins,'copy':copy,'images':images,'pie-chart':pie_chart,'bike':bike,'film':film,'clapperboard':clapperboard,'book':book,'book-open':book_open,'cast':cast,'flag':flag,'flask':flask,'folder-open':folder_open,
                  'headphones':headphones,'hourglass':hourglass,'pin':pin,'store':store,'trash':trash,'umbrella':umbrella})
 
 if __name__=='__main__':
