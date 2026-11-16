@@ -18,7 +18,7 @@ import { Words } from "./Words";
 const COLUMNS: { title: string; links: [string, string][] }[] = [
   { title: "Product", links: [["Icons", "/icons/"], ["Use cases", "/use-cases/"], ["Playground", "/playground/"], ["Icon font", "/icon-font/"], ["Docs", "/docs/"]] },
   { title: "Packages", links: [["React", "/docs/react/"], ["React Native", "/docs/react-native/"], ["Flutter", "/docs/flutter/"], ["Vue", "/docs/vue/"], ["Svelte", "/docs/svelte/"], ["Angular", "/docs/angular/"], ["SVG and CDN", "/docs/svg/"]] },
-  { title: "Resources", links: [["GitHub", GITHUB_URL], ["npm", "https://www.npmjs.com/org/softstroke"], ["Releases", "/changelog/"], ["Sponsor", SPONSOR_URL], ["Request an icon", "#request"], ["Report an issue", "#issue"], ["MIT License", `${GITHUB_URL}/blob/main/LICENSE`]] },
+  { title: "Resources", links: [["GitHub", GITHUB_URL], ["npm", "https://www.npmjs.com/org/softstroke"], ["Changelog", "/changelog/"], ["Sponsor", SPONSOR_URL], ["Request an icon", "#request"], ["Report an issue", "#issue"], ["MIT License", `${GITHUB_URL}/blob/main/LICENSE`]] },
 ];
 
 const TRAIL = [

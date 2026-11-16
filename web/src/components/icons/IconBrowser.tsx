@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { CheckIcon, CopyIcon, DownloadIcon, SearchIcon, SparklesIcon, XIcon } from "@softstroke/react";
-import strokeNodes from "@softstroke/svg/icons.json";
 import keywords from "@softstroke/svg/keywords.json";
 import categories from "@softstroke/svg/categories.json";
 import { useCopy } from "../CopyCommand";
@@ -13,12 +12,11 @@ import { ICON_COUNT } from "@/lib/count";
 import { FRAMEWORKS, savedFramework, saveFramework, snippet, type Framework } from "@/lib/frameworks";
 import { IS_NEW, NEW_VERSION } from "@/lib/new-icons";
 import { zip } from "@/lib/zip";
+import { Glyph, loadSolid, NAMES, save, SOLID, toSvg, useSolid, type Style } from "@/lib/shapes";
+import { Select } from "../Select";
 import { suggest } from "@/lib/suggest";
 
-type Nodes = [string, Record<string, string>][];
-type Style = "stroke" | "solid";
 
-const NAMES = Object.keys(strokeNodes).sort();
 const KEYWORDS = keywords as Record<string, string[]>;
 const CATEGORY = categories as Record<string, string>;
 // Categories alphabetically, each with its icon count and a representative icon (sidebar).
@@ -31,49 +29,11 @@ const CAT_ICON: Record<string, string> = {
 const CATS = [...new Set(Object.values(CATEGORY))].sort().map((c) => [c, NAMES.filter((n) => CATEGORY[n] === c).length] as const);
 const SIZES = [20, 24, 32];
 
-// Solid shapes (590 KB) load on demand: when solid is first shown, an icon panel opens, or the page is idle.
-let SOLID: Record<string, Nodes> | null = null;
-let solidLoad: Promise<void> | null = null;
-const loadSolid = () =>
-  (solidLoad ??= import("@softstroke/svg/icons-solid.json").then((m) => { SOLID = m.default as unknown as Record<string, Nodes>; }));
-function useSolid(need: boolean) {
-  const [, rerender] = useState(0);
-  useEffect(() => {
-    if (need && !SOLID) loadSolid().then(() => rerender((x) => x + 1)).catch(() => {});
-  }, [need]);
-  return SOLID;
-}
 const NEW_CAT = "__new";
 
 // Same rule as scripts/build.mjs: qr-code -> QrCodeIcon.
 const component = (n: string) => `${n.replace(/(^|-)([a-z0-9])/g, (_, __, c: string) => c.toUpperCase())}Icon`;
 
-function toSvg(name: string, style: Style) {
-  const nodes = ((style === "solid" && SOLID) || (strokeNodes as unknown as Record<string, Nodes>))[name];
-  const head =
-    style === "solid"
-      ? '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">'
-      : '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">';
-  const body = nodes.map(([tag, attrs]) => `<${tag} ${Object.entries(attrs).map(([k, v]) => `${k}="${v}"`).join(" ")}/>`).join("");
-  return `${head}${body}</svg>`;
-}
-
-// Draws an icon from its shape list: the page already needs the JSON for Copy SVG, so it doesn't also load 600 components.
-function Glyph({ name, solid, size, className = "" }: { name: string; solid: boolean; size: number | string; className?: string }) {
-  // Until the solid shapes arrive, solid draws the stroke shape.
-  const fallback = solid && !SOLID;
-  if (fallback) solid = false;
-  const nodes = ((solid && SOLID) || (strokeNodes as unknown as Record<string, Nodes>))[name];
-  const paint = solid ? { fill: "currentColor" } : { fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
-  return (
-    <svg viewBox="0 0 24 24" width={size} height={size} aria-hidden className={className} {...paint}>
-      {nodes.map(([Tag, attrs], i) => {
-        const T = Tag as "path";
-        return <T key={i} {...attrs} />;
-      })}
-    </svg>
-  );
-}
 
 function matches(name: string, q: string) {
   return name.includes(q) || (KEYWORDS[name] ?? []).some((k) => k.includes(q));
@@ -123,7 +83,7 @@ export function IconBrowser() {
     if (c && CATS.some(([name]) => name === c)) setCatState(c);
     if (p.get("new") === "1") setCatState(NEW_CAT);
     const icon = p.get("icon");
-    if (icon && icon in strokeNodes) setOpen(icon);
+    if (icon && NAMES.includes(icon)) setOpen(icon);
     setReady(true);
   }, []);
   useEffect(() => {
@@ -420,16 +380,13 @@ function Detail({ name, style, onClose }: { name: string | null; style: Style; o
               ))}
             </div>
 
-            <div className="mt-5 grid gap-2">
+            {/* minmax(0,1fr): without it the column grows to the longest code hint and pushes the rows past the card */}
+            <div className="mt-5 grid grid-cols-[minmax(0,1fr)] gap-2">
               <label className="flex items-center justify-between gap-3 text-sm">
                 <span className="text-muted">Copy for</span>
-                <select
-                  value={fw}
-                  onChange={(e) => { const v = e.target.value as Framework; setFw(v); saveFramework(v); }}
-                  className="h-9 rounded-[10px] bg-[var(--surface-2)] px-3 text-sm ring-1 ring-[var(--line)]"
-                >
+                <Select value={fw} onChange={(e) => { const v = e.target.value as Framework; setFw(v); saveFramework(v); }}>
                   {FRAMEWORKS.map((f) => <option key={f}>{f}</option>)}
-                </select>
+                </Select>
               </label>
               <Action label="Copy code" hint={snippet(n, fw, view === "solid").use} state={jsx.state} onClick={() => jsx.copy(snippet(n, fw, view === "solid").use)} />
               <Action label="Copy import" hint={snippet(n, fw, view === "solid").imp} state={imp.state} onClick={() => imp.copy(snippet(n, fw, view === "solid").imp)} />
@@ -455,14 +412,6 @@ function Detail({ name, style, onClose }: { name: string | null; style: Style; o
   );
 }
 
-function save(blob: Blob, filename: string) {
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  a.click();
-  URL.revokeObjectURL(url);
-}
 
 // Shown while icons are picked: download them as single SVG files in a ZIP, or as one sprite of <symbol>s.
 function PickBar({ picked, style, onClear }: { picked: string[]; style: Style; onClear: () => void }) {
@@ -504,7 +453,7 @@ function Action({ label, hint, state, onClick }: { label: string; hint: string; 
       onClick={onClick}
       className="flex items-center gap-3 rounded-[10px] bg-[var(--surface)] px-4 py-3 text-left text-sm ring-1 ring-[var(--line)] transition-[background-color,scale] hover:bg-[var(--surface-2)] active:scale-[0.98]"
     >
-      <span className="font-medium">{label}</span>
+      <span className="shrink-0 font-medium">{label}</span>
       <span className="min-w-0 flex-1 truncate font-mono text-xs text-muted">{hint}</span>
       <span aria-live="polite" className="text-xs">
         {state === "copied" ? <span className="text-accent-text">Copied</span> : state === "failed" ? <span className="text-muted">Copy failed</span> : <CopyIcon size={16} className="text-muted" />}

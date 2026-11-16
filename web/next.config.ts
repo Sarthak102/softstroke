@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
   images: { unoptimized: true },
   trailingSlash: true,
   devIndicators: false,
+  // Render metadata in <head> for every visitor. Streamed metadata puts an empty <div hidden> first in each page,
+  // which Next reads as "already at the top" and then skips the scroll reset on link clicks.
+  htmlLimitedBots: /.*/,
   // `npm run site` builds into out/ (the static export) so it never breaks a running dev server, which uses .next.
   distDir: process.env.NEXT_DIST_DIR ?? ".next",
   env: { NEXT_PUBLIC_ICON_COUNT: String(Object.keys(icons).length) },

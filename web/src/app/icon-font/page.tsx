@@ -49,8 +49,6 @@ export default async function IconFontPage() {
   const example = await highlight(EXAMPLE, "html");
   return (
     <>
-      {/* The real font, served by this site, powers the live examples on this page. */}
-      <link rel="stylesheet" href={`${BASE}/font/softstroke.css`} precedence="default" />
       <Nav />
       <main>
         <section className="relative overflow-hidden">
@@ -132,6 +130,9 @@ export default async function IconFontPage() {
         </section>
       </main>
       <Footer />
+      {/* The real font, served by this site, powers the live examples on this page. Kept last: React hoists it
+          into <head>, and as the page's first child Next would measure it and skip the scroll reset on navigation. */}
+      <link rel="stylesheet" href={`${BASE}/font/softstroke.css`} precedence="default" />
     </>
   );
 }

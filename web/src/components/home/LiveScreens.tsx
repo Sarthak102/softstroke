@@ -11,6 +11,7 @@ import {
   HeartIcon as HeartF, HomeIcon as HomeF, InboxIcon as InboxF, PauseIcon as PauseF, PlayIcon as PlayF, SettingsIcon as SettingsF,
   SkipBackIcon as SkipBackF, SkipForwardIcon as SkipForwardF, StarIcon as StarF, UsersIcon as UsersF,
 } from "@softstroke/react/solid";
+import { requestTheme } from "../Theme";
 import { Words } from "../Words";
 
 const ROWS: [Icon, Icon, string, string?][] = [
@@ -46,8 +47,8 @@ export function LiveScreens() {
     mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     return () => mo.disconnect();
   }, []);
-  // Clicking the matching option of the nav switch keeps its circle reveal and session storage in one place.
-  const toggleTheme = () => document.querySelector<HTMLButtonElement>(`[data-theme-option="${dark ? "light" : "dark"}"]`)?.click();
+  // The nav switch owns the reveal and session storage; this one only says where the circle starts.
+  const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => requestTheme(dark ? "light" : "dark", e.currentTarget);
 
   const navRow = ([S, F, label, c]: [Icon, Icon, string, string?]) => (
     <button key={label} type="button" className={`row ${row === label ? "on" : ""}`} onClick={() => setRow(label)}>

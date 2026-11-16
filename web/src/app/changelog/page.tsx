@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { StrokeIcon, type IconName } from "@/lib/icons";
-import { Maker } from "@/components/home/Maker";
 
 export const metadata: Metadata = {
   title: "Changelog | Softstroke",
@@ -172,8 +171,8 @@ export default function ChangelogPage() {
     <>
       <Nav />
       <main className="wrap page">
-        <Maker link={false} />
-        <h2 className="display h2" style={{ marginTop: 120 }}>Changelog</h2>
+        <p className="eyebrow">Releases</p>
+        <h1 className="display page-title">Changelog</h1>
         <p className="lede">
           New icons and package changes, release by release. Icons are never renamed or removed in a minor version.
         </p>

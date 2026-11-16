@@ -6,6 +6,7 @@ import "./globals.css";
 import { ICON_COUNT } from "@/lib/count";
 import { SITE_URL } from "@/lib/site";
 import { FeedbackModal } from "@/components/Feedback";
+import { StarNudge } from "@/components/StarNudge";
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -53,6 +54,7 @@ export default function RootLayout({
         {children}
         <Search />
         <FeedbackModal />
+        <StarNudge />
       </body>
     </html>
   );

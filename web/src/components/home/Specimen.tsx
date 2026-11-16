@@ -7,6 +7,11 @@ type Item = { name: string; stroke: Nodes; solid: Nodes };
 
 const DRAW = 1400, HOLD = 2200, SOLID = 1600;
 
+// A path with several pieces (compass ticks: "M12 2v2M22 12h-2...") restarts its dash on every piece, so the
+// pieces would appear at once. Split at each absolute M so every piece draws in turn.
+const pieces = (nodes: Nodes): Nodes =>
+  nodes.flatMap(([t, a]) => (t === "path" && /.M/.test(a.d) ? a.d.split(/(?=M)/).map((d) => [t, { ...a, d }] as Nodes[number]) : [[t, a]]));
+
 // One icon at a time on its 24px construction grid: drawn stroke by stroke with a pen dot, then turned solid.
 export function Specimen({ items }: { items: Item[] }) {
   const [i, setI] = useState(0);
@@ -22,9 +27,10 @@ export function Specimen({ items }: { items: Item[] }) {
   // so the dash is removed once the drawing ends.
   useEffect(() => {
     const parts = [...(strokeSvg.current?.children ?? [])] as SVGGeometryElement[];
-    const finish = () => parts.forEach((p) => { p.style.strokeDasharray = "none"; p.style.strokeDashoffset = "0"; });
+    const finish = () => parts.forEach((p) => { p.style.strokeDasharray = "none"; p.style.strokeDashoffset = "0"; p.style.opacity = "1"; });
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return finish();
-    parts.forEach((p) => { p.style.strokeDasharray = "1"; p.style.strokeDashoffset = "1"; });
+    // Hidden until their turn: a zero-length dash still paints its round cap as a stub.
+    parts.forEach((p) => { p.style.strokeDasharray = "1"; p.style.strokeDashoffset = "1"; p.style.opacity = "0"; });
     const per = DRAW / parts.length, t0 = performance.now(), dot = pen.current;
     let raf = 0;
     if (dot) dot.style.opacity = "1";
@@ -35,6 +41,7 @@ export function Specimen({ items }: { items: Item[] }) {
         const k = Math.min(1, Math.max(0, (t - j * per * 0.8) / (per * 1.2)));
         const e = 1 - Math.pow(1 - k, 3);
         p.style.strokeDashoffset = String(1 - e);
+        p.style.opacity = k > 0 ? "1" : "0";
         if (k < 1) done = false;
         if (k > 0 && k < 1 && dot) {
           try {
@@ -101,7 +108,7 @@ export function Specimen({ items }: { items: Item[] }) {
             {item.solid.map(([T, a], j) => { const Tag = T as "path"; return <Tag key={`${item.name}${j}`} {...a} />; })}
           </svg>
           <svg ref={strokeSvg} key={item.name} viewBox="0 0 24 24" className="spec-stroke" aria-hidden fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
-            {item.stroke.map(([T, a], j) => { const Tag = T as "path"; return <Tag key={j} {...a} pathLength={1} />; })}
+            {pieces(item.stroke).map(([T, a], j) => { const Tag = T as "path"; return <Tag key={j} {...a} pathLength={1} />; })}
           </svg>
           <svg viewBox="0 0 24 24" aria-hidden><circle ref={pen} className="pen" r={0.45} /></svg>
         </div>

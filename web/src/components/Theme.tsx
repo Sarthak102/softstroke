@@ -24,6 +24,10 @@ function apply(next: Theme) {
 // name, so the browser moves it between its old and new spot on top of the reveal; the two icons have
 // their own names too, so they stay drawn above the key while it passes under them.
 // Reduced motion or no View Transitions: the theme changes at once and the key slides with CSS.
+export function requestTheme(next: Theme, from: HTMLElement) {
+  window.dispatchEvent(new CustomEvent("theme-request", { detail: { next, from } }));
+}
+
 export function ThemeToggle() {
   const [theme, setTheme] = useState<Theme | null>(null);
 
@@ -52,6 +56,17 @@ export function ThemeToggle() {
       ),
     );
   }
+
+  // Other theme switches on the page (the settings screen on home) ask for a theme with their own element,
+  // so the circle grows from where the visitor clicked.
+  useEffect(() => {
+    const on = (e: Event) => {
+      const { next, from } = (e as CustomEvent<{ next: Theme; from: HTMLElement }>).detail;
+      choose(next, from);
+    };
+    window.addEventListener("theme-request", on);
+    return () => window.removeEventListener("theme-request", on);
+  });
 
   const btn = (on: boolean) => `relative z-10 grid size-8 place-items-center rounded-full transition-colors duration-500 ${on ? "text-[#141412]" : "text-muted hover:text-ink"}`;
 
