@@ -6,7 +6,7 @@ import { ArrowRightIcon, BookmarkIcon, CameraIcon, CloudIcon, CompassIcon, Crown
 import {
   StarIcon as StarF, BookmarkIcon as BookmarkF, GiftIcon as GiftF, CompassIcon as CompassF, TrophyIcon as TrophyF, FlameIcon as FlameF, GemIcon as GemF, TagIcon as TagF, ZapIcon as ZapF, CloudIcon as CloudF, MicIcon as MicF, LightbulbIcon as LightbulbF, RocketIcon as RocketF, CameraIcon as CameraF, CrownIcon as CrownF, LeafIcon as LeafF, MusicIcon as MusicF, MapPinIcon as MapPinF,
 } from "@softstroke/react/solid";
-import { GITHUB_URL } from "@/lib/site";
+import { GITHUB_URL, SPONSOR_URL } from "@/lib/site";
 import { ICON_COUNT } from "@/lib/count";
 import { CopyCommand } from "./CopyCommand";
 import { Downloads } from "./Downloads";
@@ -18,7 +18,7 @@ import { Words } from "./Words";
 const COLUMNS: { title: string; links: [string, string][] }[] = [
   { title: "Product", links: [["Icons", "/icons/"], ["Use cases", "/use-cases/"], ["Playground", "/playground/"], ["Icon font", "/icon-font/"], ["Docs", "/docs/"]] },
   { title: "Packages", links: [["React", "/docs/react/"], ["React Native", "/docs/react-native/"], ["Flutter", "/docs/flutter/"], ["Vue", "/docs/vue/"], ["Svelte", "/docs/svelte/"], ["Angular", "/docs/angular/"], ["SVG and CDN", "/docs/svg/"]] },
-  { title: "Resources", links: [["GitHub", GITHUB_URL], ["npm", "https://www.npmjs.com/org/softstroke"], ["Releases", "/changelog/"], ["Request an icon", "#request"], ["Report an issue", "#issue"], ["MIT License", `${GITHUB_URL}/blob/main/LICENSE`]] },
+  { title: "Resources", links: [["GitHub", GITHUB_URL], ["npm", "https://www.npmjs.com/org/softstroke"], ["Releases", "/changelog/"], ["Sponsor", SPONSOR_URL], ["Request an icon", "#request"], ["Report an issue", "#issue"], ["MIT License", `${GITHUB_URL}/blob/main/LICENSE`]] },
 ];
 
 const TRAIL = [

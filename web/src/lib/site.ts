@@ -1,5 +1,6 @@
 export const GITHUB_URL = "https://github.com/softstroke/softstroke";
 export const REQUEST_URL = `${GITHUB_URL}/issues/new?template=icon-request.yml`;
+export const SPONSOR_URL = "https://github.com/sponsors/Sarthak102";
 export const ISSUE_URL = `${GITHUB_URL}/issues/new?template=bug-report.yml`;
 // Feedback Worker (api/) and its Turnstile site key: both public values. While either is empty the feedback
 // modal hands off to the GitHub issue forms instead of sending directly.

@@ -235,7 +235,9 @@ npm run site                              Build the website into web/out
 
 ## Support
 
-Softstroke is free and made by one person. If it saves you time, a star helps others find it, and you can sponsor new icons with the **Sponsor** button at the top of the repo.
+Softstroke is free and made by one person. If it saves you time, a star helps others find it, and [sponsoring on GitHub](https://github.com/sponsors/Sarthak102) pays for new icons every release.
+
+<a href="https://github.com/sponsors/Sarthak102"><img src="https://img.shields.io/badge/Sponsor-Softstroke-e8521c?style=for-the-badge&logo=githubsponsors&logoColor=white&labelColor=141412" alt="Sponsor Softstroke"></a>
 
 ## License
 

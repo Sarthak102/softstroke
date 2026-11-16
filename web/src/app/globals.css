@@ -601,6 +601,8 @@ input[type="range"]:disabled { opacity: 0.35; }
 .person-links a { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px; border-radius: 8px; border: 1px solid var(--line-2); font-size: 14px; color: var(--text-2); transition: color var(--fast) var(--ease), background-color var(--fast) var(--ease); }
 .person-links a:hover { color: var(--text); background: var(--surface-2); }
 .person-links svg { width: 16px; height: 16px; }
+.person-links .sponsor { color: var(--accent-text); border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+.person-links .sponsor:hover { background: var(--accent-soft); color: var(--accent-text); }
 .timeline { position: relative; padding-left: 32px; }
 .tl-line { position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: var(--line-2); border-radius: 2px; overflow: hidden; }
 .tl-line i { display: block; width: 100%; height: 100%; background: var(--accent); transform-origin: top; transform: scaleY(var(--p, 0)); }
