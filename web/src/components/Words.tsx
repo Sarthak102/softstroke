@@ -1,6 +1,6 @@
 import { Fragment, type ReactNode } from "react";
 
-// Splits a heading into words so they can rise in one by one (.w in globals.css; Reveal adds .in).
+// Splits a heading into words so they can rise in one by one (.w in globals.css: h1 words play on load, others as they scroll in).
 // Strings are split; elements (like an <em>) are passed through as one word.
 export function Words({ children }: { children: ReactNode }) {
   let i = 0;

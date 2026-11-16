@@ -1,15 +1,25 @@
 // Captures the use-case scenes (web/src/components/scenes) to web/public/use-cases/<id>.webp at 1200x800 @2x, plus <id>-1200.webp at 1x.
-// Needs the dev server: cd web && npm run dev -- -p 3123. Usage: node scripts/scenes.mjs [id ...]
+// Needs the dev server: cd web && npm run dev -- -p 3123. Usage: node scripts/scenes.mjs [--dark] [id ...]
+// --dark writes <id>-dark.webp (+ -dark-1200): the light scene smart-inverted (white UI turns ink, hues kept by a
+// 180deg hue turn) over its ground dimmed, so the site can show a dark capture under the dark theme.
 import { spawn } from "node:child_process";
 import { mkdirSync, mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-const IDS = process.argv.slice(2).length ? process.argv.slice(2) : ["soft-menu", "weather-pill", "theme-toggle", "add-calendar", "bento", "clouds-bar", "glass-bar", "control-center", "feed", "dock", "music", "calendar", "menus", "profile", "files", "dashboard", "finance", "settings"];
+const DARK = process.argv.includes("--dark");
+const ARGS = process.argv.slice(2).filter((a) => a !== "--dark");
+const IDS = ARGS.length ? ARGS : ["soft-menu", "weather-pill", "theme-toggle", "add-calendar", "bento", "clouds-bar", "glass-bar", "control-center", "feed", "dock", "music", "calendar", "menus", "profile", "files", "dashboard", "finance", "settings"];
 const BASE = process.env.SCENES_URL ?? "http://localhost:3123/scenes";
 const OUT = new URL("../web/public/use-cases/", import.meta.url).pathname;
 const CHROME = process.env.CHROME ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const PORT = 9333;
+const DARK_CSS = `<style>
+  [data-frame] { box-shadow: inset 0 0 0 4000px rgb(10 9 8 / 0.58); }
+  [data-frame] > * { filter: invert(1) hue-rotate(180deg) saturate(1.1); }
+  [data-frame] > [style*="background-image"] { filter: brightness(0.66) saturate(0.95); }
+  [data-frame] > [style*="background-image"] > * { filter: none; }
+</style>`;
 
 const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${PORT}`, `--user-data-dir=${mkdtempSync(join(tmpdir(), "scenes-"))}`, "about:blank"], { stdio: "ignore" });
 try {
@@ -42,13 +52,15 @@ try {
     const done = loaded();
     await send("Page.navigate", { url: `${BASE}/${id}/` });
     await done;
+    if (DARK) await send("Runtime.evaluate", { expression: `document.head.insertAdjacentHTML("beforeend", ${JSON.stringify(DARK_CSS)})` });
     await send("Runtime.evaluate", { expression: "document.fonts.ready.then(() => new Promise((r) => setTimeout(r, 400)))", awaitPromise: true });
     const { data } = await send("Page.captureScreenshot", { format: "webp", quality: 92 });
-    writeFileSync(`${OUT}${id}.webp`, Buffer.from(data, "base64"));
+    const name = DARK ? `${id}-dark` : id;
+    writeFileSync(`${OUT}${name}.webp`, Buffer.from(data, "base64"));
     // half-size copy for phones (the page picks it through srcset)
     const { data: small } = await send("Page.captureScreenshot", { format: "webp", quality: 90, clip: { x: 0, y: 0, width: 1200, height: 800, scale: 0.5 } });
-    writeFileSync(`${OUT}${id}-1200.webp`, Buffer.from(small, "base64"));
-    console.log(`use-cases/${id}.webp (+ -1200)`);
+    writeFileSync(`${OUT}${name}-1200.webp`, Buffer.from(small, "base64"));
+    console.log(`use-cases/${name}.webp (+ -1200)`);
   }
   ws.close();
 } finally {

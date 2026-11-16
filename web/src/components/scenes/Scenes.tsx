@@ -35,7 +35,7 @@ function Frame({ dark, soft, photo, children }: { dark?: boolean; soft?: boolean
         ? `${noise("0.05", 0.05)}, radial-gradient(120% 100% at 20% 0%, #fff8f2, #fde6d6 58%, #f8cdb3)`
         : `${noise("0.05", 0.06)}, radial-gradient(120% 100% at 30% 0%, #fdfaf6, #f3e9df 58%, #ead9c8)`;
   return (
-    <div className={`relative h-[800px] w-[1200px] overflow-hidden ${dark ? "text-[#e7f0ff]" : "text-[#141412]"}`} style={{ background: bg }}>
+    <div data-frame className={`relative h-[800px] w-[1200px] overflow-hidden ${dark ? "text-[#e7f0ff]" : "text-[#141412]"}`} style={{ background: bg }}>
       {children}
     </div>
   );

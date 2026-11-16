@@ -13,6 +13,7 @@ import { ICON_COUNT } from "@/lib/count";
 import { FRAMEWORKS, savedFramework, saveFramework, snippet, type Framework } from "@/lib/frameworks";
 import { IS_NEW, NEW_VERSION } from "@/lib/new-icons";
 import { zip } from "@/lib/zip";
+import { suggest } from "@/lib/suggest";
 
 type Nodes = [string, Record<string, string>][];
 type Style = "stroke" | "solid";
@@ -204,7 +205,7 @@ export function IconBrowser() {
             }`}
           >
             {c === NEW_CAT ? `New in ${NEW_VERSION}` : c ?? "All"}
-            <span className="font-mono text-[11px] opacity-60">{count}</span>
+            <span className={`font-mono text-[11px] ${cat === c ? "opacity-70" : "text-faint"}`}>{count}</span>
           </button>
         ))}
       </div>
@@ -244,7 +245,21 @@ export function IconBrowser() {
         <div className="grid place-items-center rounded-[14px] border border-dashed border-[var(--line-2)] px-6 py-20 text-center">
           <SearchIcon size={40} className="text-muted" />
           <p className="mt-4 font-display text-xl font-semibold">Nothing matches &ldquo;{query.trim()}&rdquo;</p>
-          <p className="mt-1 max-w-[40ch] text-muted">Try a simpler word, like &ldquo;arrow&rdquo;, &ldquo;file&rdquo; or &ldquo;user&rdquo;.</p>
+          {(() => {
+            const near = suggest(query, NAMES, KEYWORDS);
+            return near.length ? (
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+                <span className="text-muted">Did you mean</span>
+                {near.map((n) => (
+                  <button key={n} type="button" onClick={() => { setQuery(n); setCat(null); }} className="flex items-center gap-1.5 rounded-lg px-2.5 py-1 font-mono text-[13px] ring-1 ring-[var(--line-2)] hover:text-accent">
+                    <Glyph name={n} solid={false} size={16} />{n}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <p className="mt-1 max-w-[40ch] text-muted">Try a simpler word, like &ldquo;arrow&rdquo;, &ldquo;file&rdquo; or &ldquo;user&rdquo;.</p>
+            );
+          })()}
           <button type="button" onClick={() => { setQuery(""); setCat(null); }} className="btn btn-primary mt-6">
             {cat ? "Clear search and category" : "Clear search"}
           </button>
@@ -266,17 +281,17 @@ export function IconBrowser() {
                     open === n || picked.includes(n) ? "bg-[var(--surface-2)] text-accent shadow-[inset_0_0_0_1.5px_var(--accent)]" : ""
                   }`}
                 >
-                  {IS_NEW.has(n) && <span className="absolute right-2 top-2 rounded bg-accent/10 px-1 font-mono text-[9px] leading-4 text-accent-text">new</span>}
+                  {IS_NEW.has(n) && <span className="absolute right-2 top-2 rounded bg-accent/10 px-1 font-mono text-[10px] leading-4 text-accent-text">new</span>}
                   {selecting && (
                     <span className={`absolute left-2 top-2 grid size-4 place-items-center rounded ring-1 ${picked.includes(n) ? "bg-accent text-accent-ink ring-accent" : "ring-[var(--line-2)]"}`}>
                       {picked.includes(n) && <CheckIcon size={12} strokeWidth={2} />}
                     </span>
                   )}
-                  <span className="inline-grid" style={{ width: size, height: size }}>
+                  <span className="tile-art inline-grid" style={{ width: size, height: size }}>
                     <Glyph name={n} solid={false} size={size} className={`${layer} ${style === "solid" ? "scale-50 opacity-0" : "opacity-100"}`} />
                     {solidSeen && SOLID && <Glyph name={n} solid size={size} className={`${layer} ${style === "solid" ? "opacity-100" : "scale-50 opacity-0"}`} />}
                   </span>
-                  <span className="w-full truncate px-1 text-center font-mono text-[11px] text-faint group-hover:text-muted">{n}</span>
+                  <span className="w-full truncate px-1 text-center font-mono text-xs text-faint group-hover:text-muted">{n}</span>
                 </button>
               </li>
             );
@@ -362,7 +377,7 @@ function Detail({ name, style, onClose }: { name: string | null; style: Style; o
         onClick={onClose}
         className={`fixed inset-0 z-[55] bg-black/30 transition-opacity duration-500 ${name ? "opacity-100" : "pointer-events-none opacity-0"}`}
       />
-      <aside
+      <div
         role="dialog"
         aria-modal="true"
         aria-label={n ?? "Icon details"}
@@ -435,7 +450,7 @@ function Detail({ name, style, onClose }: { name: string | null; style: Style; o
             </div>
           </div>
         )}
-      </aside>
+      </div>
     </>
   );
 }

@@ -75,7 +75,7 @@ export function LiveScreens() {
             </div>
             <div className="main">
               <div className="main-head">
-                <h4>Recent files</h4>
+                <p className="main-title">Recent files</p>
                 <div style={{ display: "flex", gap: 4 }}>
                   <span className="icon-btn"><SearchIcon size={18} /></span><span className="icon-btn"><SlidersIcon size={18} /></span><span className="icon-btn"><PlusIcon size={18} /></span>
                 </div>

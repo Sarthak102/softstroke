@@ -25,7 +25,7 @@ export default function UseCasesPage() {
         <div className="cases-grid">
           {USE_CASES.map((c, i) => (
             <div key={c.id} data-reveal>
-              <CaseCard c={c} i={i} eager={i < 2} />
+              <CaseCard c={c} i={i} eager={i < 2} h={2} />
             </div>
           ))}
         </div>

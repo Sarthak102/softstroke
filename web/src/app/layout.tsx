@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
-import { Reveal } from "@/components/Reveal";
 import { Search } from "@/components/Search";
 import { themeScript } from "@/lib/theme";
 import "./globals.css";
@@ -52,7 +51,6 @@ export default function RootLayout({
         className={`${jakarta.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-        <Reveal />
         <Search />
         <FeedbackModal />
       </body>

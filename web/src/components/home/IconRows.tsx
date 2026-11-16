@@ -1,12 +1,13 @@
-import { GlyphPair, NAMES } from "@/lib/glyph";
+import { Glyph, NAMES } from "@/lib/glyph";
 
-// Two rows of the set drifting in opposite directions; hovering a cell turns it solid.
+// Two rows of the set drifting in opposite directions; hovering a cell tints it.
+// Stroke only: solid shapes are about four times heavier and the rows are doubled for the loop.
 export function IconRows() {
   const row = (offset: number) => NAMES.filter((_, i) => i % 6 === offset).slice(0, 36);
   const cells = (list: string[], dup: boolean) =>
     list.map((n) => (
       <span key={`${n}${dup ? "-2" : ""}`} className="ic-cell" title={dup ? undefined : n}>
-        <GlyphPair name={n} size={26} />
+        <Glyph name={n} size={26} />
       </span>
     ));
   return (

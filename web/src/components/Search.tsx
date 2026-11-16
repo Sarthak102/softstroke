@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { BookOpenIcon, SearchIcon } from "@softstroke/react";
 import { DOC_PAGES } from "@/lib/doc-index";
 import { savedFramework, snippet } from "@/lib/frameworks";
+import { suggest } from "@/lib/suggest";
 import { useCopy } from "./CopyCommand";
 
 type Nodes = [string, Record<string, string>][];
@@ -163,9 +164,25 @@ export function Search() {
               })}
             </>
           )}
-          {data && items.length === 0 && (
-            <p className="cmdk-empty">Nothing for &ldquo;{q.trim()}&rdquo; yet. Try a simpler word, like &ldquo;arrow&rdquo; or &ldquo;file&rdquo;.</p>
-          )}
+          {data && items.length === 0 && (() => {
+            const near = suggest(q, Object.keys(data.nodes), data.keywords);
+            return (
+              <div className="cmdk-empty">
+                <p style={{ margin: 0 }}>Nothing for &ldquo;{q.trim()}&rdquo; yet.</p>
+                {near.length > 0 && (
+                  <p style={{ margin: "10px 0 0" }}>
+                    Did you mean{" "}
+                    {near.map((n, k) => (
+                      <span key={n}>
+                        <button type="button" className="cmdk-near" onClick={() => setQ(n)}>{n}</button>
+                        {k < near.length - 1 ? ", " : "?"}
+                      </span>
+                    ))}
+                  </p>
+                )}
+              </div>
+            );
+          })()}
         </div>
         <div className="cmdk-foot meta">
           {state === "copied" ? <span className="cmdk-ok">Copied the {savedFramework()} import</span> : state === "failed" ? <span>Copy failed</span> : <span>↵ copy import · ⇧↵ open · ↑↓←→ move</span>}
