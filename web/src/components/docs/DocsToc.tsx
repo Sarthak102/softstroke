@@ -22,7 +22,7 @@ export function DocsToc({ toc }: { toc: TocItem[] }) {
 
   if (!toc.length) return <span className="hidden xl:block" />;
   return (
-    <nav aria-label="On this page" className="sticky top-28 hidden h-fit text-sm xl:block">
+    <nav aria-label="On this page" className="sticky top-24 hidden h-fit text-sm xl:block">
       <p className="mb-3 font-medium">On this page</p>
       <ul className="space-y-2 border-l border-[var(--line)]">
         {toc.map((t) => (

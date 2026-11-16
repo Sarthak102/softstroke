@@ -10,7 +10,7 @@ export default function NotFound() {
   return (
     <>
       <Nav />
-      <main className="mx-auto grid min-h-[80dvh] max-w-3xl place-items-center px-4 pb-16 pt-32 text-center">
+      <main className="mx-auto grid min-h-[80dvh] max-w-3xl place-items-center px-4 pb-16 pt-16 text-center">
         <div>
           <p className="font-display text-8xl font-semibold tracking-tight text-accent-text md:text-9xl">404</p>
           <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight md:text-4xl">This page isn&apos;t drawn yet.</h1>

@@ -74,7 +74,7 @@ export function DocsSidebar({ groups, current }: { groups: Groups; current: stri
         </summary>
         <div className="mt-4">{list}</div>
       </details>
-      <aside data-lenis-prevent className="sticky top-28 hidden h-[calc(100dvh-8rem)] overflow-y-auto pr-2 lg:block">
+      <aside className="sticky top-24 hidden h-[calc(100dvh-8rem)] overflow-y-auto pr-2 lg:block">
         {list}
       </aside>
     </>

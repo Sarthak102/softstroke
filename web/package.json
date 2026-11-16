@@ -13,7 +13,6 @@
     "@softstroke/react": "file:../packages/react",
     "@softstroke/svg": "file:../packages/svg",
     "gsap": "^3.15.1",
-    "lenis": "^1.3.27",
     "marked": "^18.1.2",
     "next": "^15.5.29",
     "react": "^19.1.0",

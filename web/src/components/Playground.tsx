@@ -4,18 +4,18 @@ import { useState } from "react";
 import { BellIcon, CameraIcon, ChatIcon, HeartIcon, HomeIcon, LockIcon, MusicIcon, RocketIcon, SettingsIcon, SparklesIcon, StarIcon, WalletIcon } from "@softstroke/react";
 import { BellIcon as BellSolidIcon, CameraIcon as CameraSolidIcon, ChatIcon as ChatSolidIcon, HeartIcon as HeartSolidIcon, HomeIcon as HomeSolidIcon, LockIcon as LockSolidIcon, MusicIcon as MusicSolidIcon, RocketIcon as RocketSolidIcon, SettingsIcon as SettingsSolidIcon, SparklesIcon as SparklesSolidIcon, StarIcon as StarSolidIcon, WalletIcon as WalletSolidIcon } from "@softstroke/react/solid";
 
-const Stroke = { BellIcon, CameraIcon, ChatIcon, HeartIcon, HomeIcon, LockIcon, MusicIcon, RocketIcon, SettingsIcon, SparklesIcon, StarIcon, WalletIcon };
-const Solid = { BellIcon: BellSolidIcon, CameraIcon: CameraSolidIcon, ChatIcon: ChatSolidIcon, HeartIcon: HeartSolidIcon, HomeIcon: HomeSolidIcon, LockIcon: LockSolidIcon, MusicIcon: MusicSolidIcon, RocketIcon: RocketSolidIcon, SettingsIcon: SettingsSolidIcon, SparklesIcon: SparklesSolidIcon, StarIcon: StarSolidIcon, WalletIcon: WalletSolidIcon };
-type IconName = keyof typeof Stroke;
-
-const NAMES: IconName[] = ["HomeIcon", "HeartIcon", "BellIcon", "CameraIcon", "ChatIcon", "SettingsIcon", "StarIcon", "RocketIcon", "MusicIcon", "WalletIcon", "LockIcon", "SparklesIcon"];
+const ICONS = [
+  [HomeIcon, HomeSolidIcon], [HeartIcon, HeartSolidIcon], [BellIcon, BellSolidIcon], [CameraIcon, CameraSolidIcon], [ChatIcon, ChatSolidIcon], [SettingsIcon, SettingsSolidIcon],
+  [StarIcon, StarSolidIcon], [RocketIcon, RocketSolidIcon], [MusicIcon, MusicSolidIcon], [WalletIcon, WalletSolidIcon], [LockIcon, LockSolidIcon], [SparklesIcon, SparklesSolidIcon],
+] as const;
 const COLORS = [
-  { name: "Ink", value: "var(--ink)" },
-  { name: "Blue", value: "#2563eb" },
-  { name: "Emerald", value: "#059669" },
-  { name: "Rose", value: "#e11d48" },
-  { name: "Amber", value: "#d97706" },
+  { name: "Ink", value: "currentColor", css: "var(--text)" },
+  { name: "Tangerine", value: "#ff6b3d", css: "#ff6b3d" },
+  { name: "Moss", value: "#4f8a5b", css: "#4f8a5b" },
+  { name: "Harbour", value: "#3b7bd9", css: "#3b7bd9" },
+  { name: "Plum", value: "#8b5cc4", css: "#8b5cc4" },
 ];
+const pct = (v: number, min: number, max: number) => ({ "--p": `${((v - min) / (max - min)) * 100}%` }) as React.CSSProperties;
 
 // Live controls: every value here is a real prop of the React package.
 export function Playground() {
@@ -23,83 +23,54 @@ export function Playground() {
   const [stroke, setStroke] = useState(1.5);
   const [color, setColor] = useState(COLORS[0].value);
   const [solid, setSolid] = useState(false);
+  const [flip, setFlip] = useState(0);
+  const imp = solid ? "@softstroke/react/solid" : "@softstroke/react";
+  const props = `size={${size}}${solid ? "" : ` strokeWidth={${stroke}}`}${color === "currentColor" ? "" : ` color="${color}"`}`;
 
   return (
-    <section id="playground" className="scroll-mt-24 px-4 pb-24 lg:pb-32">
-      <div className="mx-auto grid max-w-6xl gap-4 lg:grid-cols-[0.8fr_1.2fr]">
-        <div className="glass rounded-[32px] p-6 sm:p-8">
-          <h2 className="font-display text-3xl font-semibold tracking-tight">Make them yours.</h2>
-          <p className="mt-3 text-muted">Size, stroke width and color are plain props. Try them.</p>
-          <div className="mt-8 space-y-6">
-            <label className="block">
-              <span className="mb-2 flex justify-between text-sm">
-                Size <span className="font-mono text-muted">{size}px</span>
-              </span>
-              <input type="range" min={16} max={56} value={size} onChange={(e) => setSize(+e.target.value)} className="w-full accent-[var(--accent)]" />
-            </label>
-            <label className={`block transition-opacity ${solid ? "opacity-40" : ""}`}>
-              <span className="mb-2 flex justify-between text-sm">
-                Stroke width <span className="font-mono text-muted">{stroke.toFixed(2)}</span>
-              </span>
-              <input type="range" min={1} max={2.5} step={0.25} value={stroke} disabled={solid} onChange={(e) => setStroke(+e.target.value)} className="w-full accent-[var(--accent)]" />
-            </label>
-            <div>
-              <span className="mb-2 block text-sm">Color</span>
-              <div className="flex gap-2">
-                {COLORS.map((c) => (
-                  <button
-                    key={c.name}
-                    type="button"
-                    aria-label={c.name}
-                    aria-pressed={color === c.value}
-                    onClick={() => setColor(c.value)}
-                    className={`size-8 rounded-full ring-offset-2 ring-offset-[var(--bg-2)] transition-[box-shadow,scale] active:scale-90 ${color === c.value ? "ring-2 ring-[var(--ink)]" : ""}`}
-                    style={{ background: c.value }}
-                  />
-                ))}
-              </div>
-            </div>
-            <div className="flex rounded-full bg-[var(--glass)] p-1 ring-1 ring-[var(--line)]">
-              {(["Stroke", "Solid"] as const).map((s) => (
-                <button
-                  key={s}
-                  type="button"
-                  aria-pressed={solid === (s === "Solid")}
-                  onClick={() => setSolid(s === "Solid")}
-                  className={`flex-1 rounded-full py-1.5 text-sm transition-colors duration-300 ${solid === (s === "Solid") ? "bg-accent text-accent-ink" : "text-muted hover:text-ink"}`}
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
+    <div className="play-grid" data-reveal>
+      <div className="panel">
+        <label className="field">
+          <span className="field-head"><span>Size</span><span className="meta">{size}px</span></span>
+          <input type="range" min={16} max={56} step={4} value={size} onChange={(e) => setSize(+e.target.value)} style={pct(size, 16, 56)} />
+        </label>
+        <label className="field">
+          <span className="field-head"><span>Stroke width</span><span className="meta">{stroke.toFixed(2)}</span></span>
+          <input type="range" min={1} max={2.5} step={0.25} value={stroke} disabled={solid} onChange={(e) => setStroke(+e.target.value)} style={pct(stroke, 1, 2.5)} />
+        </label>
+        <div className="field">
+          <span className="field-head"><span>Color</span><span className="meta">{color}</span></span>
+          <div className="swatches">
+            {COLORS.map((c) => (
+              <button key={c.name} type="button" className="sw" aria-label={c.name} aria-pressed={color === c.value} style={{ "--c": c.css } as React.CSSProperties} onClick={() => { setColor(c.value); setFlip((f) => f + 1); }} />
+            ))}
           </div>
         </div>
-        <div className="glass flex flex-col justify-between gap-6 rounded-[32px] p-6 sm:p-8">
-          <div className="grid flex-1 grid-cols-4 place-items-center gap-y-6 sm:grid-cols-6">
-            {NAMES.map((n, i) => {
-              const S = Stroke[n];
-              const F = Solid[n];
-              const layer = "col-start-1 row-start-1 transition-[opacity,scale,width,height] duration-500 ease-[cubic-bezier(.34,1.56,.64,1)]";
-              // Delays per property (opacity, scale, width, height): a wave on style change, no lag on size.
-              const box = { width: size, height: size, transitionDelay: `${i * 30}ms, ${i * 30}ms, 0ms, 0ms` };
-              return (
-                <span key={n} className="inline-grid">
-                  <S size={24} strokeWidth={stroke} color={color} style={box} className={`${layer} ${solid ? "scale-50 opacity-0" : "scale-100 opacity-100"}`} />
-                  <F size={24} color={color} style={box} className={`${layer} ${solid ? "scale-100 opacity-100" : "scale-50 opacity-0"}`} />
-                </span>
-              );
-            })}
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2">
-            <p className="rounded-2xl bg-[var(--glass)] p-4 text-sm ring-1 ring-[var(--line)]">
-              <span className="font-medium">Tree-shakable.</span> <span className="text-muted">Your bundle gets only the icons you import.</span>
-            </p>
-            <p className="rounded-2xl bg-[var(--glass)] p-4 text-sm ring-1 ring-[var(--line)]">
-              <span className="font-medium">About 0.4 KB each.</span> <span className="text-muted">Optimised paths, no runtime, no fonts to load.</span>
-            </p>
+        <div className="field">
+          <span className="field-head"><span>Style</span></span>
+          <div className="seg" role="group" aria-label="Style" style={{ width: "max-content" }}>
+            {(["Stroke", "Solid"] as const).map((s) => (
+              <button key={s} type="button" aria-pressed={solid === (s === "Solid")} onClick={() => { setSolid(s === "Solid"); setFlip((f) => f + 1); }}>{s}</button>
+            ))}
           </div>
         </div>
       </div>
-    </section>
+      <div className="panel preview">
+        <div className="preview-grid" key={flip}>
+          {ICONS.map(([S, F], i) => {
+            const C = solid ? F : S;
+            return <C key={i} size={size} strokeWidth={stroke} color={color} className={flip ? "flip" : undefined} style={{ "--d": `${i * 30}ms` } as React.CSSProperties} />;
+          })}
+        </div>
+        <div className="codeline" style={{ margin: 0, display: "block" }}>
+          <span className="str">&lt;HeartIcon</span> {props} <span className="str">/&gt;</span> <span style={{ color: "var(--text-3)" }}>{`// from "${imp}"`}</span>
+        </div>
+        <div className="facts">
+          <div><b>About 0.4 KB each</b><span>Optimised paths, no runtime</span></div>
+          <div><b>Tree-shakable</b><span>Ship only what you import</span></div>
+          <div><b>MIT licensed</b><span>Personal and commercial work</span></div>
+        </div>
+      </div>
+    </div>
   );
 }

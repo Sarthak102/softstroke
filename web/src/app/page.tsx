@@ -1,11 +1,14 @@
 import { Footer } from "@/components/Footer";
-import { Hero } from "@/components/Hero";
 import { Nav } from "@/components/Nav";
-import { Playground } from "@/components/Playground";
-import { ScrollMorph } from "@/components/ScrollMorph";
-import { Showcase } from "@/components/Showcase";
-import { Supports } from "@/components/Supports";
-import { UseCases } from "@/components/UseCases";
+import { Cases } from "@/components/home/Cases";
+import { Hero } from "@/components/home/Hero";
+import { IconRows } from "@/components/home/IconRows";
+import { Install } from "@/components/home/Install";
+import { LiveScreens } from "@/components/home/LiveScreens";
+import { Maker } from "@/components/home/Maker";
+import { Sheet } from "@/components/home/Sheet";
+import { States } from "@/components/home/States";
+import { Stats } from "@/components/home/Stats";
 
 export default function Home() {
   return (
@@ -13,11 +16,16 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <ScrollMorph />
-        <Showcase />
-        <UseCases />
-        <Supports />
-        <Playground />
+        <Stats />
+        <IconRows />
+        <States />
+        <Sheet />
+        <Cases />
+        <LiveScreens />
+        <Install />
+        <section className="section wrap" style={{ paddingTop: 48 }}>
+          <Maker eyebrow="06" />
+        </section>
       </main>
       <Footer />
     </>

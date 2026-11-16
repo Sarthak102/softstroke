@@ -1,92 +1,102 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-import { ArrowRightIcon } from "@softstroke/react";
-import { CopyCommand } from "./CopyCommand";
-import { LogoMark } from "./Logo";
+import { useEffect, useRef } from "react";
+import { ArrowRightIcon, BookmarkIcon, CameraIcon, CloudIcon, CompassIcon, CrownIcon, FlameIcon, GemIcon, GiftIcon, LeafIcon, LightbulbIcon, MapPinIcon, MicIcon, MusicIcon, RocketIcon, StarIcon, TagIcon, TrophyIcon, ZapIcon } from "@softstroke/react";
+import {
+  StarIcon as StarF, BookmarkIcon as BookmarkF, GiftIcon as GiftF, CompassIcon as CompassF, TrophyIcon as TrophyF, FlameIcon as FlameF, GemIcon as GemF, TagIcon as TagF, ZapIcon as ZapF, CloudIcon as CloudF, MicIcon as MicF, LightbulbIcon as LightbulbF, RocketIcon as RocketF, CameraIcon as CameraF, CrownIcon as CrownF, LeafIcon as LeafF, MusicIcon as MusicF, MapPinIcon as MapPinF,
+} from "@softstroke/react/solid";
 import { GITHUB_URL } from "@/lib/site";
-import { FeedbackLink } from "./Feedback";
 import { ICON_COUNT } from "@/lib/count";
-
-gsap.registerPlugin(ScrollTrigger);
+import { CopyCommand } from "./CopyCommand";
+import { FeedbackLink } from "./Feedback";
+import { IconsLink } from "./IconsLink";
+import { LogoMark } from "./Logo";
+import { Words } from "./Words";
 
 const COLUMNS: { title: string; links: [string, string][] }[] = [
-  { title: "Product", links: [["Icons", "/icons/"], ["Icon font", "/icon-font/"], ["Docs", "/docs/"], ["Playground", "/#playground"]] },
+  { title: "Product", links: [["Icons", "/icons/"], ["Use cases", "/use-cases/"], ["Playground", "/playground/"], ["Icon font", "/icon-font/"], ["Docs", "/docs/"]] },
   { title: "Packages", links: [["React", "/docs/react/"], ["React Native", "/docs/react-native/"], ["Flutter", "/docs/flutter/"], ["Vue", "/docs/vue/"], ["Svelte", "/docs/svelte/"], ["Angular", "/docs/angular/"], ["SVG and CDN", "/docs/svg/"]] },
-  { title: "Resources", links: [["GitHub", GITHUB_URL], ["npm", "https://www.npmjs.com/org/softstroke"], ["Changelog", "/changelog/"], ["Request an icon", "#request"], ["Report an issue", "#issue"], ["MIT License", `${GITHUB_URL}/blob/main/LICENSE`]] },
+  { title: "Resources", links: [["GitHub", GITHUB_URL], ["npm", "https://www.npmjs.com/org/softstroke"], ["Releases", "/changelog/"], ["Request an icon", "#request"], ["Report an issue", "#issue"], ["MIT License", `${GITHUB_URL}/blob/main/LICENSE`]] },
 ];
 
-export function Footer() {
-  const root = useRef<HTMLElement>(null);
+const TRAIL = [
+  [StarIcon, StarF], [BookmarkIcon, BookmarkF], [GiftIcon, GiftF], [CompassIcon, CompassF], [TrophyIcon, TrophyF], [FlameIcon, FlameF], [GemIcon, GemF], [TagIcon, TagF], [ZapIcon, ZapF], [CloudIcon, CloudF], [MicIcon, MicF], [LightbulbIcon, LightbulbF], [RocketIcon, RocketF], [CameraIcon, CameraF], [CrownIcon, CrownF], [LeafIcon, LeafF], [MusicIcon, MusicF], [MapPinIcon, MapPinF],
+] as const;
 
-  useGSAP(
-    () => {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      gsap.from(".ft-in", {
-        autoAlpha: 0,
-        y: 40,
-        duration: 1,
-        ease: "power3.out",
-        stagger: 0.1,
-        scrollTrigger: { trigger: root.current, start: "top bottom", once: true },
-      });
-      // The big mark turns into place as the footer scrolls in (tied to scroll, so it never fights it).
-      gsap.fromTo(".ft-mark", { rotate: -24, scale: 0.85 }, { rotate: 0, scale: 1, ease: "none", scrollTrigger: { trigger: root.current, start: "top bottom", end: "bottom bottom", scrub: 0.8 } });
-    },
-    { scope: root },
-  );
+export function Footer() {
+  const trail = useRef<HTMLDivElement>(null);
+
+  // A diagonal wave of icons turning solid, once a quarter second.
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let wave = 0;
+    const id = setInterval(() => {
+      trail.current?.querySelectorAll("span").forEach((c, i) => c.classList.toggle("hot", Math.floor(i / 6) + (i % 6) === wave % 10));
+      wave++;
+    }, 260);
+    return () => clearInterval(id);
+  }, []);
 
   return (
-    <footer ref={root} className="mt-8">
-      <div className="glass relative overflow-hidden rounded-t-[48px] border-b-0 px-6 pb-8 pt-16 sm:px-12 sm:pt-24">
-        <LogoMark className="ft-mark pointer-events-none absolute -bottom-[18%] -right-[8%] size-[min(34rem,80vw)] text-accent-text opacity-[0.07]" />
-        <div className="relative mx-auto w-full max-w-6xl">
-          <div className="grid gap-14 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
-            <div>
-              <h2 className="ft-in max-w-[14ch] font-display text-5xl font-semibold leading-[1.02] tracking-tight md:text-6xl">Start with one icon.</h2>
-              <p className="ft-in mt-5 max-w-[40ch] text-lg text-muted">All {ICON_COUNT}, in both styles, free for personal and commercial work.</p>
-              <div className="ft-in mt-8 flex flex-wrap gap-3">
-                <Link href="/icons/" prefetch={false} className="group flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-medium text-accent-ink shadow-[var(--shadow)] transition-transform active:scale-[0.98]">
-                  Browse icons
-                  <ArrowRightIcon size={18} className="transition-transform group-hover:translate-x-0.5" />
-                </Link>
-                <CopyCommand command="npm i @softstroke/react" />
-              </div>
-            </div>
-            <nav aria-label="Footer" className="ft-in grid grid-cols-2 gap-x-8 gap-y-10 text-sm sm:grid-cols-3">
-              {COLUMNS.map((c) => (
-                <div key={c.title}>
-                  <p className="mb-4 font-medium text-ink">{c.title}</p>
-                  <ul className="space-y-3 text-muted">
-                    {c.links.map(([label, href]) => (
-                      <li key={label}>
-                        {href === "#request" || href === "#issue" ? (
-                          <FeedbackLink kind={href === "#request" ? "request" : "issue"} className="transition-colors hover:text-ink">{label}</FeedbackLink>
-                        ) : href.startsWith("http") ? (
-                          <a href={href} className="transition-colors hover:text-ink">{label}</a>
-                        ) : (
-                          <Link href={href} className="transition-colors hover:text-ink">{label}</Link>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </nav>
-          </div>
-          <div className="mt-16 flex flex-col gap-3 border-t border-[var(--line)] pt-6 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
-            <span className="flex items-center gap-2 font-display font-semibold text-ink">
-              <LogoMark className="size-5 text-accent-text" />
-              Softstroke
-            </span>
-            <span>MIT licensed. Made by Sarthak Kamble.</span>
+    <>
+      <section className="cta">
+        <div className="wrap" style={{ position: "relative", zIndex: 1 }}>
+          <h2 className="display" data-split><Words>Start with one icon</Words></h2>
+          <div className="cta-row" data-reveal>
+            <IconsLink href="/icons/" className="btn btn-primary">
+              Browse all {ICON_COUNT} <ArrowRightIcon size={18} className="arrow" />
+            </IconsLink>
+            <CopyCommand command="npm i @softstroke/react" />
           </div>
         </div>
-      </div>
-    </footer>
+        <div className="cta-trail" ref={trail} aria-hidden>
+          {TRAIL.map(([S, F], i) => (
+            <span key={i}>
+              <S className="s" />
+              <F className="f" />
+            </span>
+          ))}
+        </div>
+      </section>
+
+      <footer className="foot">
+        <div className="wrap">
+          <div className="foot-grid">
+            <div>
+              <Link href="/" className="brand"><LogoMark />Softstroke</Link>
+              <p className="meta" style={{ marginTop: 12 }}>Soft icons on a 24px grid</p>
+            </div>
+            {COLUMNS.map((c) => (
+              <nav key={c.title} aria-label={c.title}>
+                <h5>{c.title}</h5>
+                <ul>
+                  {c.links.map(([label, href]) => (
+                    <li key={label}>
+                      {href.startsWith("#") ? (
+                        <FeedbackLink kind={href === "#request" ? "request" : "issue"}>{label}</FeedbackLink>
+                      ) : href.startsWith("http") ? (
+                        <a href={href}>{label}</a>
+                      ) : (
+                        <Link href={href}>{label}</Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            ))}
+          </div>
+          <div className="foot-base meta">
+            <span>MIT licensed. Made by Sarthak Kamble.</span>
+            <span>{ICON_COUNT} icons in stroke and solid</span>
+          </div>
+        </div>
+        <div className="wordmark" aria-hidden>
+          {"Softstroke".split("").map((ch, i) => (
+            <span key={i} style={{ "--i": i } as React.CSSProperties} className={i === 4 ? "acc" : undefined}>{ch}</span>
+          ))}
+        </div>
+      </footer>
+    </>
   );
 }

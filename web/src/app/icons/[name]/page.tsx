@@ -70,7 +70,7 @@ export default async function IconPage({ params }: { params: Promise<{ name: str
   return (
     <>
       <Nav />
-      <main className="mx-auto max-w-5xl px-4 pb-24 pt-28">
+      <main className="mx-auto max-w-5xl px-4 pb-24 pt-12">
         <p className="text-sm text-muted">
           <Link href="/icons/" className="hover:text-ink">Icons</Link>
           <span aria-hidden> / </span>

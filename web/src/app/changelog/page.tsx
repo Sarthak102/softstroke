@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { StrokeIcon, type IconName } from "@/lib/icons";
+import { Maker } from "@/components/home/Maker";
 
 export const metadata: Metadata = {
   title: "Changelog | Softstroke",
@@ -170,20 +171,21 @@ export default function ChangelogPage() {
   return (
     <>
       <Nav />
-      <main className="mx-auto max-w-5xl px-4 pb-24 pt-32">
-        <h1 className="font-display text-5xl font-semibold tracking-tight md:text-6xl">Changelog</h1>
-        <p className="mt-4 max-w-[52ch] text-lg text-muted">
+      <main className="wrap page">
+        <Maker link={false} />
+        <h2 className="display h2" style={{ marginTop: 120 }}>Changelog</h2>
+        <p className="lede">
           New icons and package changes, release by release. Icons are never renamed or removed in a minor version.
         </p>
         <ol className="mt-16">
           {RELEASES.map((r) => (
             <li key={r.version} className="relative grid gap-6 border-l border-[var(--line)] pb-16 pl-8 md:grid-cols-[180px_1fr] md:gap-12 md:border-l-0 md:pl-0">
               <span aria-hidden className="absolute -left-[5px] top-2 size-2.5 rounded-full bg-accent md:hidden" />
-              <div className="md:sticky md:top-28 md:h-fit">
+              <div className="md:sticky md:top-24 md:h-fit">
                 <p className="font-display text-2xl font-semibold">{r.version}</p>
                 <p className="mt-1 text-sm text-muted">{r.date}</p>
               </div>
-              <div className="glass rounded-[28px] p-6 sm:p-8">
+              <div className="glass rounded-[20px] p-6 sm:p-8">
                 <p className="text-lg">{r.summary}</p>
                 <div className="mt-8 space-y-8">
                   {r.groups.map((g) => (

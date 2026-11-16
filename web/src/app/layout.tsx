@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
-import { SmoothScroll } from "@/components/SmoothScroll";
+import { Geist, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { Reveal } from "@/components/Reveal";
 import { themeScript } from "@/lib/theme";
 import "./globals.css";
 import { ICON_COUNT } from "@/lib/count";
 import { SITE_URL } from "@/lib/site";
 import { FeedbackModal } from "@/components/Feedback";
 
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
 });
 
@@ -48,10 +48,10 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body
-        className={`${bricolage.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${jakarta.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SmoothScroll />
         {children}
+        <Reveal />
         <FeedbackModal />
       </body>
     </html>

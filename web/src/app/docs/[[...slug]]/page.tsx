@@ -32,7 +32,7 @@ export default async function DocPage({ params }: Props) {
   return (
     <>
       <Nav />
-      <main className="mx-auto grid max-w-7xl gap-10 px-4 pb-24 pt-24 lg:grid-cols-[220px_minmax(0,1fr)] lg:pt-28 xl:grid-cols-[220px_minmax(0,1fr)_200px]">
+      <main className="mx-auto grid max-w-7xl gap-10 px-4 pb-24 pt-12 lg:grid-cols-[220px_minmax(0,1fr)] lg:pt-12 xl:grid-cols-[220px_minmax(0,1fr)_200px]">
         <DocsSidebar groups={DOC_GROUPS} current={slug} />
         <article className="min-w-0">
           <p className="mb-2 text-sm font-medium text-accent-text">{doc.group}</p>

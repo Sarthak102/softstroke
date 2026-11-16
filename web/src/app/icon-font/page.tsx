@@ -54,7 +54,7 @@ export default async function IconFontPage() {
       <Nav />
       <main>
         <section className="relative overflow-hidden">
-          <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 pb-16 pt-32 lg:grid-cols-[1fr_1.05fr] lg:pt-36">
+          <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 pb-16 pt-12 lg:grid-cols-[1fr_1.05fr] lg:pt-16">
             <div className="min-w-0">
               <h1 className="font-display text-5xl font-semibold leading-[1.02] tracking-tight md:text-6xl">Every icon, one CSS link.</h1>
               <p className="mt-6 max-w-[44ch] text-lg leading-relaxed text-muted">

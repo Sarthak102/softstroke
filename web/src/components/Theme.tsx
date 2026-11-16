@@ -53,7 +53,7 @@ export function ThemeToggle() {
     );
   }
 
-  const btn = (on: boolean) => `relative z-10 grid size-8 place-items-center rounded-full transition-colors duration-500 ${on ? "text-[#0b2545]" : "text-muted hover:text-ink"}`;
+  const btn = (on: boolean) => `relative z-10 grid size-8 place-items-center rounded-full transition-colors duration-500 ${on ? "text-[#141412]" : "text-muted hover:text-ink"}`;
 
   // Radio group keyboard pattern: Tab lands on the chosen theme, arrow keys pick (and focus) the other one.
   function onKey(e: KeyboardEvent<HTMLDivElement>) {
@@ -67,12 +67,12 @@ export function ThemeToggle() {
   const current = theme ?? "light";
 
   return (
-    <div role="radiogroup" aria-label="Theme" onKeyDown={onKey} className="relative flex items-center gap-0.5 rounded-full bg-[var(--glass)] p-1 ring-1 ring-[var(--line)]">
+    <div role="radiogroup" aria-label="Theme" onKeyDown={onKey} className="relative flex items-center gap-0.5 rounded-full bg-[var(--surface-2)] p-0.5 ring-1 ring-[var(--line)]">
       {/* the gliding white key: hidden until the saved theme is known, so it never jumps on load */}
       <span
         aria-hidden
         style={{ viewTransitionName: "theme-key", transitionTimingFunction: EASE }}
-        className={`absolute left-1 top-1 size-8 rounded-full bg-white shadow-[0_1px_2px_rgb(11_37_69/0.15),0_4px_10px_-4px_rgb(11_37_69/0.35)] transition-[translate,opacity] duration-500 ${
+        className={`absolute left-0.5 top-0.5 size-8 rounded-full bg-white shadow-[0_1px_2px_rgb(0_0_0/0.15),0_4px_10px_-4px_rgb(0_0_0/0.3)] transition-[translate,opacity] duration-500 ${
           theme === null ? "opacity-0" : "opacity-100"
         } ${theme === "dark" ? "translate-x-[2.125rem]" : "translate-x-0"}`}
       />

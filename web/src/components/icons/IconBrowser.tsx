@@ -121,14 +121,15 @@ export function IconBrowser() {
   }, []);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 pb-24 pt-28">
-      <h1 className="font-display text-4xl font-semibold tracking-tight md:text-5xl">Icons</h1>
-      <p className="mt-3 text-lg text-muted">
-        {NAMES.length} icons, each in stroke and solid. Click one to copy it.
+    <div className="wrap page">
+      <p className="eyebrow">Icons</p>
+      <h1 className="display page-title">Every icon, on one sheet</h1>
+      <p className="lede">
+        {NAMES.length} icons, each in stroke and solid. Search by name or meaning, then open one to copy or download it.
       </p>
 
-      <div className="liquid sticky top-[5.5rem] z-30 mt-8 flex flex-wrap items-center gap-2 rounded-[24px] p-2">
-        <label className="flex min-w-0 flex-1 basis-60 items-center gap-2 rounded-2xl px-3 ring-accent focus-within:ring-2">
+      <div className="liquid sticky top-[76px] z-30 mt-10 flex flex-wrap items-center gap-2 rounded-[14px] p-1.5">
+        <label className="flex min-w-0 flex-1 basis-60 items-center gap-2 rounded-[10px] px-3 ring-accent focus-within:ring-2">
           <SearchIcon size={20} className="shrink-0 text-muted" />
           <span className="sr-only">Search icons</span>
           <input
@@ -158,38 +159,38 @@ export function IconBrowser() {
             type="button"
             aria-pressed={cat === c}
             onClick={() => setCat(c)}
-            className={`flex shrink-0 snap-start items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm ring-1 transition-colors duration-300 ${
-              cat === c ? "bg-accent text-accent-ink ring-accent" : "text-muted ring-[var(--line)] hover:text-ink"
+            className={`flex shrink-0 snap-start items-center gap-1.5 rounded-lg px-3 py-1.5 text-[13px] ring-1 transition-colors duration-300 ${
+              cat === c ? "bg-ink text-[var(--bg)] ring-ink" : "text-muted ring-[var(--line)] hover:text-ink"
             }`}
           >
             {c ?? "All"}
-            <span className={`text-xs ${cat === c ? "text-accent-ink" : "text-muted"}`}>{count}</span>
+            <span className="font-mono text-[11px] opacity-60">{count}</span>
           </button>
         ))}
       </div>
 
       <div className="mt-6 lg:mt-8 lg:grid lg:grid-cols-[210px_minmax(0,1fr)] lg:gap-10">
         <aside className="hidden lg:block">
-          <div role="group" aria-label="Category" data-lenis-prevent className="sticky top-44 max-h-[calc(100dvh-12rem)] space-y-0.5 overflow-y-auto pb-2">
+          <div role="group" aria-label="Category" className="sticky top-[150px] max-h-[calc(100dvh-170px)] space-y-0.5 overflow-y-auto pb-2">
             {[[null, NAMES.length] as const, ...CATS].map(([c, count]) => (
               <button
                 key={c ?? "all"}
                 type="button"
                 aria-pressed={cat === c}
                 onClick={() => setCat(c)}
-                className={`flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm transition-colors duration-200 ${
-                  cat === c ? "bg-accent/10 font-medium text-accent-text" : "text-muted hover:bg-[var(--glass)] hover:text-ink"
+                className={`flex w-full items-center gap-3 rounded-[10px] px-3 py-2 text-left text-sm transition-colors duration-200 ${
+                  cat === c ? "bg-[var(--surface)] font-medium text-ink shadow-[0_0_0_1px_var(--line)] [&>svg]:text-accent" : "text-muted hover:bg-[var(--surface-2)] hover:text-ink"
                 }`}
               >
                 <Glyph name={c ? CAT_ICON[c] : "grid"} solid={cat === c} size={18} className="shrink-0" />
                 <span className="flex-1 truncate">{c ?? "All icons"}</span>
-                <span className="text-xs tabular-nums">{count}</span>
+                <span className="font-mono text-[11px] tabular-nums text-faint">{count}</span>
               </button>
             ))}
           </div>
         </aside>
         <div className="min-w-0">
-      <p ref={results} className="mb-4 mt-6 scroll-mt-44 text-sm text-muted lg:mt-0" aria-live="polite">
+      <p ref={results} className="meta mb-4 mt-6 scroll-mt-40 lg:mt-0" aria-live="polite">
         {q
           ? `${list.length} ${list.length === 1 ? "result" : "results"} for "${query.trim()}"${cat ? ` in ${cat}` : ""}`
           : cat
@@ -198,11 +199,11 @@ export function IconBrowser() {
       </p>
 
       {list.length === 0 ? (
-        <div className="glass grid place-items-center rounded-[32px] px-6 py-20 text-center">
+        <div className="grid place-items-center rounded-[14px] border border-dashed border-[var(--line-2)] px-6 py-20 text-center">
           <SearchIcon size={40} className="text-muted" />
           <p className="mt-4 font-display text-xl font-semibold">Nothing matches &ldquo;{query.trim()}&rdquo;</p>
           <p className="mt-1 max-w-[40ch] text-muted">Try a simpler word, like &ldquo;arrow&rdquo;, &ldquo;file&rdquo; or &ldquo;user&rdquo;.</p>
-          <button type="button" onClick={() => { setQuery(""); setCat(null); }} className="mt-6 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-ink active:scale-[0.98]">
+          <button type="button" onClick={() => { setQuery(""); setCat(null); }} className="btn btn-primary mt-6">
             {cat ? "Clear search and category" : "Clear search"}
           </button>
           <FeedbackLink kind="request" prefill={{ name: query.trim().slice(0, 60) }} className="mt-3 text-sm text-accent-text hover:underline">
@@ -210,23 +211,23 @@ export function IconBrowser() {
           </FeedbackLink>
         </div>
       ) : (
-        <ul className="grid grid-cols-[repeat(auto-fill,minmax(96px,1fr))] gap-2">
+        <ul className="icon-sheet">
           {list.map((n, i) => {
-            const layer = "col-start-1 row-start-1 transition-[opacity,scale] duration-500 ease-[cubic-bezier(.34,1.56,.64,1)]";
+            const layer = "col-start-1 row-start-1 transition-[opacity,scale] duration-500 ease-[cubic-bezier(.2,.7,.2,1)]";
             return (
-              <li key={n} className="animate-[tile-in_.5s_cubic-bezier(.16,1,.3,1)_both]" style={{ animationDelay: `${Math.min(i, 40) * 12}ms` }}>
+              <li key={n} className="animate-[tile-in_.5s_cubic-bezier(.2,.7,.2,1)_both]" style={{ animationDelay: `${Math.min(i, 40) * 12}ms` }}>
                 <button
                   type="button"
                   onClick={() => setOpen(n)}
-                  className={`group flex aspect-square w-full flex-col items-center justify-center gap-3 rounded-[20px] p-2 transition-[background-color,translate,box-shadow] duration-300 hover:-translate-y-0.5 hover:bg-[var(--glass)] hover:shadow-[var(--shadow)] ${
-                    open === n ? "bg-[var(--glass)] ring-2 ring-accent" : ""
+                  className={`group relative flex aspect-square w-full flex-col items-center justify-center gap-3 p-2 transition-colors duration-150 hover:bg-[var(--surface-2)] hover:text-accent ${
+                    open === n ? "bg-[var(--surface-2)] text-accent shadow-[inset_0_0_0_1.5px_var(--accent)]" : ""
                   }`}
                 >
                   <span className="inline-grid" style={{ width: size, height: size }}>
                     <Glyph name={n} solid={false} size={size} className={`${layer} ${style === "solid" ? "scale-50 opacity-0" : "opacity-100"}`} />
                     {solidSeen && <Glyph name={n} solid size={size} className={`${layer} ${style === "solid" ? "opacity-100" : "scale-50 opacity-0"}`} />}
                   </span>
-                  <span className="w-full truncate px-1 text-center text-[11px] text-muted group-hover:text-ink">{n}</span>
+                  <span className="w-full truncate px-1 text-center font-mono text-[11px] text-faint group-hover:text-muted">{n}</span>
                 </button>
               </li>
             );
@@ -256,10 +257,10 @@ function Segmented<T extends string | number>({
 }) {
   const i = options.indexOf(value);
   return (
-    <div role="group" aria-label={label} className="relative grid rounded-2xl bg-[var(--glass)] p-1 ring-1 ring-[var(--line)]" style={{ gridTemplateColumns: `repeat(${options.length}, minmax(0, 1fr))` }}>
+    <div role="group" aria-label={label} className="relative grid rounded-[10px] bg-[var(--surface-2)] p-1 ring-1 ring-[var(--line)]" style={{ gridTemplateColumns: `repeat(${options.length}, minmax(0, 1fr))` }}>
       <span
         aria-hidden
-        className="absolute bottom-1 left-1 top-1 rounded-xl bg-accent transition-transform duration-500 ease-[cubic-bezier(.34,1.3,.64,1)]"
+        className="absolute bottom-1 left-1 top-1 rounded-[7px] bg-[var(--surface)] shadow-[0_1px_2px_rgb(0_0_0/0.08),0_0_0_1px_var(--line)] transition-transform duration-500 ease-[cubic-bezier(.2,.7,.2,1)]"
         style={{ width: `calc((100% - 0.5rem) / ${options.length})`, transform: `translateX(${i * 100}%)` }}
       />
       {options.map((o) => (
@@ -268,7 +269,7 @@ function Segmented<T extends string | number>({
           type="button"
           aria-pressed={o === value}
           onClick={() => onChange(o)}
-          className={`relative h-9 rounded-xl px-3.5 text-sm capitalize transition-colors duration-300 ${o === value ? "text-accent-ink" : "text-muted hover:text-ink"}`}
+          className={`relative h-8 rounded-[7px] px-3.5 text-[13px] capitalize transition-colors duration-300 ${o === value ? "text-ink" : "text-muted hover:text-ink"}`}
         >
           {format(o)}
         </button>
@@ -312,14 +313,13 @@ function Detail({ name, style, onClose }: { name: string | null; style: Style; o
       <div
         aria-hidden
         onClick={onClose}
-        className={`fixed inset-0 z-40 bg-[#06101f]/30 transition-opacity duration-500 ${name ? "opacity-100" : "pointer-events-none opacity-0"}`}
+        className={`fixed inset-0 z-[55] bg-black/30 transition-opacity duration-500 ${name ? "opacity-100" : "pointer-events-none opacity-0"}`}
       />
       <aside
         role="dialog"
         aria-modal="true"
         aria-label={n ?? "Icon details"}
-        data-lenis-prevent
-        className={`liquid fixed z-50 overflow-y-auto transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)] max-sm:inset-x-2 max-sm:bottom-2 max-sm:max-h-[85dvh] max-sm:rounded-[28px] sm:bottom-4 sm:right-4 sm:top-4 sm:w-[380px] sm:rounded-[32px] ${
+        className={`liquid fixed z-[60] overflow-y-auto transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)] max-sm:inset-x-2 max-sm:bottom-2 max-sm:max-h-[85dvh] max-sm:rounded-[20px] sm:bottom-4 sm:right-4 sm:top-4 sm:w-[380px] sm:rounded-[20px] ${
           name ? "translate-x-0 translate-y-0" : "max-sm:translate-y-[110%] sm:translate-x-[110%]"
         }`}
         style={{ background: "var(--bg-1)" }}
@@ -336,7 +336,7 @@ function Detail({ name, style, onClose }: { name: string | null; style: Style; o
               </button>
             </div>
 
-            <div className="relative mt-5 grid aspect-square place-items-center overflow-hidden rounded-[24px] bg-[var(--glass)] ring-1 ring-[var(--line)]">
+            <div className="relative mt-5 grid aspect-square place-items-center overflow-hidden rounded-[14px] bg-[var(--surface-2)] ring-1 ring-[var(--line)]">
               <svg viewBox="0 0 24 24" className="absolute inset-[8%] text-accent-text opacity-25" aria-hidden>
                 {Array.from({ length: 25 }, (_, i) => (
                   <path key={i} d={`M${i} 0v24M0 ${i}h24`} stroke="currentColor" strokeWidth={0.03} />
@@ -352,7 +352,7 @@ function Detail({ name, style, onClose }: { name: string | null; style: Style; o
 
             <div className="mt-4 flex flex-wrap gap-1.5">
               {(KEYWORDS[n] ?? []).map((k) => (
-                <span key={k} className="rounded-full bg-[var(--glass)] px-2.5 py-1 text-xs text-muted ring-1 ring-[var(--line)]">
+                <span key={k} className="rounded-md bg-[var(--surface-2)] px-2 py-0.5 text-xs text-muted">
                   {k}
                 </span>
               ))}
@@ -367,7 +367,7 @@ function Detail({ name, style, onClose }: { name: string | null; style: Style; o
               <button
                 type="button"
                 onClick={download}
-                className="flex items-center justify-center gap-2 rounded-2xl bg-accent px-4 py-3 text-sm font-medium text-accent-ink transition-transform active:scale-[0.98]"
+                className="flex items-center justify-center gap-2 rounded-[10px] bg-[var(--btn)] px-4 py-3 text-sm font-medium text-[var(--btn-ink)] transition-transform active:scale-[0.98]"
               >
                 <DownloadIcon size={18} />
                 Download SVG
@@ -388,7 +388,7 @@ function Action({ label, hint, state, onClick }: { label: string; hint: string; 
     <button
       type="button"
       onClick={onClick}
-      className="flex items-center gap-3 rounded-2xl bg-[var(--glass)] px-4 py-3 text-left text-sm ring-1 ring-[var(--line)] transition-[background-color,scale] hover:ring-accent active:scale-[0.98]"
+      className="flex items-center gap-3 rounded-[10px] bg-[var(--surface)] px-4 py-3 text-left text-sm ring-1 ring-[var(--line)] transition-[background-color,scale] hover:bg-[var(--surface-2)] active:scale-[0.98]"
     >
       <span className="font-medium">{label}</span>
       <span className="min-w-0 flex-1 truncate font-mono text-xs text-muted">{hint}</span>

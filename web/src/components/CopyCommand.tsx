@@ -42,11 +42,10 @@ export function CopyCommand({ command }: { command: string }) {
     <button
       type="button"
       onClick={() => copy(command)}
-      className="glass flex items-center gap-3 rounded-full px-5 py-3 font-mono text-sm transition-transform active:scale-[0.98]"
+      className="chip-cmd"
     >
-      <span className="text-muted">$</span>
-      {command}
-      <CopyGlyph state={state} />
+      <span><span className="dollar">$</span> {command}</span>
+      <span className="icon-btn"><CopyGlyph state={state} /></span>
     </button>
   );
 }
