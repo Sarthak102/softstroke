@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import { Reveal } from "@/components/Reveal";
+import { Search } from "@/components/Search";
 import { themeScript } from "@/lib/theme";
 import "./globals.css";
 import { ICON_COUNT } from "@/lib/count";
@@ -52,6 +53,7 @@ export default function RootLayout({
       >
         {children}
         <Reveal />
+        <Search />
         <FeedbackModal />
       </body>
     </html>

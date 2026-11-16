@@ -2,11 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRightIcon } from "@softstroke/react";
 import { CaseCard } from "@/components/CaseCard";
-import { FitScenes } from "@/components/FitScenes";
 import { Footer } from "@/components/Footer";
 import { IconsLink } from "@/components/IconsLink";
 import { Nav } from "@/components/Nav";
-import { USE_CASES } from "@/components/UseCaseScenes";
+import { USE_CASES } from "@/components/use-cases";
 import { Words } from "@/components/Words";
 import { ICON_COUNT } from "@/lib/count";
 
@@ -26,11 +25,10 @@ export default function UseCasesPage() {
         <div className="cases-grid">
           {USE_CASES.map((c, i) => (
             <div key={c.id} data-reveal>
-              <CaseCard c={c} i={i} />
+              <CaseCard c={c} i={i} eager={i < 2} />
             </div>
           ))}
         </div>
-        <FitScenes />
         <div className="hero-actions" style={{ marginTop: 64 }}>
           <IconsLink href="/icons/" className="btn btn-primary">Browse all {ICON_COUNT} icons <ArrowRightIcon size={18} className="arrow" /></IconsLink>
           <Link href="/docs/" className="btn btn-ghost">Read the docs</Link>

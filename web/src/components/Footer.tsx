@@ -9,6 +9,7 @@ import {
 import { GITHUB_URL } from "@/lib/site";
 import { ICON_COUNT } from "@/lib/count";
 import { CopyCommand } from "./CopyCommand";
+import { Downloads } from "./Downloads";
 import { FeedbackLink } from "./Feedback";
 import { IconsLink } from "./IconsLink";
 import { LogoMark } from "./Logo";
@@ -88,7 +89,7 @@ export function Footer() {
           </div>
           <div className="foot-base meta">
             <span>MIT licensed. Made by Sarthak Kamble.</span>
-            <span>{ICON_COUNT} icons in stroke and solid</span>
+            <span>{ICON_COUNT} icons in stroke and solid · npm <Downloads /></span>
           </div>
         </div>
         <div className="wordmark" aria-hidden>

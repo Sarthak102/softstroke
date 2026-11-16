@@ -10,6 +10,7 @@ import { IconsLink } from "./IconsLink";
 import { LogoMark } from "./Logo";
 import { Brand } from "./Brand";
 import { Stars } from "./Stars";
+import { NavSearch } from "./NavSearch";
 import { ThemeToggle } from "./Theme";
 
 // Each tab is its own page.
@@ -80,6 +81,7 @@ export function Nav() {
           })}
         </nav>
         <div className="nav-end">
+          <NavSearch />
           <a className="gh" href={GITHUB_URL} aria-label="Softstroke on GitHub">
             <Brand logo={siGithub} size={16} />
             <Stars />

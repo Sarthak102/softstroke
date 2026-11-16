@@ -5,36 +5,9 @@ import { createHighlighter } from "shiki";
 import { BASE, SITE_URL } from "./site";
 import { ICON_COUNT } from "./count";
 
-export const DOC_GROUPS: { title: string; pages: { slug: string; title: string }[] }[] = [
-  { title: "Getting started", pages: [{ slug: "", title: "Introduction" }, { slug: "installation", title: "Installation" }] },
-  {
-    title: "Frameworks",
-    pages: [
-      { slug: "react", title: "React" },
-      { slug: "shadcn", title: "shadcn" },
-      { slug: "react-native", title: "React Native" },
-      { slug: "flutter", title: "Flutter" },
-      { slug: "vue", title: "Vue" },
-      { slug: "svelte", title: "Svelte" },
-      { slug: "angular", title: "Angular" },
-      { slug: "svg", title: "SVG and sprite" },
-      { slug: "cdn", title: "CDN" },
-      { slug: "font", title: "Icon font" },
-    ],
-  },
-  {
-    title: "Guides",
-    pages: [
-      { slug: "styling", title: "Styling" },
-      { slug: "solid", title: "Solid icons" },
-      { slug: "accessibility", title: "Accessibility" },
-      { slug: "bundle-size", title: "Bundle size" },
-    ],
-  },
-  { title: "About", pages: [{ slug: "design", title: "Design rules" }, { slug: "contributing", title: "Contributing" }, { slug: "license", title: "License" }] },
-];
+import { DOC_GROUPS, DOC_PAGES } from "./doc-index";
 
-export const DOC_PAGES = DOC_GROUPS.flatMap((g) => g.pages.map((p) => ({ ...p, group: g.title })));
+export { DOC_GROUPS, DOC_PAGES };
 
 export type TocItem = { id: string; text: string; depth: number };
 export type Doc = { slug: string; title: string; description: string; group: string; html: string; toc: TocItem[]; raw: string };

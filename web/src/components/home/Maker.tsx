@@ -3,6 +3,7 @@ import { siFlutter, siGithub, siNpm } from "simple-icons";
 import { GITHUB_URL } from "@/lib/site";
 import { Brand } from "../Brand";
 import { Stars } from "../Stars";
+import { Downloads } from "../Downloads";
 import { Words } from "../Words";
 import { Timeline } from "./Timeline";
 
@@ -36,7 +37,7 @@ export function Maker({ eyebrow, link = true }: { eyebrow?: string; link?: boole
         </div>
         <div className="person-links">
           <a href={GITHUB_URL}><Brand logo={siGithub} size={16} />Star on GitHub<Stars /></a>
-          <a href="https://www.npmjs.com/org/softstroke"><Brand logo={siNpm} size={16} />npm</a>
+          <a href="https://www.npmjs.com/org/softstroke"><Brand logo={siNpm} size={16} />npm<Downloads /></a>
           <a href="https://pub.dev/packages/softstroke"><Brand logo={siFlutter} size={16} />pub.dev</a>
           {link && <Link href="/changelog/">Full changelog</Link>}
         </div>

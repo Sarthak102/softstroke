@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { CopyIcon, DownloadIcon, SearchIcon, XIcon } from "@softstroke/react";
+import { CheckIcon, CopyIcon, DownloadIcon, SearchIcon, SparklesIcon, XIcon } from "@softstroke/react";
 import strokeNodes from "@softstroke/svg/icons.json";
-import solidNodes from "@softstroke/svg/icons-solid.json";
 import keywords from "@softstroke/svg/keywords.json";
 import categories from "@softstroke/svg/categories.json";
 import { useCopy } from "../CopyCommand";
@@ -11,6 +10,9 @@ import Link from "next/link";
 import { SITE_URL } from "@/lib/site";
 import { FeedbackLink } from "../Feedback";
 import { ICON_COUNT } from "@/lib/count";
+import { FRAMEWORKS, savedFramework, saveFramework, snippet, type Framework } from "@/lib/frameworks";
+import { IS_NEW, NEW_VERSION } from "@/lib/new-icons";
+import { zip } from "@/lib/zip";
 
 type Nodes = [string, Record<string, string>][];
 type Style = "stroke" | "solid";
@@ -28,11 +30,25 @@ const CAT_ICON: Record<string, string> = {
 const CATS = [...new Set(Object.values(CATEGORY))].sort().map((c) => [c, NAMES.filter((n) => CATEGORY[n] === c).length] as const);
 const SIZES = [20, 24, 32];
 
+// Solid shapes (590 KB) load on demand: when solid is first shown, an icon panel opens, or the page is idle.
+let SOLID: Record<string, Nodes> | null = null;
+let solidLoad: Promise<void> | null = null;
+const loadSolid = () =>
+  (solidLoad ??= import("@softstroke/svg/icons-solid.json").then((m) => { SOLID = m.default as unknown as Record<string, Nodes>; }));
+function useSolid(need: boolean) {
+  const [, rerender] = useState(0);
+  useEffect(() => {
+    if (need && !SOLID) loadSolid().then(() => rerender((x) => x + 1)).catch(() => {});
+  }, [need]);
+  return SOLID;
+}
+const NEW_CAT = "__new";
+
 // Same rule as scripts/build.mjs: qr-code -> QrCodeIcon.
 const component = (n: string) => `${n.replace(/(^|-)([a-z0-9])/g, (_, __, c: string) => c.toUpperCase())}Icon`;
 
 function toSvg(name: string, style: Style) {
-  const nodes = (style === "solid" ? solidNodes : strokeNodes)[name as keyof typeof strokeNodes] as Nodes;
+  const nodes = ((style === "solid" && SOLID) || (strokeNodes as unknown as Record<string, Nodes>))[name];
   const head =
     style === "solid"
       ? '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">'
@@ -43,7 +59,10 @@ function toSvg(name: string, style: Style) {
 
 // Draws an icon from its shape list: the page already needs the JSON for Copy SVG, so it doesn't also load 600 components.
 function Glyph({ name, solid, size, className = "" }: { name: string; solid: boolean; size: number | string; className?: string }) {
-  const nodes = (solid ? solidNodes : strokeNodes)[name as keyof typeof strokeNodes] as Nodes;
+  // Until the solid shapes arrive, solid draws the stroke shape.
+  const fallback = solid && !SOLID;
+  if (fallback) solid = false;
+  const nodes = ((solid && SOLID) || (strokeNodes as unknown as Record<string, Nodes>))[name];
   const paint = solid ? { fill: "currentColor" } : { fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
   return (
     <svg viewBox="0 0 24 24" width={size} height={size} aria-hidden className={className} {...paint}>
@@ -78,9 +97,20 @@ export function IconBrowser() {
     if (style === "solid") setSolidSeen(true);
   }, [style]);
   const input = useRef<HTMLInputElement>(null);
+  useSolid(solidSeen);
+  useEffect(() => {
+    const id = setTimeout(() => loadSolid().catch(() => {}), 2500);
+    return () => clearTimeout(id);
+  }, []);
+  // Pick several icons, then download them as a ZIP or one sprite.
+  const [selecting, setSelecting] = useState(false);
+  const [picked, setPicked] = useState<string[]>([]);
+  const toggle = (n: string) => setPicked((p) => (p.includes(n) ? p.filter((x) => x !== n) : [...p, n]));
 
   const q = query.trim().toLowerCase();
-  const list = useMemo(() => NAMES.filter((n) => (!cat || CATEGORY[n] === cat) && (!q || matches(n, q))), [q, cat]);
+  const inCat = (n: string) => !cat || (cat === NEW_CAT ? IS_NEW.has(n) : CATEGORY[n] === cat);
+  const list = useMemo(() => NAMES.filter((n) => inCat(n) && (!q || matches(n, q))), [q, cat]); // eslint-disable-line react-hooks/exhaustive-deps
+  const catName = cat === NEW_CAT ? `New in ${NEW_VERSION}` : cat;
 
   // The view lives in the URL (?q=, ?style=, ?icon=) so any search or icon can be shared.
   const [ready, setReady] = useState(false);
@@ -90,6 +120,7 @@ export function IconBrowser() {
     if (p.get("style") === "solid") setStyle("solid");
     const c = p.get("category");
     if (c && CATS.some(([name]) => name === c)) setCatState(c);
+    if (p.get("new") === "1") setCatState(NEW_CAT);
     const icon = p.get("icon");
     if (icon && icon in strokeNodes) setOpen(icon);
     setReady(true);
@@ -99,7 +130,8 @@ export function IconBrowser() {
     const p = new URLSearchParams();
     if (query.trim()) p.set("q", query.trim());
     if (style === "solid") p.set("style", "solid");
-    if (cat) p.set("category", cat);
+    if (cat === NEW_CAT) p.set("new", "1");
+    else if (cat) p.set("category", cat);
     if (open) p.set("icon", open);
     const qs = p.toString();
     window.history.replaceState(null, "", qs ? `?${qs}` : window.location.pathname);
@@ -150,10 +182,18 @@ export function IconBrowser() {
         </label>
         <Segmented label="Style" value={style} options={["stroke", "solid"]} onChange={setStyle} />
         <Segmented label="Size" value={size} options={SIZES} onChange={setSize} format={(s) => `${s}`} />
+        <button
+          type="button"
+          aria-pressed={selecting}
+          onClick={() => { setSelecting(!selecting); if (selecting) setPicked([]); }}
+          className={`h-10 rounded-[10px] px-3.5 text-[13px] ring-1 transition-colors ${selecting ? "bg-ink text-[var(--bg)] ring-ink" : "text-muted ring-[var(--line)] hover:text-ink"}`}
+        >
+          {selecting ? "Done" : "Select"}
+        </button>
       </div>
 
       <div role="group" aria-label="Category" className="-mx-4 mt-4 flex snap-x lg:hidden gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none]">
-        {[[null, NAMES.length] as const, ...CATS].map(([c, count]) => (
+        {[[null, NAMES.length] as const, [NEW_CAT, IS_NEW.size] as const, ...CATS].map(([c, count]) => (
           <button
             key={c ?? "all"}
             type="button"
@@ -163,7 +203,7 @@ export function IconBrowser() {
               cat === c ? "bg-ink text-[var(--bg)] ring-ink" : "text-muted ring-[var(--line)] hover:text-ink"
             }`}
           >
-            {c ?? "All"}
+            {c === NEW_CAT ? `New in ${NEW_VERSION}` : c ?? "All"}
             <span className="font-mono text-[11px] opacity-60">{count}</span>
           </button>
         ))}
@@ -172,7 +212,7 @@ export function IconBrowser() {
       <div className="mt-6 lg:mt-8 lg:grid lg:grid-cols-[210px_minmax(0,1fr)] lg:gap-10">
         <aside className="hidden lg:block">
           <div role="group" aria-label="Category" className="sticky top-[150px] max-h-[calc(100dvh-170px)] space-y-0.5 overflow-y-auto pb-2">
-            {[[null, NAMES.length] as const, ...CATS].map(([c, count]) => (
+            {[[null, NAMES.length] as const, [NEW_CAT, IS_NEW.size] as const, ...CATS].map(([c, count]) => (
               <button
                 key={c ?? "all"}
                 type="button"
@@ -182,8 +222,8 @@ export function IconBrowser() {
                   cat === c ? "bg-[var(--surface)] font-medium text-ink shadow-[0_0_0_1px_var(--line)] [&>svg]:text-accent" : "text-muted hover:bg-[var(--surface-2)] hover:text-ink"
                 }`}
               >
-                <Glyph name={c ? CAT_ICON[c] : "grid"} solid={cat === c} size={18} className="shrink-0" />
-                <span className="flex-1 truncate">{c ?? "All icons"}</span>
+                {c === NEW_CAT ? <SparklesIcon size={18} className="shrink-0" /> : <Glyph name={c ? CAT_ICON[c] : "grid"} solid={cat === c} size={18} className="shrink-0" />}
+                <span className="flex-1 truncate">{c === NEW_CAT ? `New in ${NEW_VERSION}` : c ?? "All icons"}</span>
                 <span className="font-mono text-[11px] tabular-nums text-faint">{count}</span>
               </button>
             ))}
@@ -192,8 +232,10 @@ export function IconBrowser() {
         <div className="min-w-0">
       <p ref={results} className="meta mb-4 mt-6 scroll-mt-40 lg:mt-0" aria-live="polite">
         {q
-          ? `${list.length} ${list.length === 1 ? "result" : "results"} for "${query.trim()}"${cat ? ` in ${cat}` : ""}`
-          : cat
+          ? `${list.length} ${list.length === 1 ? "result" : "results"} for "${query.trim()}"${cat ? ` in ${catName}` : ""}`
+          : cat === NEW_CAT
+            ? `${list.length} icons new in ${NEW_VERSION}`
+            : cat
             ? `${list.length} icons in ${cat}`
             : `All ${NAMES.length} icons`}
       </p>
@@ -218,14 +260,21 @@ export function IconBrowser() {
               <li key={n} className="animate-[tile-in_.5s_cubic-bezier(.2,.7,.2,1)_both]" style={{ animationDelay: `${Math.min(i, 40) * 12}ms` }}>
                 <button
                   type="button"
-                  onClick={() => setOpen(n)}
+                  aria-pressed={selecting ? picked.includes(n) : undefined}
+                  onClick={() => (selecting ? toggle(n) : setOpen(n))}
                   className={`group relative flex aspect-square w-full flex-col items-center justify-center gap-3 p-2 transition-colors duration-150 hover:bg-[var(--surface-2)] hover:text-accent ${
-                    open === n ? "bg-[var(--surface-2)] text-accent shadow-[inset_0_0_0_1.5px_var(--accent)]" : ""
+                    open === n || picked.includes(n) ? "bg-[var(--surface-2)] text-accent shadow-[inset_0_0_0_1.5px_var(--accent)]" : ""
                   }`}
                 >
+                  {IS_NEW.has(n) && <span className="absolute right-2 top-2 rounded bg-accent/10 px-1 font-mono text-[9px] leading-4 text-accent-text">new</span>}
+                  {selecting && (
+                    <span className={`absolute left-2 top-2 grid size-4 place-items-center rounded ring-1 ${picked.includes(n) ? "bg-accent text-accent-ink ring-accent" : "ring-[var(--line-2)]"}`}>
+                      {picked.includes(n) && <CheckIcon size={12} strokeWidth={2} />}
+                    </span>
+                  )}
                   <span className="inline-grid" style={{ width: size, height: size }}>
                     <Glyph name={n} solid={false} size={size} className={`${layer} ${style === "solid" ? "scale-50 opacity-0" : "opacity-100"}`} />
-                    {solidSeen && <Glyph name={n} solid size={size} className={`${layer} ${style === "solid" ? "opacity-100" : "scale-50 opacity-0"}`} />}
+                    {solidSeen && SOLID && <Glyph name={n} solid size={size} className={`${layer} ${style === "solid" ? "opacity-100" : "scale-50 opacity-0"}`} />}
                   </span>
                   <span className="w-full truncate px-1 text-center font-mono text-[11px] text-faint group-hover:text-muted">{n}</span>
                 </button>
@@ -237,6 +286,7 @@ export function IconBrowser() {
         </div>
       </div>
 
+      {picked.length > 0 && <PickBar picked={picked} style={style} onClear={() => setPicked([])} />}
       <Detail name={open} style={style} onClose={() => setOpen(null)} />
     </div>
   );
@@ -283,6 +333,9 @@ function Detail({ name, style, onClose }: { name: string | null; style: Style; o
   const [shown, setShown] = useState(name);
   const jsx = useCopy();
   const imp = useCopy();
+  const [fw, setFw] = useState<Framework>("React");
+  useEffect(() => setFw(savedFramework()), []);
+  useSolid(!!name);
   const svg = useCopy();
   const share = useCopy();
   const shad = useCopy();
@@ -295,16 +348,10 @@ function Detail({ name, style, onClose }: { name: string | null; style: Style; o
 
   const n = shown;
   const C = n ? component(n) : null;
-  const from = view === "solid" ? "@softstroke/react/solid" : "@softstroke/react";
 
   function download() {
     if (!n) return;
-    const url = URL.createObjectURL(new Blob([toSvg(n, view)], { type: "image/svg+xml" }));
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `${n}${view === "solid" ? "-solid" : ""}.svg`;
-    a.click();
-    URL.revokeObjectURL(url);
+    save(new Blob([toSvg(n, view)], { type: "image/svg+xml" }), `${n}${view === "solid" ? "-solid" : ""}.svg`);
   }
 
 
@@ -359,10 +406,20 @@ function Detail({ name, style, onClose }: { name: string | null; style: Style; o
             </div>
 
             <div className="mt-5 grid gap-2">
-              <Action label="Copy JSX" hint={`<${C} />`} state={jsx.state} onClick={() => jsx.copy(`<${C} />`)} />
-              <Action label="Copy import" hint={`from "${from}"`} state={imp.state} onClick={() => imp.copy(`import { ${C} } from "${from}";`)} />
+              <label className="flex items-center justify-between gap-3 text-sm">
+                <span className="text-muted">Copy for</span>
+                <select
+                  value={fw}
+                  onChange={(e) => { const v = e.target.value as Framework; setFw(v); saveFramework(v); }}
+                  className="h-9 rounded-[10px] bg-[var(--surface-2)] px-3 text-sm ring-1 ring-[var(--line)]"
+                >
+                  {FRAMEWORKS.map((f) => <option key={f}>{f}</option>)}
+                </select>
+              </label>
+              <Action label="Copy code" hint={snippet(n, fw, view === "solid").use} state={jsx.state} onClick={() => jsx.copy(snippet(n, fw, view === "solid").use)} />
+              <Action label="Copy import" hint={snippet(n, fw, view === "solid").imp} state={imp.state} onClick={() => imp.copy(snippet(n, fw, view === "solid").imp)} />
               <Action label="Copy SVG" hint={`${view}, 24px`} state={svg.state} onClick={() => svg.copy(toSvg(n, view))} />
-              <Action label="Copy shadcn" hint="npx shadcn add" state={shad.state} onClick={() => shad.copy(`npx shadcn@latest add ${SITE_URL}/r/${n}${view === "solid" ? "-solid" : ""}.json`)} />
+              {fw === "React" && <Action label="Copy shadcn" hint="npx shadcn add" state={shad.state} onClick={() => shad.copy(`npx shadcn@latest add ${SITE_URL}/r/${n}${view === "solid" ? "-solid" : ""}.json`)} />}
               <Action label="Copy link" hint="to this icon" state={share.state} onClick={() => share.copy(window.location.href)} />
               <button
                 type="button"
@@ -380,6 +437,48 @@ function Detail({ name, style, onClose }: { name: string | null; style: Style; o
         )}
       </aside>
     </>
+  );
+}
+
+function save(blob: Blob, filename: string) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// Shown while icons are picked: download them as single SVG files in a ZIP, or as one sprite of <symbol>s.
+function PickBar({ picked, style, onClear }: { picked: string[]; style: Style; onClear: () => void }) {
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState(false);
+  const suffix = style === "solid" ? "-solid" : "";
+  async function run(kind: "zip" | "sprite") {
+    setBusy(true);
+    setError(false);
+    try {
+      if (style === "solid") await loadSolid();
+      if (kind === "zip") {
+        save(zip(picked.map((n) => ({ name: `${n}${suffix}.svg`, text: toSvg(n, style) }))), `softstroke-${picked.length}-icons${suffix}.zip`);
+      } else {
+        const symbols = picked.map((n) => toSvg(n, style).replace(/^<svg[^>]*>/, `<symbol id="${n}" viewBox="0 0 24 24">`).replace(/<\/svg>$/, "</symbol>"));
+        const paint = style === "solid" ? 'fill="currentColor"' : 'fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"';
+        save(new Blob([`<svg xmlns="http://www.w3.org/2000/svg" ${paint}>${symbols.join("")}</svg>`], { type: "image/svg+xml" }), `softstroke-sprite${suffix}.svg`);
+      }
+    } catch {
+      setError(true);
+    }
+    setBusy(false);
+  }
+  return (
+    <div className="pick-bar" role="region" aria-label="Selected icons">
+      <span><b>{picked.length}</b> selected · {style}</span>
+      {error && <span className="text-accent-text">Download failed, try again</span>}
+      <button type="button" className="btn btn-primary" disabled={busy} onClick={() => run("zip")}><DownloadIcon size={16} />ZIP</button>
+      <button type="button" className="btn btn-ghost" disabled={busy} onClick={() => run("sprite")}>Sprite</button>
+      <button type="button" className="icon-btn" aria-label="Clear selection" onClick={onClear}><XIcon size={18} /></button>
+    </div>
   );
 }
 
