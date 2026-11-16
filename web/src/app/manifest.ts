@@ -10,8 +10,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Soft, rounded open-source icons in stroke and solid.",
     start_url: `${BASE}/`,
     display: "standalone",
-    background_color: "#f4f9ff",
-    theme_color: "#2563eb",
+    background_color: "#f4f3ef",
+    theme_color: "#e8521c",
     icons: [{ src: `${BASE}/icon-512.png`, sizes: "512x512", type: "image/png" }],
   };
 }

@@ -14,7 +14,7 @@
   --grid-2: rgb(20 20 18 / 0.1);
   --text: #141412;
   --text-2: #57564f;
-  --text-3: #8a8982;
+  --text-3: #6e6d67;
   --accent: #e8521c;
   --accent-text: #c2410c;
   --accent-soft: rgb(232 82 28 / 0.1);
@@ -36,15 +36,15 @@
 [data-theme="dark"] {
   --bg: #0b0b0d;
   --bg-2: #101013;
-  --surface: #141417;
-  --surface-2: #1a1a1e;
-  --line: rgb(255 255 255 / 0.07);
-  --line-2: rgb(255 255 255 / 0.12);
-  --grid: rgb(255 255 255 / 0.04);
-  --grid-2: rgb(255 255 255 / 0.08);
+  --surface: #151518;
+  --surface-2: #1d1d21;
+  --line: rgb(255 255 255 / 0.1);
+  --line-2: rgb(255 255 255 / 0.16);
+  --grid: rgb(255 255 255 / 0.05);
+  --grid-2: rgb(255 255 255 / 0.1);
   --text: #f3f2ed;
-  --text-2: #a7a69f;
-  --text-3: #6f6e69;
+  --text-2: #b4b3ac;
+  --text-3: #8e8d87;
   --accent: #ff6b3d;
   --accent-text: #ff8a63;
   --accent-soft: rgb(255 107 61 / 0.12);
@@ -704,7 +704,9 @@ input[type="range"]:disabled { opacity: 0.35; }
 /* The /icons sheet: hairline cells like a glyph table */
 .icon-sheet { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--surface); }
 .icon-sheet > li { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.glyphs-teaser { margin-top: 40px; max-height: none; }
+.glyphs-teaser { margin-top: 40px; max-height: none; grid-template-columns: repeat(14, 1fr); }
+@media (max-width: 1100px) { .glyphs-teaser { grid-template-columns: repeat(7, 1fr); } }
+@media (max-width: 600px) { .glyphs-teaser { grid-template-columns: repeat(6, 1fr); } }
 
 /* Docs typography (rendered Markdown). */
 @layer components {

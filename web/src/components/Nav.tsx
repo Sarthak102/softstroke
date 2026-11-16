@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { siGithub } from "simple-icons";
-import { BookOpenIcon, GridIcon, HistoryIcon, LayoutIcon, MenuIcon, SlidersIcon, XIcon } from "@softstroke/react";
+import { BookOpenIcon, GridIcon, LayoutIcon, MenuIcon, XIcon } from "@softstroke/react";
 import { GITHUB_URL } from "@/lib/site";
 import { IconsLink } from "./IconsLink";
 import { LogoMark } from "./Logo";
@@ -17,8 +17,6 @@ const TABS = [
   { label: "Icons", href: "/icons/", Icon: GridIcon },
   { label: "Use cases", href: "/use-cases/", Icon: LayoutIcon },
   { label: "Docs", href: "/docs/", Icon: BookOpenIcon },
-  { label: "Playground", href: "/playground/", Icon: SlidersIcon },
-  { label: "Releases", href: "/changelog/", Icon: HistoryIcon },
 ] as const;
 
 export function Nav() {

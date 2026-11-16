@@ -5,7 +5,7 @@ import { Words } from "../Words";
 
 // 02: a slice of the glyph table; the full sheet lives on /icons.
 export function Sheet() {
-  const slice = NAMES.filter((_, i) => i % 9 === 1).slice(0, 40);
+  const slice = NAMES.filter((_, i) => i % 9 === 1).slice(0, 42);
   return (
     <section className="section wrap" style={{ paddingTop: 48 }}>
       <div className="set-head" data-reveal>
