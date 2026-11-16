@@ -4,7 +4,6 @@ import { Brand } from "@/components/Brand";
 import { Construct } from "@/components/home/Specimen";
 import { LogoMark } from "@/components/Logo";
 import { Glyph } from "@/lib/glyph";
-import { ICON_COUNT } from "@/lib/count";
 
 // Social preview source: screenshot at 1200x630 into public/og.png. Not linked, not indexed.
 // Fixed light colours: the preview must look the same whatever theme the capture browser uses.
@@ -31,7 +30,7 @@ export default function OgImage() {
         <h1 className="mt-9 font-display text-[66px] font-semibold leading-[1.04] tracking-[-0.035em]">
           Soft at the corners, <span className="text-[#c2410c]">exact</span> on the grid
         </h1>
-        <p className="mt-6 text-[24px] text-[#57564f]">{ICON_COUNT} icons in stroke and solid. MIT licensed.</p>
+        <p className="mt-6 text-[24px] text-[#57564f]">Every icon in stroke and solid. MIT licensed.</p>
         <div className="mt-9 flex items-center gap-5 text-[#8a8982]">
           {LOGOS.map((l) => <Brand key={l.title} logo={l} size={26} />)}
         </div>
