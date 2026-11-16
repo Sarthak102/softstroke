@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRightIcon } from "@softstroke/react";
-import { siAngular, siExpo, siFlutter, siGithub, siJsdelivr, siNextdotjs, siNpm, siReact, siSvelte, siSvg, siVuedotjs } from "simple-icons";
+import { siAngular, siFlutter, siGithub, siNextdotjs, siNpm, siReact, siSvelte, siSvg, siVuedotjs } from "simple-icons";
 import { GITHUB_URL } from "@/lib/site";
 import { Downloads } from "../Downloads";
 import { Stars } from "../Stars";
@@ -16,7 +16,7 @@ import { brandColor } from "./brand-color";
 const SPEC = ["sparkles", "heart", "home", "bell", "leaf", "rocket", "headphones", "compass", "crown", "camera", "chat", "settings"];
 const LOGOS = [
   [siReact, "React"], [siNextdotjs, "Next.js"], [siVuedotjs, "Vue"], [siSvelte, "Svelte"], [siAngular, "Angular"],
-  [siExpo, "React Native"], [siFlutter, "Flutter"], [siSvg, "SVG"], [siJsdelivr, "jsDelivr"], [siNpm, "npm"],
+  [siReact, "React Native"], [siFlutter, "Flutter"], [siSvg, "SVG"], [null, "Icon font"],
 ] as const;
 
 export function Hero() {
@@ -51,7 +51,7 @@ export function Hero() {
           <span className="meta">Works with</span>
           <div className="logo-row">
             {LOGOS.map(([logo, name]) => (
-              <span key={name} className="logo-item" style={{ "--brand": brandColor(logo) } as React.CSSProperties}>
+              <span key={name} className="logo-item" style={{ "--brand": logo ? brandColor(logo) : "var(--accent)" } as React.CSSProperties}>
                 <Brand logo={logo} size={20} />
                 {name}
               </span>

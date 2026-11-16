@@ -287,7 +287,7 @@ export function IconBrowser() {
                       {picked.includes(n) && <CheckIcon size={12} strokeWidth={2} />}
                     </span>
                   )}
-                  <span className="tile-art inline-grid" style={{ width: size, height: size }}>
+                  <span className="inline-grid" style={{ width: size, height: size }}>
                     <Glyph name={n} solid={false} size={size} className={`${layer} ${style === "solid" ? "scale-50 opacity-0" : "opacity-100"}`} />
                     {solidSeen && SOLID && <Glyph name={n} solid size={size} className={`${layer} ${style === "solid" ? "opacity-100" : "scale-50 opacity-0"}`} />}
                   </span>

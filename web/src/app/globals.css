@@ -138,7 +138,7 @@ body {
     transition-duration: 0.01ms !important;
     transition-delay: 0ms !important;
   }
-  .w, .fade-in, [data-reveal], .wordmark span { animation: none !important; opacity: 1 !important; filter: none !important; }
+  .w, .fade-in, [data-reveal], .wordmark span { animation: none !important; opacity: 1 !important; filter: none !important; transform: none !important; }
 }
 
 @keyframes tile-in {
@@ -320,7 +320,7 @@ h1 .w { animation: wordIn 1000ms var(--ease) both; animation-delay: calc(80ms + 
 @media (max-width: 760px) { .stat:nth-child(3) { border-left: 0; padding-left: 0; } .stat:nth-child(n+3) { border-top: 1px solid var(--line); } }
 .stat b { font-family: var(--font-jakarta); font-weight: var(--dw); font-size: clamp(40px, 5vw, 56px); line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
 .stat b small { font-size: 0.5em; color: var(--text-3); margin-left: 2px; }
-.stat span { color: var(--text-2); font-size: 14px; }
+.stat > span { color: var(--text-2); font-size: 14px; }
 
 /* ---------- Icon marquee ---------- */
 .icon-rows { padding-block: 56px; display: grid; gap: 8px; }
@@ -638,11 +638,9 @@ input[type="range"]:disabled { opacity: 0.35; }
 .foot ul button { text-align: left; }
 .foot-base { margin-top: 48px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
 .wordmark { margin-top: 40px; font-family: var(--font-jakarta); font-weight: var(--dw); font-size: clamp(64px, 19vw, 300px); line-height: 0.8; letter-spacing: -0.04em; color: var(--text); white-space: nowrap; display: flex; justify-content: center; padding-bottom: env(safe-area-inset-bottom, 0px); user-select: none; }
-.wordmark span { display: inline-block; transform: translateY(14%); }
-@keyframes markIn { from { transform: translateY(70%); opacity: 0; } }
-@supports (animation-timeline: view()) {
-  .wordmark span { animation: markIn linear both; animation-timeline: view(); animation-range: entry calc(var(--i) * 3%) cover calc(30% + var(--i) * 3%); }
-}
+/* Letters rise in one after another when the wordmark scrolls into view (Footer adds .in), then stay fully visible. */
+.wordmark span { display: inline-block; transform: translateY(14%); transition: transform 1100ms var(--ease), opacity 1100ms var(--ease); transition-delay: calc(var(--i) * 45ms); }
+.wordmark.armed:not(.in) span { transform: translateY(70%); opacity: 0; }
 .wordmark span.acc { color: var(--accent); }
 
 /* Toast */
@@ -671,21 +669,13 @@ input[type="range"]:disabled { opacity: 0.35; }
   .nav-sheet-row.cur svg { color: var(--accent); }
 }
 @media (max-width: 560px) { .gh svg + .gh-n { display: none; } }
-@media (max-width: 640px) { .nav-end .btn, .sound-toggle { display: none; } .nav-inner { gap: 16px; } }
+@media (max-width: 640px) { .nav-end .btn { display: none; } .nav-inner { gap: 16px; } }
 
 /* Hero proof row: live stars and weekly downloads */
 .proof { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; font-size: 13px; color: var(--text-3); }
 .proof a { display: inline-flex; align-items: center; gap: 7px; transition: color var(--fast) var(--ease); }
 .proof a:hover { color: var(--text); }
 .proof .gh-n { padding-left: 2px; }
-
-/* /icons: hovering a tile shows the icon's construction grid (24 units, majors every 4, live area 2-22) */
-.tile-art { position: relative; }
-.tile-art::before, .tile-art::after { content: ""; position: absolute; pointer-events: none; opacity: 0; transition: opacity var(--mid) var(--ease); }
-.tile-art::before { inset: -50%; background-image: linear-gradient(var(--grid-2) 1px, transparent 1px), linear-gradient(90deg, var(--grid-2) 1px, transparent 1px); background-size: calc(100% / 12) calc(100% / 12); background-position: center; mask-image: radial-gradient(closest-side, #000 55%, transparent); -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent); }
-.tile-art::after { inset: 8.33%; border: 1px dashed color-mix(in srgb, var(--accent) 45%, transparent); border-radius: 18%; }
-.group:hover .tile-art::before, .group:hover .tile-art::after, .group:focus-visible .tile-art::before { opacity: 1; }
-.tile-art > svg { position: relative; z-index: 1; }
 
 /* ⌘K search */
 .nav-search { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 6px 0 10px; border-radius: 8px; border: 1px solid var(--line); color: var(--text-3); font-size: 13px; transition: color var(--fast) var(--ease), background-color var(--fast) var(--ease); }

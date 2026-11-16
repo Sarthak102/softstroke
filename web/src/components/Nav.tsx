@@ -11,7 +11,6 @@ import { LogoMark } from "./Logo";
 import { Brand } from "./Brand";
 import { Stars } from "./Stars";
 import { NavSearch } from "./NavSearch";
-import { SoundToggle } from "./Sound";
 import { ThemeToggle } from "./Theme";
 
 // Each tab is its own page.
@@ -87,7 +86,6 @@ export function Nav() {
             <Brand logo={siGithub} size={16} />
             <Stars />
           </a>
-          <SoundToggle />
           <ThemeToggle />
           <IconsLink href="/icons/" className="btn btn-primary">Browse icons</IconsLink>
           <button type="button" aria-expanded={open} aria-controls="nav-mobile" aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen(!open)} className="icon-btn nav-menu">

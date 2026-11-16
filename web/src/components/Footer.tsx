@@ -27,6 +27,19 @@ const TRAIL = [
 
 export function Footer() {
   const trail = useRef<HTMLDivElement>(null);
+  const mark = useRef<HTMLDivElement>(null);
+
+  // The wordmark is armed (letters hidden) only once JS runs, then rises when it scrolls into view.
+  useEffect(() => {
+    const el = mark.current;
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    el.classList.add("armed");
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { el.classList.add("in"); io.disconnect(); }
+    }, { threshold: 0.3 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   // A diagonal wave of icons turning solid, once a quarter second.
   useEffect(() => {
@@ -92,7 +105,7 @@ export function Footer() {
             <span>{ICON_COUNT} icons in stroke and solid · npm <Downloads /></span>
           </div>
         </div>
-        <div className="wordmark" aria-hidden>
+        <div className="wordmark" aria-hidden ref={mark}>
           {"Softstroke".split("").map((ch, i) => (
             <span key={i} style={{ "--i": i } as React.CSSProperties} className={i === 4 ? "acc" : undefined}>{ch}</span>
           ))}

@@ -15,9 +15,9 @@ const OUT = new URL("../web/public/use-cases/", import.meta.url).pathname;
 const CHROME = process.env.CHROME ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const PORT = 9333;
 const DARK_CSS = `<style>
-  [data-frame] { box-shadow: inset 0 0 0 4000px rgb(10 9 8 / 0.58); }
-  [data-frame] > * { filter: invert(1) hue-rotate(180deg) saturate(1.1); }
-  [data-frame] > [style*="background-image"] { filter: brightness(0.66) saturate(0.95); }
+  [data-frame] { box-shadow: inset 0 0 0 4000px rgb(10 9 8 / 0.3); }
+  [data-frame] > * { filter: invert(0.88) hue-rotate(180deg); }
+  [data-frame] > [style*="background-image"] { filter: brightness(0.82); }
   [data-frame] > [style*="background-image"] > * { filter: none; }
 </style>`;
 

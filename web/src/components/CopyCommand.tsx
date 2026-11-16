@@ -11,7 +11,6 @@ export function useCopy() {
     try {
       await navigator.clipboard.writeText(text);
       setState("copied");
-      window.dispatchEvent(new Event("ss:copied"));
     } catch {
       setState("failed");
     }
