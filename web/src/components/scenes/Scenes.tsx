@@ -32,7 +32,7 @@ function Frame({ dark, soft, photo, children }: { dark?: boolean; soft?: boolean
     : dark
       ? `${noise("1", 0.05)}, radial-gradient(110% 90% at 50% 0%, #2a1d16, #0b0b0d 70%)`
       : soft
-        ? `${noise("0.05", 0.05)}, radial-gradient(120% 100% at 20% 0%, #fdfaf6, #f6efe7 60%, #efe4d8)`
+        ? `${noise("0.05", 0.05)}, radial-gradient(120% 100% at 20% 0%, #fff8f2, #fde6d6 58%, #f8cdb3)`
         : `${noise("0.05", 0.06)}, radial-gradient(120% 100% at 30% 0%, #fdfaf6, #f3e9df 58%, #ead9c8)`;
   return (
     <div className={`relative h-[800px] w-[1200px] overflow-hidden ${dark ? "text-[#e7f0ff]" : "text-[#141412]"}`} style={{ background: bg }}>
@@ -843,17 +843,17 @@ function AddCalendar() {
   return (
     <Frame soft>
       <div className="absolute left-[80px] top-[150px] h-[500px] w-[1300px] rounded-full bg-[#f8f6f2] p-[16px] shadow-[0_0_0_1.5px_rgb(80_45_20/0.04),0_40px_80px_-40px_rgb(80_45_20/0.3)]">
-        <div className="flex h-full items-center gap-[60px] rounded-full bg-[linear-gradient(180deg,#fffdfb,#e9f0fa)] pl-[150px] shadow-[inset_0_2px_0_#fff,inset_0_-2px_6px_rgb(80_45_20/0.04),0_0_0_1.5px_rgb(80_45_20/0.05)]">
+        <div className="flex h-full items-center gap-[60px] rounded-full bg-[linear-gradient(180deg,#fffdfb,#f6ebe1)] pl-[150px] shadow-[inset_0_2px_0_#fff,inset_0_-2px_6px_rgb(80_45_20/0.04),0_0_0_1.5px_rgb(80_45_20/0.05)]">
           <CalendarSolid size={180} color="url(#add-cal)" className="shrink-0 drop-shadow-[0_10px_20px_rgb(232_82_28/0.22)]">
             <defs>
               <linearGradient id="add-cal" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stopColor="#fbbf24" />
-                <stop offset=".45" stopColor="#ff8a63" />
-                <stop offset="1" stopColor="#fcd2bf" />
+                <stop offset="0" stopColor="#ffb08f" />
+                <stop offset=".5" stopColor="#ff6b3d" />
+                <stop offset="1" stopColor="#e8521c" />
               </linearGradient>
             </defs>
           </CalendarSolid>
-          <div className="leading-none text-[#7f8da6] [text-shadow:0_1.5px_0_#fff]">
+          <div className="leading-none text-[#a08878] [text-shadow:0_1.5px_0_#fff]">
             <p className="text-[64px] font-medium tracking-[-0.01em]">Add to</p>
             <p className="mt-4 whitespace-nowrap text-[120px] font-semibold tracking-[-0.02em]">My Calendar</p>
           </div>

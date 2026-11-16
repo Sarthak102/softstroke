@@ -663,20 +663,11 @@ input[type="range"]:disabled { opacity: 0.35; }
 @media (max-width: 560px) { .gh svg + .gh-n { display: none; } }
 @media (max-width: 640px) { .nav-end .btn { display: none; } .nav-inner { gap: 16px; } }
 
-/* New in the latest release */
-.new-strip { margin-top: -72px; padding-bottom: 72px; }
-.new-head { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; }
-.new-head p { margin: 0; color: var(--text-2); }
-.new-head p b { color: var(--text); font-weight: 500; }
-.new-all { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--accent-text); }
-.new-all svg { transition: transform var(--mid) var(--ease); }
-.new-all:hover svg { transform: translateX(3px); }
-.new-row { margin-top: 16px; display: grid; grid-template-columns: repeat(24, 1fr); gap: 6px; }
-@media (max-width: 1100px) { .new-row { grid-template-columns: repeat(12, 1fr); } }
-@media (max-width: 600px) { .new-row { grid-template-columns: repeat(8, 1fr); } .new-row a:nth-child(n+17) { display: none; } }
-.new-cell { position: relative; aspect-ratio: 1; display: grid; place-items: center; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--text-2); transition: color var(--fast) var(--ease), background-color var(--fast) var(--ease); }
-.new-cell::after { content: ""; position: absolute; top: 5px; right: 5px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
-.new-cell:hover { color: var(--accent); background: var(--accent-soft); }
+/* Hero proof row: live stars and weekly downloads */
+.proof { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; font-size: 13px; color: var(--text-3); }
+.proof a { display: inline-flex; align-items: center; gap: 7px; transition: color var(--fast) var(--ease); }
+.proof a:hover { color: var(--text); }
+.proof .gh-n { padding-left: 2px; }
 
 /* ⌘K search */
 .nav-search { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 6px 0 10px; border-radius: 8px; border: 1px solid var(--line); color: var(--text-3); font-size: 13px; transition: color var(--fast) var(--ease), background-color var(--fast) var(--ease); }

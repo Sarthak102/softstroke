@@ -5,6 +5,7 @@ export type UseCase = { id: string; title: string; body: string; icons: string[]
 export const USE_CASES: UseCase[] = [
   { id: "bento", title: "App cards", body: "Weather, health, smart home and music cards. Tabs rest in stroke, the active one turns solid.", icons: ["inbox", "calendar", "sticky-note", "bookmark", "cloud-sun", "moon"] },
   { id: "soft-menu", title: "Account menu", body: "A soft dropdown with icons at 38px, next to large text.", icons: ["user", "puzzle", "sliders", "help-circle", "log-out"] },
+  { id: "add-calendar", title: "Call to action", body: "A big double-rimmed button with the solid calendar, filled with a gradient through the color prop.", icons: ["calendar"] },
   { id: "dashboard", title: "Analytics dashboard", body: "Sidebar navigation, stat cards and toolbar buttons at 20 to 22px.", icons: ["home", "bar-chart", "inbox", "users", "credit-card", "bell"] },
   { id: "clouds-bar", title: "Glass tab bar", body: "White stroke icons on frosted glass over a photo.", icons: ["home", "search-sparkle", "bookmark"] },
   { id: "glass-bar", title: "Floating tab bar", body: "The active tab in solid, the rest in stroke.", icons: ["home", "map-pin", "bag", "settings", "search"] },

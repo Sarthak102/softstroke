@@ -9,6 +9,13 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/softstroke/softstroke/stargazers"><img src="https://img.shields.io/github/stars/softstroke/softstroke?style=flat&color=e8521c&labelColor=141412" alt="GitHub stars"></a>
+  <a href="https://www.npmjs.com/package/@softstroke/react"><img src="https://img.shields.io/npm/dw/@softstroke/react?style=flat&color=e8521c&labelColor=141412&label=npm" alt="Weekly npm downloads"></a>
+  <a href="https://pub.dev/packages/softstroke"><img src="https://img.shields.io/pub/v/softstroke?style=flat&color=e8521c&labelColor=141412&label=pub.dev" alt="pub.dev version"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-e8521c?style=flat&labelColor=141412" alt="MIT license"></a>
+</p>
+
+<p align="center">
   <a href="https://softstroke.github.io/softstroke/"><strong>Browse the icons</strong></a>
   &nbsp;·&nbsp;
   <a href="https://softstroke.github.io/softstroke/docs/">Docs</a>
@@ -54,7 +61,7 @@ import { HomeIcon, BellIcon } from '@softstroke/react';
 import { HomeIcon as HomeSolidIcon } from '@softstroke/react/solid';
 
 <HomeIcon />                                   // 24px, inherits the text color
-<HomeSolidIcon color="#2563eb" />              // the same icon, solid
+<HomeSolidIcon color="#e8521c" />              // the same icon, solid
 <BellIcon size={20} strokeWidth={2} aria-label="Notifications" />
 ```
 
@@ -97,7 +104,7 @@ import { HomeIcon as HomeSolidIcon } from '@softstroke/vue/solid';
 
 <template>
   <HomeIcon :size="24" />
-  <HomeSolidIcon color="#2563eb" />
+  <HomeSolidIcon color="#e8521c" />
 </template>
 ```
 </details>
@@ -116,7 +123,7 @@ npm i @softstroke/svelte
 </script>
 
 <HomeIcon size={24} />
-<HomeSolidIcon color="#2563eb" />
+<HomeSolidIcon color="#e8521c" />
 ```
 </details>
 
@@ -135,7 +142,7 @@ import { HomeIcon as HomeSolidIcon } from '@softstroke/angular/solid';
 
 @Component({
   imports: [HomeIcon, HomeSolidIcon],
-  template: `<ss-home [size]="24" /> <ss-home-solid color="#2563eb" aria-label="Home" />`,
+  template: `<ss-home [size]="24" /> <ss-home-solid color="#e8521c" aria-label="Home" />`,
 })
 export class Toolbar {}
 ```
@@ -225,6 +232,10 @@ python3 scripts/bbox.py <names>           Live area and centring
 .venv/bin/python scripts/font.py          Rebuild the icon font
 npm run site                              Build the website into web/out
 ```
+
+## Support
+
+Softstroke is free and made by one person. If it saves you time, a star helps others find it, and you can sponsor new icons with the **Sponsor** button at the top of the repo.
 
 ## License
 

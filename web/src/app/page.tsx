@@ -6,7 +6,6 @@ import { IconRows } from "@/components/home/IconRows";
 import { Install } from "@/components/home/Install";
 import { LiveScreens } from "@/components/home/LiveScreens";
 import { Maker } from "@/components/home/Maker";
-import { NewStrip } from "@/components/home/NewStrip";
 import { Sheet } from "@/components/home/Sheet";
 import { States } from "@/components/home/States";
 import { Stats } from "@/components/home/Stats";
@@ -21,7 +20,6 @@ export default function Home() {
         <IconRows />
         <States />
         <Sheet />
-        <NewStrip />
         <Cases />
         <LiveScreens />
         <Install />

@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { ArrowRightIcon } from "@softstroke/react";
-import { siAngular, siExpo, siFlutter, siJsdelivr, siNextdotjs, siNpm, siReact, siSvelte, siSvg, siVuedotjs } from "simple-icons";
+import { siAngular, siExpo, siFlutter, siGithub, siJsdelivr, siNextdotjs, siNpm, siReact, siSvelte, siSvg, siVuedotjs } from "simple-icons";
+import { GITHUB_URL } from "@/lib/site";
+import { Downloads } from "../Downloads";
+import { Stars } from "../Stars";
 import { nodes } from "@/lib/glyph";
 import { CopyCommand } from "../CopyCommand";
 import { IconsLink } from "../IconsLink";
@@ -35,6 +38,11 @@ export function Hero() {
                 Browse icons <ArrowRightIcon size={18} className="arrow" />
               </IconsLink>
               <CopyCommand command="npm i @softstroke/react" />
+            </div>
+            <div className="proof fade-in" style={{ animationDelay: "650ms" }}>
+              <a href={GITHUB_URL}><Brand logo={siGithub} size={15} />GitHub<Stars /></a>
+              <a href="https://www.npmjs.com/org/softstroke"><Brand logo={siNpm} size={15} />npm<Downloads /></a>
+              <span>MIT licensed</span>
             </div>
           </div>
           <Specimen items={items} />
