@@ -28,7 +28,7 @@ export function Hero() {
           <div>
             <Link className="status fade-in" href="/changelog/"><i />1.3 is out · 1.4 in progress</Link>
             <h1 className="display" data-split>
-              <Words>Soft at the corners, <em>exact</em> on the grid</Words>
+              <Words>Soft icons for <em>crisp</em> interfaces</Words>
             </h1>
             <p className="lede fade-in" style={{ animationDelay: "450ms" }}>
               Every icon is drawn on a 24px grid with a 1.5px stroke, then ships twice under one name: stroke for rest, solid for the chosen state.

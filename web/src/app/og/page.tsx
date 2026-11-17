@@ -28,7 +28,7 @@ export default function OgImage() {
           Softstroke
         </p>
         <h1 className="mt-9 font-display text-[66px] font-semibold leading-[1.04] tracking-[-0.035em]">
-          Soft at the corners, <span className="text-[#c2410c]">exact</span> on the grid
+          Soft icons for <span className="text-[#c2410c]">crisp</span> interfaces
         </h1>
         <p className="mt-6 text-[24px] text-[#57564f]">Every icon in stroke and solid. MIT licensed.</p>
         <div className="mt-9 flex items-center gap-5 text-[#8a8982]">
