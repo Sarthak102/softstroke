@@ -1,13 +1,17 @@
 // Icons added in the latest release, for the home strip and the "New" tags on /icons.
 // Update at every release (git show --name-only --diff-filter=A <icons commit> -- icons/).
-export const NEW_VERSION = "1.3";
+export const NEW_VERSION = "1.4";
 export const NEW_ICONS = [
-  "accessibility", "alert-octagon", "badge-alert", "bell-dot", "chat-check", "chat-circle", "chat-dots", "chat-plus", "chats", "clipboard-check",
-  "clipboard-list", "clipboard-pen", "contact-book", "eye-closed", "file-archive", "file-audio", "file-code", "file-image", "file-lock", "file-minus",
-  "file-pen", "file-search", "file-spreadsheet", "file-video", "file-x", "files", "folder-check", "folder-lock", "folder-minus", "folder-search",
-  "folder-x", "headset", "id-badge", "mail-check", "mail-plus", "mail-x", "mails", "password", "person-standing", "phone-incoming",
-  "phone-missed", "phone-outgoing", "reply-all", "scan-eye", "scan", "search-check", "search-x", "shield-lock", "shield-plus", "shield-user",
-  "shield-x", "user-cog", "user-heart", "user-lock", "user-pen", "user-search", "user-shield", "user-star", "vault", "voicemail",
-  "zoom-in", "zoom-out",
+  "activity", "airplay", "antenna", "api", "badge-percent", "bag-plus", "bank", "battery-full", "battery-low", "bot",
+  "braces", "brain", "brain-circuit", "brightness-low", "bring-forward", "bring-to-front", "calendar-clock", "calendar-heart", "calendar-range", "calendar-search",
+  "caps-lock", "cart-check", "cart-plus", "cart-x", "chart-area", "chart-bar-horizontal", "chart-column", "chart-donut", "chart-scatter", "chat-sparkle",
+  "chip-ai", "clipboard-paste", "clock-check", "clock-plus", "contrast", "control", "copy-plus", "coupon", "dark-mode", "delete-left",
+  "desktop", "dock", "earbuds", "eject", "ethernet", "euro", "file-sparkle", "file-text-search", "function", "git-branch",
+  "git-commit", "git-fork", "git-merge", "git-pull-request", "hand-coins", "handshake", "hard-drive", "hierarchy", "hotspot", "image-sparkle",
+  "invoice", "keyboard", "keyboard-light", "list-filter", "monitor-off", "mouse", "mouse-pointer", "network", "night-shift", "option",
+  "piggy-bank", "plug-zap", "power", "presentation-chart", "projector", "receipt-percent", "router", "rupee", "screen-mirror", "screenshot",
+  "sd-card", "send-backward", "send-to-back", "share-nearby", "share-up", "shift", "shopping-basket", "signal", "signal-low", "signal-medium",
+  "sitemap", "smartwatch", "split", "square-pen", "subscript", "superscript", "tag-off", "tags", "text-size", "trackpad",
+  "usb", "variable", "volume-none", "wand", "webcam", "webhook", "window-overview", "workflow",
 ];
 export const IS_NEW = new Set(NEW_ICONS);

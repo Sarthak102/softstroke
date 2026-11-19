@@ -21,7 +21,7 @@ const KEYWORDS = keywords as Record<string, string[]>;
 const CATEGORY = categories as Record<string, string>;
 // Categories alphabetically, each with its icon count and a representative icon (sidebar).
 const CAT_ICON: Record<string, string> = {
-  Arrows: "arrow-up-right", "Charts and data": "bar-chart", Commerce: "cart", Communication: "chat", Development: "code", Devices: "smartphone",
+  AI: "sparkles", Arrows: "arrow-up-right", "Charts and data": "bar-chart", Commerce: "cart", Communication: "chat", Development: "code", Devices: "smartphone",
   Editing: "type", Files: "folder",
   Interface: "layout", Media: "play-circle", Objects: "lightbulb", "People and security": "shield-check", Time: "clock",
   Travel: "map-pin", "Weather and nature": "cloud-sun",

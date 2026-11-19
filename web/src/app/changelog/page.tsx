@@ -12,6 +12,80 @@ export const metadata: Metadata = {
 // Newest first. Set the date when the version is published to npm.
 const RELEASES: { version: string; date: string; summary: string; groups: { icon: IconName; title: string; items: string[] }[] }[] = [
   {
+    version: "1.4.0",
+    date: "November 20, 2026",
+    summary: "108 new icons for commerce, charts, devices, development, AI, time and Mac and iOS system controls, each in stroke and solid. 537 icons in total; no icon renamed or removed.",
+    groups: [
+      {
+        icon: "CartPlusIcon",
+        title: "Commerce",
+        items: [
+          "shopping-basket, cart-plus, cart-check, cart-x, bag-plus, receipt-percent, badge-percent, coupon, invoice, tags.",
+          "piggy-bank, bank, hand-coins, euro, rupee.",
+        ],
+      },
+      {
+        icon: "ChartDonutIcon",
+        title: "Charts and data",
+        items: ["chart-area, chart-column, chart-bar-horizontal, chart-donut, chart-scatter, activity, presentation-chart."],
+      },
+      {
+        icon: "KeyboardIcon",
+        title: "Devices",
+        items: [
+          "keyboard, mouse, trackpad, router, usb, hard-drive, sd-card, webcam, smartwatch, earbuds, projector, ethernet, antenna.",
+          "power, plug-zap, signal, signal-medium, signal-low, battery-low, battery-full.",
+        ],
+      },
+      {
+        icon: "GitBranchIcon",
+        title: "Development",
+        items: [
+          "git-branch, git-commit, git-merge, git-pull-request, git-fork.",
+          "braces, variable, function, api, webhook, workflow, sitemap, hierarchy, network.",
+        ],
+      },
+      {
+        icon: "BotIcon",
+        title: "AI",
+        items: ["bot, brain, brain-circuit, wand, chip-ai, chat-sparkle, image-sparkle, file-sparkle."],
+      },
+      {
+        icon: "CalendarClockIcon",
+        title: "Time",
+        items: ["calendar-clock, calendar-heart, calendar-search, calendar-range, clock-plus, clock-check."],
+      },
+      {
+        icon: "WindowOverviewIcon",
+        title: "Mac and iOS",
+        items: [
+          "Keys: option, shift, control, caps-lock, delete-left, eject. Display: desktop, window-overview, dock, monitor-off, screen-mirror, airplay, night-shift, brightness-low, keyboard-light, contrast, dark-mode.",
+          "share-nearby, share-up, hotspot, screenshot, mouse-pointer, text-size, volume-none, tag-off.",
+        ],
+      },
+      {
+        icon: "BringToFrontIcon",
+        title: "Editing",
+        items: [
+          "copy-plus, clipboard-paste, square-pen, superscript, subscript, file-text-search, list-filter, split.",
+          "Layer order: bring-to-front, send-to-back, bring-forward, send-backward.",
+        ],
+      },
+      {
+        icon: "HandshakeIcon",
+        title: "People",
+        items: ["handshake."],
+      },
+      {
+        icon: "PaletteIcon",
+        title: "Packages",
+        items: [
+          "A few stroke icons now fill one shape (the active layer in layer-order icons, dark-mode's halves). The fill follows the color prop in every package, so nothing changes in how you use them.",
+        ],
+      },
+    ],
+  },
+  {
     version: "1.3.0",
     date: "November 15, 2026",
     summary: "62 new icons for communication, people, security, files, notes and search, each in stroke and solid. 429 icons in total; no icon renamed or removed.",
