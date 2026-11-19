@@ -25,8 +25,11 @@ function parse(name, src, solid) {
     if (!TAGS[tag]) throw new Error(`${name}: unsupported element <${tag}>`);
     const a = {};
     for (const [, k, v] of attrs.matchAll(/([\w-]+)="([^"]*)"/g)) {
-      // Solid icons may cut details out of a silhouette with fill-rule/clip-rule; nothing else is per-shape.
-      if (/^(fill|stroke|style|class|id|transform)/.test(k) && !(solid && /^(fill|clip)-rule$/.test(k))) throw new Error(`${name}: <${tag}> must not set ${k}`);
+      // Solid icons may cut details out of a silhouette with fill-rule/clip-rule. A stroke icon may fill a shape with
+      // fill="currentColor" (layer-order's active layer, dark-mode's halves): every renderer sets the root's color
+      // attribute from the color prop, so that fill always matches the stroke. Nothing else is per-shape.
+      const strokeFill = !solid && k === 'fill' && v === 'currentColor';
+      if (/^(fill|stroke|style|class|id|transform)/.test(k) && !strokeFill && !(solid && /^(fill|clip)-rule$/.test(k))) throw new Error(`${name}: <${tag}> must not set ${k}`);
       a[camel(k)] = v;
     }
     // A stroked circle smaller than half the stroke renders with a hole in Chrome; glyph dots use "M x y h.01".
@@ -81,7 +84,7 @@ export function createIcon(displayName, nodes, solid = false) {
     createElement('svg', {
       ref, xmlns: 'http://www.w3.org/2000/svg', width: size, height: size, viewBox: '0 0 24 24',
       // Solid icons are pure fills: strokeWidth has nothing to act on.
-      ...(solid ? { fill: color } : { fill: 'none', stroke: color, strokeWidth, strokeLinecap: 'round', strokeLinejoin: 'round' }),
+      ...(solid ? { fill: color } : { fill: 'none', stroke: color, strokeWidth, strokeLinecap: 'round', strokeLinejoin: 'round', color }),
       // Decorative by default; passing aria-label (or title as a child) makes it meaningful.
       'aria-hidden': rest['aria-label'] || rest['aria-labelledby'] ? undefined : true,
       ...rest,
@@ -109,7 +112,7 @@ export function createIcon(displayName, nodes, solid = false) {
   const Icon = forwardRef(({ size = 24, color = '#000', strokeWidth = 1.5, children, ...rest }, ref) =>
     createElement(Svg, {
       ref, width: size, height: size, viewBox: '0 0 24 24',
-      ...(solid ? { fill: color } : { fill: 'none', stroke: color, strokeWidth, strokeLinecap: 'round', strokeLinejoin: 'round' }),
+      ...(solid ? { fill: color } : { fill: 'none', stroke: color, strokeWidth, strokeLinecap: 'round', strokeLinejoin: 'round', color }),
       ...rest,
     }, ...nodes.map(([tag, attrs], i) => createElement(MAP[TAGS[tag]], { key: i, ...attrs })), children));
   Icon.displayName = displayName;
@@ -144,7 +147,7 @@ export function createIcon(name, nodes, solid = false) {
       return () => h('svg', {
         xmlns: 'http://www.w3.org/2000/svg', width: props.size, height: props.size, viewBox: '0 0 24 24',
         // Solid icons are pure fills: strokeWidth has nothing to act on.
-        ...(solid ? { fill: props.color } : { fill: 'none', stroke: props.color, 'stroke-width': props.strokeWidth, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }),
+        ...(solid ? { fill: props.color } : { fill: 'none', stroke: props.color, 'stroke-width': props.strokeWidth, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', color: props.color }),
         // Decorative by default; passing aria-label makes it meaningful.
         'aria-hidden': attrs['aria-label'] || attrs['aria-labelledby'] ? undefined : 'true',
         ...attrs,
@@ -174,7 +177,7 @@ mkdirSync('packages/svelte/dist', { recursive: true });
 writeFileSync('packages/svelte/dist/Icon.svelte', `<script>
   let { nodes, solid = false, size = 24, color = 'currentColor', strokeWidth = 1.5, children, ...rest } = $props();
   // Solid icons are pure fills: strokeWidth has nothing to act on.
-  const paint = $derived(solid ? { fill: color } : { fill: 'none', stroke: color, 'stroke-width': strokeWidth, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' });
+  const paint = $derived(solid ? { fill: color } : { fill: 'none', stroke: color, 'stroke-width': strokeWidth, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', color });
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" {...paint} aria-hidden={rest['aria-label'] || rest['aria-labelledby'] ? undefined : 'true'} {...rest}>
@@ -262,6 +265,7 @@ export abstract class SoftstrokeIcon implements OnInit, OnChanges {
       set('stroke-width', this.strokeWidth);
       set('stroke-linecap', 'round');
       set('stroke-linejoin', 'round');
+      set('color', this.color);   // a shape's fill="currentColor" follows the color input
     }
   }
 }
@@ -365,7 +369,7 @@ rmSync(REG, { recursive: true, force: true });
 mkdirSync(REG, { recursive: true });
 const tsx = ({ name, component: base, nodes }, solid) => {
   const component = solid ? base.replace(/Icon$/, 'SolidIcon') : base;   // both styles can live in one project
-  const paint = solid ? 'fill={color}' : 'fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round"';
+  const paint = solid ? 'fill={color}' : 'fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" color={color}';
   const shapes = nodes.map(([t, a]) => `      <${t} ${Object.entries(a).map(([k, v]) => `${k}="${v}"`).join(' ')} />`).join('\n');
   return `import { forwardRef, type SVGProps } from "react";
 

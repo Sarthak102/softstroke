@@ -7,7 +7,7 @@ import os, re, sys
 sys.path.insert(0, os.path.dirname(__file__))
 from solid import *
 from solid import _pts
-from geo import place, shift, mirror
+from geo import place, shift, mirror, soft, outline as path_outline
 import math
 
 H='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">\n'
@@ -49,7 +49,7 @@ THROUGH={'mail','magnet','mails'}   # icons whose edge-to-edge detail lines cut 
 # a single inner circle is cut out whole (one white circle, like the stroke's one circle), not as a ring around a dot
 CUT_WHOLE={'banknote','contact-book','id-badge','file-video','camera','coins','cpu','fuel','disc','record','id-card','map-pin','radio','speaker','toggle','user-circle'}   # not target (nested rings) or eye (iris + pupil)
 # glyph-like icons (and ones a fill would change: wheels -> balls, glasses -> sunglasses): solid = bold stroke
-LINE_ICONS={'at-sign','bold','infinity','glasses','voicemail','globe','earth','command','crosshair'}
+LINE_ICONS={'at-sign','bold','infinity','glasses','voicemail','globe','earth','command','crosshair','chart-donut'}
 # outside details drawn at stroke weight: they meet fused lines, so they must match their weight
 NORMAL_WEIGHT={'music','key'}
 # lines crossing into the body that stay solid there (calendar rings: no white notch under them)
@@ -235,7 +235,7 @@ def clapperboard():
 # "-off" icons: the base icon's solid built only from the parts the stroke -off icon still has,
 # a gap band around the slash, the slash in bold; pieces the stroke -off icon doesn't draw are dropped
 OFF={'wifi-off':'wifi','alarm-off':'alarm','bell-off':'bell','camera-off':'camera','eye-off':'eye','mic-off':'mic','phone-off':'phone',
-     'shield-off':'shield','timer-off':'timer','video-off':'video'}
+     'shield-off':'shield','timer-off':'timer','video-off':'video','monitor-off':'monitor','tag-off':'tag'}
 ELEM=r'<(?:path|circle) [^>]*/>'
 OFF_OWN={'wifi-off'}   # drawn on its own geometry (shifted from wifi), so not derived from the base
 def footprint(svg):
@@ -435,9 +435,37 @@ def clipboard_pen():
 def search_glyph(n):
     # like search: a bold ring + handle (not a disc), the glyph bold inside
     return search().union(line(src(n)[1],BOLD))
+def filled_ink(n):
+    # a stroke icon with fill="currentColor" shapes, exactly as drawn: every stroke + the filled areas (dark-mode)
+    t=open(f'icons/{n}.svg').read()
+    return unary_union([line(d) for d in re.findall(r' d="([^"]+)"',t)]+[area(d) for d in re.findall(r' d="([^"]+)" fill="currentColor"',t)])
+def layers_reversed(n):
+    # his call: the solid reverses the stroke's colouring: the active (filled) layer becomes an outline, the others fill.
+    # Layers run top to bottom in the file; each one keeps LAYER_GAP from the silhouettes above (filled neighbours merged)
+    out=Polygon(); front=Polygon()
+    for d,fill in re.findall(r'<path d="([^"]+)"( fill="currentColor")?/>',open(f'icons/{n}.svg').read()):
+        sil=area(d).buffer(W/2,quad_segs=16)
+        g=(line(d) if fill else sil).difference(front.buffer(LAYER_GAP,quad_segs=16))
+        out=out.union(g.buffer(-.3,quad_segs=16).buffer(.3,quad_segs=16)); front=front.union(sil)
+    return out
+def clock_badge(n):
+    # 1.4.0 badge rule: the glyph in front, the whole clock (the stroke cuts it round the badge) behind with a gap
+    return front_back(n,P(src(n)[-1]),''.join(re.findall(ELEM,open('icons/clock.svg').read())))
+def handshake():
+    # Remix Icon's structure (Sarthak's pick, 2026-11-16), drawn in our style: the upper hand, the lower hand (knuckle
+    # bumps on its lower-right edge) and the lower hand's thumb pill, each filled, LAYER_GAP of white between them.
+    # The stroke cuts the lower hand's outline around the thumb, so its full outline is kept here.
+    d=src('handshake'); U,P=d[0],d[2]
+    LOWER='M9.36 5.51C7.56 5.51 5.75 5.51 3.95 5.51C3.15 5.51 2.75 5.91 2.75 6.71C2.75 8.31 2.75 9.91 2.75 11.51C2.75 12.44 3.09 13.23 3.76 13.88C6.17 16.17 8.59 18.47 11 20.76C11.5 20.98 12.08 20.95 12.55 20.67C12.82 20.52 13.04 20.29 13.19 20.03C13.47 19.54 13.51 19.51 14.08 19.51C14.38 19.52 14.69 19.44 14.96 19.28C15.23 19.12 15.44 18.9 15.59 18.63C15.88 18.12 15.9 18.1 16.49 18.06C16.74 18.03 16.99 17.96 17.22 17.83C17.56 17.63 17.83 17.31 17.97 16.94C18.06 16.67 18.04 16.67 18.28 16.53C18.36 16.48 18.44 16.44 18.52 16.39C18.84 16.2 18.78 15.66 18.33 14.77C18.07 14.24 17.81 13.72 17.55 13.19'
+    Ug,Pg=silhouette(U),silhouette(P)
+    Lg=silhouette(LOWER+'Z').difference(Ug.buffer(LAYER_GAP,quad_segs=16)).difference(Pg.buffer(LAYER_GAP,quad_segs=16))
+    return Ug.union(Pg).union(Lg.buffer(-.35,quad_segs=16).buffer(.35,quad_segs=16))
 
+def search_glyph(n):
+    # like search: a bold ring + handle (not a disc), the glyph bold inside
+    return search().union(line(src(n)[1],BOLD))
 DESIGNED={n:fn for n,fn in list(globals().items()) if n in ('home','search','user','calendar','heart','bell','mail','settings')}
-DESIGNED.update({'bell-plus':bell_plus,'clipboard-check':lambda:clipboard_glyph('clipboard-check'),'clipboard-list':lambda:clipboard_glyph('clipboard-list'),'clipboard-pen':clipboard_pen,
+DESIGNED.update({'dark-mode':lambda:filled_ink('dark-mode'),**{n:(lambda n=n:layers_reversed(n)) for n in ('bring-to-front','send-to-back','bring-forward','send-backward')},'clock-plus':lambda:clock_badge('clock-plus'),'clock-check':lambda:clock_badge('clock-check'),'bell-plus':bell_plus,'handshake':handshake,'clipboard-check':lambda:clipboard_glyph('clipboard-check'),'clipboard-list':lambda:clipboard_glyph('clipboard-list'),'clipboard-pen':clipboard_pen,
                  **{n:(lambda n=n:search_glyph(n)) for n in 'zoom-in zoom-out search-check search-x'.split()},'files':files,'file-pen':file_pen,**{n:(lambda n=n:user_badge(n)) for n in 'user-cog user-lock user-search user-star user-shield user-pen user-heart'.split()},'bell-dot':bell_dot,'chats':chats,'mails':mails,'headset':headset,
                  'mail-plus':lambda:mail_badge('mail-plus'),'mail-check':lambda:mail_badge('mail-check'),'mail-x':lambda:mail_badge('mail-x'),'cloud-sun':cloud_sun,'rocket':rocket,'bug':bug,'database':database,'award':award,'pipette':pipette,'truck':truck,'archive':archive,'cart':cart,'gift':gift,'image-plus':image_plus,'fuel':fuel,'graduation-cap':graduation_cap,'printer':printer,'ship':ship,'wallet':wallet,'clipboard':clipboard,'coins':coins,'copy':copy,'images':images,'pie-chart':pie_chart,'bike':bike,'film':film,'clapperboard':clapperboard,'book':book,'book-open':book_open,'cast':cast,'flag':flag,'flask':flask,'folder-open':folder_open,
                  'headphones':headphones,'hourglass':hourglass,'pin':pin,'store':store,'trash':trash,'umbrella':umbrella})

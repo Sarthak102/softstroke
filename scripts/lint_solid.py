@@ -8,7 +8,7 @@ MIN=.9   # thinnest solid part / hole allowed (a 16px render loses anything thin
 GAP=.45  # smallest gap between separate parts (stroke icons allow 0.5 edge gaps)
 # Reviewed by eye 2026-11-10 at 16/24/120px and accepted (re-check if the icon changes):
 ACCEPT={
- 'slivers = tips of cut details': 'alarm-off bell-off book-open camera-off cloud-download cloud-upload compass flask folder-open gem globe mic-off shield-off timer-off video-off wallet-card wifi-off',
+ 'slivers = tips of cut details': 'alarm-off bell-off book-open camera-off cloud-download cloud-upload compass flask folder-open gem globe mic-off shield-off timer-off video-off wallet-card wifi-off invoice',
  'narrow slots in bold U shapes, close cleanly at 16px': 'bell-ring bus car hammer megaphone ship trash wallet',
  'gaps between footprint cuts, read fine': 'printer qr-code',
 }

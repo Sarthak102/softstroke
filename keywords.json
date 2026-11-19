@@ -6,6 +6,20 @@
     "inclusive",
     "person"
   ],
+  "activity": [
+    "pulse",
+    "heartbeat",
+    "monitor",
+    "health",
+    "signal"
+  ],
+  "airplay": [
+    "stream to tv",
+    "screen cast",
+    "wireless display",
+    "apple tv",
+    "mirror"
+  ],
   "alarm": [
     "clock",
     "wake",
@@ -79,6 +93,20 @@
     "sea",
     "boat",
     "nautical"
+  ],
+  "antenna": [
+    "broadcast",
+    "radio tower",
+    "signal",
+    "transmit",
+    "aerial"
+  ],
+  "api": [
+    "integration",
+    "connector",
+    "endpoint",
+    "interface",
+    "connect"
   ],
   "app-window": [
     "browser",
@@ -239,6 +267,13 @@
     "quality",
     "official"
   ],
+  "badge-percent": [
+    "discount",
+    "sale",
+    "offer",
+    "deal",
+    "promo"
+  ],
   "bag": [
     "shopping",
     "purchase",
@@ -246,12 +281,26 @@
     "buy",
     "tote"
   ],
+  "bag-plus": [
+    "add to bag",
+    "shopping bag",
+    "buy",
+    "purchase",
+    "store"
+  ],
   "ban": [
     "block",
     "forbidden",
     "prohibited",
     "not allowed",
     "cancel"
+  ],
+  "bank": [
+    "finance",
+    "institution",
+    "building",
+    "money",
+    "banking"
   ],
   "banknote": [
     "money",
@@ -285,6 +334,20 @@
     "power",
     "energy",
     "plugged in"
+  ],
+  "battery-full": [
+    "charged",
+    "battery level",
+    "power",
+    "energy",
+    "full"
+  ],
+  "battery-low": [
+    "low power",
+    "battery empty",
+    "charge",
+    "energy",
+    "power"
   ],
   "bell": [
     "notification",
@@ -368,12 +431,61 @@
     "favorite",
     "read later"
   ],
+  "bot": [
+    "robot",
+    "ai assistant",
+    "chatbot",
+    "automation",
+    "agent"
+  ],
+  "braces": [
+    "curly brackets",
+    "code",
+    "json",
+    "object",
+    "programming"
+  ],
+  "brain": [
+    "mind",
+    "think",
+    "intelligence",
+    "ai",
+    "memory"
+  ],
+  "brain-circuit": [
+    "ai",
+    "neural network",
+    "machine learning",
+    "smart",
+    "cognition"
+  ],
   "briefcase": [
     "work",
     "job",
     "business",
     "portfolio",
     "career"
+  ],
+  "brightness-low": [
+    "dim",
+    "screen brightness",
+    "display",
+    "sun dim",
+    "lower"
+  ],
+  "bring-forward": [
+    "layer up",
+    "arrange",
+    "forward",
+    "raise",
+    "z order"
+  ],
+  "bring-to-front": [
+    "layer order",
+    "arrange",
+    "front",
+    "top layer",
+    "z order"
   ],
   "brush": [
     "paint",
@@ -431,12 +543,26 @@
     "event",
     "scheduled"
   ],
+  "calendar-clock": [
+    "schedule",
+    "appointment time",
+    "event time",
+    "date",
+    "reminder"
+  ],
   "calendar-days": [
     "month",
     "schedule",
     "dates",
     "planner",
     "agenda"
+  ],
+  "calendar-heart": [
+    "date night",
+    "anniversary",
+    "favourite event",
+    "love",
+    "wedding"
   ],
   "calendar-minus": [
     "remove event",
@@ -450,6 +576,20 @@
     "new",
     "date",
     "appointment"
+  ],
+  "calendar-range": [
+    "date range",
+    "period",
+    "duration",
+    "booking",
+    "from to"
+  ],
+  "calendar-search": [
+    "find date",
+    "search events",
+    "lookup",
+    "schedule",
+    "agenda"
   ],
   "calendar-x": [
     "cancel",
@@ -472,6 +612,13 @@
     "photo",
     "video off"
   ],
+  "caps-lock": [
+    "capitals",
+    "uppercase lock",
+    "keyboard",
+    "caps",
+    "shift lock"
+  ],
   "captions": [
     "subtitles",
     "cc",
@@ -493,12 +640,68 @@
     "buy",
     "ecommerce"
   ],
+  "cart-check": [
+    "in cart",
+    "added",
+    "purchase done",
+    "shopping",
+    "checkout"
+  ],
+  "cart-plus": [
+    "add to cart",
+    "shopping",
+    "buy",
+    "basket add",
+    "checkout"
+  ],
+  "cart-x": [
+    "remove from cart",
+    "empty cart",
+    "shopping",
+    "cancel",
+    "delete item"
+  ],
   "cast": [
     "chromecast",
     "screen",
     "stream",
     "tv",
     "mirror"
+  ],
+  "chart-area": [
+    "area chart",
+    "graph",
+    "analytics",
+    "statistics",
+    "trend"
+  ],
+  "chart-bar-horizontal": [
+    "horizontal bars",
+    "bar chart",
+    "ranking",
+    "analytics",
+    "compare"
+  ],
+  "chart-column": [
+    "column chart",
+    "bar graph",
+    "analytics",
+    "statistics",
+    "report"
+  ],
+  "chart-donut": [
+    "donut chart",
+    "ring chart",
+    "proportion",
+    "analytics",
+    "share"
+  ],
+  "chart-scatter": [
+    "scatter plot",
+    "data points",
+    "correlation",
+    "analytics",
+    "dots"
   ],
   "chat": [
     "message",
@@ -540,6 +743,13 @@
     "add comment",
     "start chat",
     "reply"
+  ],
+  "chat-sparkle": [
+    "ai chat",
+    "assistant",
+    "smart reply",
+    "copilot",
+    "generate"
   ],
   "chats": [
     "messages",
@@ -649,6 +859,13 @@
     "expand",
     "unfold"
   ],
+  "chip-ai": [
+    "ai chip",
+    "processor",
+    "neural engine",
+    "npu",
+    "smart"
+  ],
   "circle": [
     "shape",
     "radio",
@@ -684,6 +901,13 @@
     "inventory",
     "list"
   ],
+  "clipboard-paste": [
+    "paste",
+    "clipboard",
+    "insert",
+    "copy paste",
+    "document"
+  ],
   "clipboard-pen": [
     "edit notes",
     "fill form",
@@ -697,6 +921,20 @@
     "watch",
     "schedule",
     "pending"
+  ],
+  "clock-check": [
+    "on time",
+    "done",
+    "completed",
+    "time tracked",
+    "approved"
+  ],
+  "clock-plus": [
+    "add time",
+    "new reminder",
+    "extend",
+    "schedule",
+    "add"
   ],
   "cloud": [
     "weather",
@@ -817,11 +1055,32 @@
     "people",
     "phonebook"
   ],
+  "contrast": [
+    "appearance",
+    "dark mode",
+    "light mode",
+    "theme",
+    "half"
+  ],
+  "control": [
+    "ctrl",
+    "control key",
+    "modifier",
+    "keyboard",
+    "caret"
+  ],
   "copy": [
     "duplicate",
     "clone",
     "clipboard",
     "paste"
+  ],
+  "copy-plus": [
+    "duplicate",
+    "clone",
+    "copy",
+    "add copy",
+    "replicate"
   ],
   "corner-down-left": [
     "enter",
@@ -850,6 +1109,13 @@
     "share",
     "next",
     "turn"
+  ],
+  "coupon": [
+    "voucher",
+    "discount code",
+    "promo",
+    "ticket",
+    "deal"
   ],
   "cpu": [
     "chip",
@@ -886,6 +1152,13 @@
     "pro",
     "royal"
   ],
+  "dark-mode": [
+    "appearance",
+    "theme",
+    "light dark",
+    "night",
+    "display"
+  ],
   "dashboard": [
     "overview",
     "widgets",
@@ -900,6 +1173,20 @@
     "db",
     "server"
   ],
+  "delete-left": [
+    "backspace",
+    "delete key",
+    "erase",
+    "keyboard",
+    "remove"
+  ],
+  "desktop": [
+    "show desktop",
+    "wallpaper",
+    "screen",
+    "home screen",
+    "computer"
+  ],
   "dice": [
     "game",
     "random",
@@ -913,6 +1200,13 @@
     "vinyl",
     "record",
     "album"
+  ],
+  "dock": [
+    "app dock",
+    "taskbar",
+    "launcher",
+    "desktop",
+    "mac"
   ],
   "dollar": [
     "money",
@@ -935,6 +1229,13 @@
     "humidity",
     "rain"
   ],
+  "earbuds": [
+    "airpods",
+    "wireless earphones",
+    "buds",
+    "audio",
+    "earphones"
+  ],
   "earth": [
     "world",
     "planet",
@@ -949,6 +1250,13 @@
     "modify",
     "compose"
   ],
+  "eject": [
+    "eject disk",
+    "unmount",
+    "media",
+    "remove drive",
+    "keyboard"
+  ],
   "ellipsis-circle": [
     "more",
     "options",
@@ -962,6 +1270,20 @@
     "rubber",
     "remove",
     "clean"
+  ],
+  "ethernet": [
+    "lan",
+    "network port",
+    "rj45",
+    "wired",
+    "cable"
+  ],
+  "euro": [
+    "currency",
+    "eur",
+    "money",
+    "price",
+    "europe"
   ],
   "expand": [
     "fullscreen",
@@ -1079,6 +1401,13 @@
     "browse",
     "page"
   ],
+  "file-sparkle": [
+    "ai document",
+    "summarize",
+    "generate",
+    "smart file",
+    "magic"
+  ],
   "file-spreadsheet": [
     "excel",
     "sheet",
@@ -1092,6 +1421,13 @@
     "page",
     "notes",
     "article"
+  ],
+  "file-text-search": [
+    "find",
+    "find in page",
+    "search text",
+    "lookup",
+    "replace"
   ],
   "file-video": [
     "movie file",
@@ -1236,6 +1572,13 @@
     "pump",
     "energy"
   ],
+  "function": [
+    "fx",
+    "formula",
+    "math",
+    "code",
+    "calculate"
+  ],
   "gamepad": [
     "game",
     "controller",
@@ -1263,6 +1606,41 @@
     "birthday",
     "surprise",
     "offer"
+  ],
+  "git-branch": [
+    "branch",
+    "version control",
+    "git",
+    "fork",
+    "code"
+  ],
+  "git-commit": [
+    "commit",
+    "version control",
+    "git",
+    "save point",
+    "history"
+  ],
+  "git-fork": [
+    "fork",
+    "repository",
+    "git",
+    "copy",
+    "branch"
+  ],
+  "git-merge": [
+    "merge",
+    "version control",
+    "git",
+    "combine",
+    "branch"
+  ],
+  "git-pull-request": [
+    "pull request",
+    "pr",
+    "review",
+    "git",
+    "merge request"
   ],
   "glasses": [
     "reading",
@@ -1314,6 +1692,27 @@
     "fix",
     "auction"
   ],
+  "hand-coins": [
+    "payment",
+    "donate",
+    "give money",
+    "salary",
+    "tip"
+  ],
+  "handshake": [
+    "deal",
+    "agreement",
+    "partnership",
+    "welcome",
+    "trust"
+  ],
+  "hard-drive": [
+    "disk",
+    "storage",
+    "drive",
+    "hdd",
+    "backup"
+  ],
   "heading": [
     "title",
     "h1",
@@ -1348,6 +1747,13 @@
     "info",
     "unknown"
   ],
+  "hierarchy": [
+    "org chart",
+    "tree",
+    "structure",
+    "levels",
+    "parent child"
+  ],
   "highlighter": [
     "marker",
     "highlight",
@@ -1367,6 +1773,13 @@
     "main",
     "start",
     "dashboard"
+  ],
+  "hotspot": [
+    "tethering",
+    "personal hotspot",
+    "share internet",
+    "wireless",
+    "broadcast"
   ],
   "hourglass": [
     "time",
@@ -1403,6 +1816,13 @@
     "picture",
     "new"
   ],
+  "image-sparkle": [
+    "ai image",
+    "generate image",
+    "enhance photo",
+    "magic",
+    "edit"
+  ],
   "images": [
     "gallery",
     "photos",
@@ -1437,6 +1857,13 @@
     "help",
     "tooltip"
   ],
+  "invoice": [
+    "bill",
+    "payment due",
+    "statement",
+    "document",
+    "accounting"
+  ],
   "italic": [
     "text",
     "format",
@@ -1457,6 +1884,20 @@
     "unlock",
     "security",
     "credentials"
+  ],
+  "keyboard": [
+    "typing",
+    "keys",
+    "input",
+    "computer",
+    "type"
+  ],
+  "keyboard-light": [
+    "backlight",
+    "keyboard brightness",
+    "illumination",
+    "keys",
+    "glow"
   ],
   "lamp": [
     "light",
@@ -1541,6 +1982,13 @@
     "tasks",
     "done",
     "items"
+  ],
+  "list-filter": [
+    "filter",
+    "sort",
+    "refine",
+    "narrow",
+    "funnel lines"
   ],
   "list-music": [
     "playlist",
@@ -1726,6 +2174,13 @@
     "computer",
     "pc"
   ],
+  "monitor-off": [
+    "display off",
+    "screen off",
+    "sleep display",
+    "no screen",
+    "disconnect"
+  ],
   "moon": [
     "night",
     "dark mode",
@@ -1760,6 +2215,20 @@
     "hike",
     "outdoors"
   ],
+  "mouse": [
+    "computer mouse",
+    "click",
+    "input",
+    "scroll",
+    "pointer device"
+  ],
+  "mouse-pointer": [
+    "cursor",
+    "arrow",
+    "pointer",
+    "click",
+    "select"
+  ],
   "move": [
     "drag",
     "pan",
@@ -1788,12 +2257,33 @@
     "pointer",
     "arrow"
   ],
+  "network": [
+    "nodes",
+    "connections",
+    "graph",
+    "topology",
+    "distributed"
+  ],
   "newspaper": [
     "news",
     "article",
     "press",
     "blog",
     "feed"
+  ],
+  "night-shift": [
+    "warm display",
+    "blue light",
+    "evening",
+    "sun moon",
+    "night mode"
+  ],
+  "option": [
+    "alt",
+    "option key",
+    "modifier",
+    "keyboard",
+    "mac"
   ],
   "outdent": [
     "outdent",
@@ -1934,6 +2424,13 @@
     "statistics",
     "report"
   ],
+  "piggy-bank": [
+    "savings",
+    "save money",
+    "bank",
+    "budget",
+    "finance"
+  ],
   "pin": [
     "pushpin",
     "attach",
@@ -1976,6 +2473,13 @@
     "socket",
     "charger"
   ],
+  "plug-zap": [
+    "charging",
+    "electric plug",
+    "power",
+    "ev",
+    "energy"
+  ],
   "plus": [
     "add",
     "new",
@@ -2003,11 +2507,32 @@
     "listen",
     "episode"
   ],
+  "power": [
+    "on off",
+    "shutdown",
+    "power button",
+    "switch",
+    "turn off"
+  ],
+  "presentation-chart": [
+    "presentation",
+    "slides",
+    "report",
+    "meeting",
+    "board"
+  ],
   "printer": [
     "print",
     "document",
     "paper",
     "output"
+  ],
+  "projector": [
+    "beamer",
+    "presentation",
+    "movie",
+    "display",
+    "project"
   ],
   "puzzle": [
     "plugin",
@@ -2050,6 +2575,13 @@
     "purchase",
     "order",
     "payment"
+  ],
+  "receipt-percent": [
+    "tax",
+    "discount receipt",
+    "bill",
+    "vat",
+    "sale"
   ],
   "record": [
     "rec",
@@ -2126,6 +2658,13 @@
     "trip",
     "way"
   ],
+  "router": [
+    "wifi router",
+    "network",
+    "modem",
+    "internet",
+    "access point"
+  ],
   "rows": [
     "split",
     "two rows",
@@ -2146,6 +2685,13 @@
     "length",
     "size",
     "design"
+  ],
+  "rupee": [
+    "currency",
+    "inr",
+    "money",
+    "price",
+    "india"
   ],
   "save": [
     "floppy",
@@ -2188,6 +2734,27 @@
     "barber",
     "salon"
   ],
+  "screen-mirror": [
+    "mirroring",
+    "second screen",
+    "duplicate display",
+    "cast",
+    "project"
+  ],
+  "screenshot": [
+    "screen capture",
+    "capture",
+    "snapshot",
+    "grab",
+    "screen shot"
+  ],
+  "sd-card": [
+    "memory card",
+    "storage",
+    "camera card",
+    "micro sd",
+    "flash"
+  ],
   "search": [
     "find",
     "magnifier",
@@ -2222,6 +2789,20 @@
     "paper plane",
     "deliver"
   ],
+  "send-backward": [
+    "layer down",
+    "arrange",
+    "backward",
+    "lower",
+    "z order"
+  ],
+  "send-to-back": [
+    "layer order",
+    "arrange",
+    "back",
+    "bottom layer",
+    "z order"
+  ],
   "server": [
     "hosting",
     "rack",
@@ -2242,12 +2823,26 @@
     "paper plane",
     "social"
   ],
+  "share-nearby": [
+    "airdrop",
+    "nearby share",
+    "wireless",
+    "send nearby",
+    "rings"
+  ],
   "share-nodes": [
     "share",
     "network",
     "connect",
     "social",
     "android"
+  ],
+  "share-up": [
+    "share sheet",
+    "export",
+    "send",
+    "upload",
+    "ios share"
   ],
   "shield": [
     "security",
@@ -2305,12 +2900,26 @@
     "threat",
     "shield"
   ],
+  "shift": [
+    "shift key",
+    "uppercase",
+    "modifier",
+    "keyboard",
+    "arrow up"
+  ],
   "ship": [
     "boat",
     "cruise",
     "sea",
     "ferry",
     "travel"
+  ],
+  "shopping-basket": [
+    "basket",
+    "groceries",
+    "shop",
+    "buy",
+    "store"
   ],
   "shrink": [
     "exit fullscreen",
@@ -2339,6 +2948,27 @@
     "drawer",
     "navigation"
   ],
+  "signal": [
+    "cellular",
+    "reception",
+    "bars",
+    "network",
+    "mobile signal"
+  ],
+  "signal-low": [
+    "weak signal",
+    "cellular",
+    "reception",
+    "bars",
+    "network"
+  ],
+  "signal-medium": [
+    "cellular",
+    "reception",
+    "medium signal",
+    "bars",
+    "network"
+  ],
   "signature": [
     "sign",
     "autograph",
@@ -2352,6 +2982,13 @@
     "road",
     "wayfinding",
     "crossroads"
+  ],
+  "sitemap": [
+    "structure",
+    "tree",
+    "pages",
+    "navigation",
+    "map"
   ],
   "skip-back": [
     "previous",
@@ -2387,6 +3024,13 @@
     "device",
     "iphone",
     "android"
+  ],
+  "smartwatch": [
+    "wearable",
+    "fitness watch",
+    "health",
+    "watch",
+    "activity"
   ],
   "smile": [
     "emoji",
@@ -2430,6 +3074,13 @@
     "hifi",
     "device"
   ],
+  "split": [
+    "divide",
+    "separate",
+    "split pages",
+    "halves",
+    "break apart"
+  ],
   "sprout": [
     "plant",
     "grow",
@@ -2443,6 +3094,13 @@
     "shape",
     "box",
     "empty"
+  ],
+  "square-pen": [
+    "compose",
+    "new note",
+    "write",
+    "edit",
+    "create"
   ],
   "star": [
     "favorite",
@@ -2486,6 +3144,13 @@
     "format",
     "text"
   ],
+  "subscript": [
+    "index",
+    "chemical",
+    "text formatting",
+    "lowered",
+    "formula"
+  ],
   "sun": [
     "light mode",
     "day",
@@ -2507,6 +3172,13 @@
     "night",
     "weather"
   ],
+  "superscript": [
+    "exponent",
+    "power",
+    "text formatting",
+    "raised",
+    "footnote"
+  ],
   "table": [
     "spreadsheet",
     "grid",
@@ -2526,6 +3198,20 @@
     "discount",
     "category",
     "sale"
+  ],
+  "tag-off": [
+    "remove tag",
+    "no metadata",
+    "untag",
+    "strip info",
+    "label off"
+  ],
+  "tags": [
+    "labels",
+    "categories",
+    "prices",
+    "tagging",
+    "organize"
   ],
   "target": [
     "goal",
@@ -2554,6 +3240,13 @@
     "type",
     "i-beam",
     "text field"
+  ],
+  "text-size": [
+    "font size",
+    "type size",
+    "larger text",
+    "accessibility",
+    "scale text"
   ],
   "thermometer": [
     "temperature",
@@ -2609,6 +3302,13 @@
     "disable",
     "setting",
     "boolean"
+  ],
+  "trackpad": [
+    "touchpad",
+    "track pad",
+    "laptop input",
+    "gestures",
+    "click"
   ],
   "train": [
     "railway",
@@ -2703,6 +3403,13 @@
     "arrow up",
     "tray",
     "publish"
+  ],
+  "usb": [
+    "usb plug",
+    "connector",
+    "port",
+    "flash drive",
+    "cable"
   ],
   "user": [
     "person",
@@ -2802,6 +3509,13 @@
     "members",
     "community"
   ],
+  "variable": [
+    "parentheses",
+    "math",
+    "code",
+    "x",
+    "formula"
+  ],
   "vault": [
     "safe",
     "bank",
@@ -2843,6 +3557,13 @@
     "audio",
     "lower"
   ],
+  "volume-none": [
+    "speaker",
+    "mono",
+    "sound",
+    "audio",
+    "quiet"
+  ],
   "volume-off": [
     "mute",
     "silent",
@@ -2863,6 +3584,13 @@
     "finance",
     "purse"
   ],
+  "wand": [
+    "magic",
+    "auto",
+    "generate",
+    "enhance",
+    "ai"
+  ],
   "watch": [
     "smartwatch",
     "time",
@@ -2876,6 +3604,20 @@
     "ocean",
     "beach",
     "swim"
+  ],
+  "webcam": [
+    "camera",
+    "video call",
+    "web camera",
+    "meeting",
+    "stream"
+  ],
+  "webhook": [
+    "hook",
+    "callback",
+    "automation",
+    "event",
+    "integration"
   ],
   "wifi": [
     "internet",
@@ -2896,6 +3638,20 @@
     "breeze",
     "windy",
     "blow"
+  ],
+  "window-overview": [
+    "mission control",
+    "all windows",
+    "expose",
+    "spaces",
+    "overview"
+  ],
+  "workflow": [
+    "process",
+    "flow",
+    "automation",
+    "steps",
+    "pipeline"
   ],
   "wrench": [
     "tool",

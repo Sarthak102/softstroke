@@ -1,7 +1,8 @@
 # flag icons whose drawn bbox (stroke edges) leaves 1.25..22.75 (rule 4: centre lines 2-22, since v1.1) or whose centre is > 0.5 off (12,12)
 import sys, re; sys.path.insert(0,'scripts'); from geo import chains, circle_path; from geo import _pt
-# optical, checked by eye: play's triangle sits right, volume-low keeps volume's speaker spot, eye is 0.15 wide
-OK={'play','volume-low','eye','eye-off'}
+# optical, checked by eye: play's triangle sits right, volume-low keeps volume's speaker spot, eye is 0.15 wide,
+# signal-medium/low keep signal's bar positions
+OK={'play','volume-low','eye','eye-off','signal-medium','signal-low'}
 for n in sys.argv[1:]:
     if n in OK: continue
     s=open(f'icons/{n}.svg').read()

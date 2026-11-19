@@ -16,6 +16,7 @@ FIRST = 0xE001                     # Private Use Area
 
 def stroke_shape(svg):
     shapes = [line(d) for d in re.findall(r' d="([^"]+)"', svg)]
+    shapes += [area(d) for d in re.findall(r' d="([^"]+)" fill="currentColor"', svg)]   # filled shapes in stroke icons
     shapes += [line(circle_path(float(a), float(b), float(r))) for a, b, r in re.findall(r'<circle cx="([^"]+)" cy="([^"]+)" r="([^"]+)"', svg)]
     return unary_union(shapes)
 

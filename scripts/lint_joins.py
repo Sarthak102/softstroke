@@ -9,7 +9,7 @@ from geo import chains, circle_path, _pt
 ANGLE=20
 SNAP=.7
 # Checked by eye, deliberate: knots/overhangs that read correctly at 16-24px.
-EXCEPT={'gift':'bow loops meet in a knot on the lid line','sprout':'stem top hidden inside the leaf joins',
+EXCEPT={'dark-mode':'filled halves meet the ring and the dot at the diameter; the corners sit on the ring','gift':'bow loops meet in a knot on the lid line','sprout':'stem top hidden inside the leaf joins',
         **dict.fromkeys('alarm-off clapperboard flag flower fuel images pin truck'.split(),'deliberate overhang or end on a wheel, checked by eye'),
         'bold':'letter B: bowls meet the stem at real corners','password':'asterisk arms meet at their centres'}
 def tangent(c,end):
